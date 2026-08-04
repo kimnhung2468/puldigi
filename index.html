@@ -3,281 +3,209 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>puldigi — Marketing &amp; Brand Specialist</title>
-  <meta name="description" content="puldigi — chuyên gia marketing & thương hiệu. Chiến lược, sáng tạo và dữ liệu, biến ý tưởng thành thương hiệu được yêu thích.">
+  <title>puldigi — Digital Marketing Specialist</title>
+  <meta name="description" content="puldigi — chuyên gia Digital Marketing. Chiến lược, nội dung, quảng cáo và SEO giúp thương hiệu của bạn tăng trưởng trên môi trường số.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Fraunces:ital,opsz,wght@0,400;0,600;1,400;1,500;1,600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;0,900;1,600;1,700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Dancing+Script:wght@600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <!-- ===== TOP BAR ===== -->
-  <div class="topbar">
-    <div class="container row">
-      <span>✦ Marketing &amp; Brand Studio — TP. Hồ Chí Minh</span>
-      <span class="socials">
-        <a href="mailto:nhungkim2468@gmail.com">Email</a>
-        <a href="#">Facebook</a>
-        <a href="#">Instagram</a>
-        <a href="#">LinkedIn</a>
-      </span>
-    </div>
-  </div>
-
-  <!-- ===== HEADER ===== -->
-  <header class="site-header">
-    <div class="container">
-      <nav class="nav">
-        <a href="index.html" class="brand"><span class="logo-mark">P</span> puldigi</a>
+  <!-- ===== TOP NAV ===== -->
+  <header class="nav">
+    <div class="nav-inner">
+      <a href="#home" class="brand"><span class="bstar">✦</span> puldigi</a>
+      <nav>
         <ul class="nav-links">
-          <li><a href="index.html" class="active">Trang chủ</a></li>
-          <li><a href="gioi-thieu.html">Về tôi</a></li>
-          <li><a href="dich-vu.html">Dịch vụ</a></li>
-          <li><a href="#work">Dự án</a></li>
-          <li><a href="lien-he.html">Liên hệ</a></li>
+          <li><a href="#work" data-spy="work">Dự án</a></li>
+          <li><a href="#services">Dịch vụ</a></li>
+          <li><a href="#about" data-spy="about">Giới thiệu</a></li>
+          <li><a href="#process" data-spy="process">Quy trình</a></li>
         </ul>
-        <div class="nav-actions">
-          <a href="lien-he.html" class="btn btn-outline">Hợp tác ✦</a>
-          <button class="nav-search" aria-label="Tìm kiếm">⌕</button>
-          <button class="nav-toggle" aria-label="Menu">☰</button>
-        </div>
       </nav>
+      <div class="nav-cta">
+        <a href="#contact" class="btn btn-coral">Liên hệ <span class="arw">→</span></a>
+        <button class="menu-btn" aria-label="Menu">☰</button>
+      </div>
     </div>
   </header>
 
-  <!-- ===== HERO ===== -->
-  <section class="hero">
-    <div class="container hero-grid">
-      <div class="hero-left">
-        <span class="hero-eyebrow">| Marketing &amp; Brand Specialist |</span>
-        <!-- SỬA: câu tuyên ngôn của bạn -->
-        <h1>Tôi tạo trải nghiệm<br>thương hiệu như <em>tương lai.</em></h1>
-        <p class="lead">Kết hợp thấu hiểu con người và thiết kế tinh tế — biến ý tưởng thành
-           thương hiệu được yêu thích và ghi nhớ.</p>
-        <div class="hero-actions">
-          <a href="#work" class="btn btn-gold">Xem dự án <span class="arrow">→</span></a>
-          <a href="gioi-thieu.html" class="btn btn-outline">Về tôi</a>
-        </div>
-        <div class="hero-status">
-          <span class="pulse"></span>
-          <div><b>Đang nhận dự án mới</b><span>Cùng tạo nên điều khác biệt.</span></div>
-        </div>
+  <main>
+
+    <!-- ===== HERO ===== -->
+    <section class="hero wrap" id="home">
+      <div class="hero-top">
+        <span class="eyebrow">puldigi studio</span>
+        <span class="rule"></span>
+        <span class="eyebrow" style="flex-direction:row-reverse">Digital Marketing</span>
       </div>
 
-      <!-- Cosmic visual (không mặt người) -->
-      <div class="hero-visual">
-        <div class="visual-ring"></div>
-        <div class="visual-orb">
-          <!-- SỬA: đổi ảnh cosmic. Bỏ ảnh vào images/ rồi đổi src -->
-          <img src="https://images.unsplash.com/photo-1534796636912-3b95b3ab5986?w=900&q=80" alt="">
+      <div class="hero-grid">
+        <div class="hero-left">
+          <!-- SỬA: đổi chữ lớn ở đây nếu muốn -->
+          <h1 class="hero-title reveal">Sáng tạo<span class="coral">.</span></h1>
+          <p class="hero-sub reveal" data-delay="0.05">Tôi xây dựng &amp; tăng trưởng thương hiệu<br><span class="coral">trên môi trường số</span></p>
+          <p class="lead reveal" data-delay="0.1">Chuyên gia Digital Marketing — kết hợp chiến lược, nội dung và dữ liệu
+            để giúp thương hiệu của bạn tiếp cận đúng người và tăng trưởng bền vững.</p>
+
+          <div class="reveal" data-delay="0.15">
+            <div class="signature">puldigi</div>
+            <div class="sig-role">Digital Marketing Specialist</div>
+          </div>
+
+          <div class="hero-meta reveal" data-delay="0.2">
+            <div class="mi"><span class="ic">◎</span><div><small>Khu vực</small><b>TP. Hồ Chí Minh, VN</b></div></div>
+            <div class="mi"><span class="ic">✦</span><div><small>Trạng thái</small><b>Nhận dự án freelance</b></div></div>
+            <div class="mi"><span class="ic">✉</span><div><small>Email</small><b>hello@puldigi.com</b></div></div>
+          </div>
         </div>
-        <div class="fcard f1"><div class="k">Định hướng</div><div class="v">Có mục đích<small>&amp; thấu cảm</small></div></div>
-        <div class="fcard f2"><div class="k">Kinh nghiệm</div><div class="v">7+ năm<small>xây dựng thương hiệu</small></div></div>
-        <div class="fcard f3"><div class="k">Lĩnh vực</div><ul><li>Chiến lược</li><li>Thương hiệu</li><li>Nội dung</li><li>Quảng cáo</li></ul></div>
+
+        <!-- Visual -->
+        <div class="hero-visual reveal" data-delay="0.1">
+          <div class="hv-halo"></div>
+          <span class="spark s1">✦</span>
+          <span class="spark s2">✦</span>
+          <span class="spark s3">✧</span>
+          <div class="hv-photo">
+            <!-- SỬA: thay bằng ảnh của bạn (bỏ vào images/ rồi đổi src) -->
+            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=800&q=80" alt="puldigi">
+          </div>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- ===== MARQUEE ===== -->
-  <div class="marquee">
-    <div class="marquee-track">
-      <span>Chiến lược <span class="star">✦</span> Thương hiệu <span class="star">✦</span> Nội dung <span class="star">✦</span> Quảng cáo <span class="star">✦</span> SEO <span class="star">✦</span> Social <span class="star">✦</span></span>
-      <span>Chiến lược <span class="star">✦</span> Thương hiệu <span class="star">✦</span> Nội dung <span class="star">✦</span> Quảng cáo <span class="star">✦</span> SEO <span class="star">✦</span> Social <span class="star">✦</span></span>
-    </div>
-  </div>
-
-  <!-- ===== FEATURED CASE STUDIES ===== -->
-  <section class="section" id="work">
-    <div class="container">
-      <div class="section-head">
-        <div>
-          <span class="label">Dự án tiêu biểu</span>
-          <h2 style="margin-top:14px">Tạo dấu ấn qua<br>những giải pháp <em>ý nghĩa.</em></h2>
-        </div>
-        <a href="lien-he.html" class="link-arrow">Xem tất cả dự án →</a>
-      </div>
-
-      <!-- SỬA: thay ảnh + tên dự án thật của bạn -->
-      <div class="cases">
-        <div class="case">
-          <div class="case-img"><span class="case-num">01</span><img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80" alt=""></div>
-          <div class="case-body">
-            <h3>NEXORA</h3>
-            <div class="sub">Chiến dịch ra mắt thương hiệu</div>
-            <div class="case-tags"><span>Chiến lược</span><span>Thương hiệu</span><span>Ads</span></div>
-            <div class="case-foot"><span class="go">→</span></div>
-          </div>
-        </div>
-        <div class="case">
-          <div class="case-img"><span class="case-num">02</span><img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=800&q=80" alt=""></div>
-          <div class="case-body">
-            <h3>MINDFUL</h3>
-            <div class="sub">Nội dung &amp; mạng xã hội</div>
-            <div class="case-tags"><span>Content</span><span>Social</span><span>SEO</span></div>
-            <div class="case-foot"><span class="go">→</span></div>
-          </div>
-        </div>
-        <div class="case">
-          <div class="case-img"><span class="case-num">03</span><img src="https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=800&q=80" alt=""></div>
-          <div class="case-body">
-            <h3>ROAMIA</h3>
-            <div class="sub">Tái định vị thương hiệu</div>
-            <div class="case-tags"><span>Rebrand</span><span>Chiến lược</span><span>Website</span></div>
-            <div class="case-foot"><span class="go">→</span></div>
-          </div>
-        </div>
+    <!-- ===== MARQUEE ===== -->
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee-track">
+        <span>Digital Marketing</span><span class="star">✦</span><span>Content</span><span class="star">✦</span><span>SEO</span><span class="star">✦</span><span>Performance Ads</span><span class="star">✦</span><span>Social Media</span><span class="star">✦</span><span>Branding</span><span class="star">✦</span>
+        <span>Digital Marketing</span><span class="star">✦</span><span>Content</span><span class="star">✦</span><span>SEO</span><span class="star">✦</span><span>Performance Ads</span><span class="star">✦</span><span>Social Media</span><span class="star">✦</span><span>Branding</span><span class="star">✦</span>
       </div>
     </div>
-  </section>
 
-  <!-- ===== SERVICES + TOOLS ===== -->
-  <section class="section section-soft">
-    <div class="container">
-      <div class="services-panel">
-        <div class="services-grid">
-          <div class="services-intro">
-            <span class="label">Dịch vụ</span>
-            <h2 style="margin-top:14px">Giải pháp trọn gói cho mục tiêu của bạn.</h2>
+    <!-- ===== SELECTED WORK + WHAT I DO ===== -->
+    <section id="work">
+      <div class="wrap">
+        <div class="work-grid">
+
+          <!-- Selected Work -->
+          <div class="work-left reveal">
+            <div class="head-row">
+              <div><span class="eyebrow">Dự án tiêu biểu</span>
+                <h2 style="font-size:clamp(1.8rem,3.4vw,2.6rem);margin-top:12px">Selected Work<span class="coral">.</span></h2></div>
+              <a href="#contact" class="link-arw">Xem tất cả <span class="arw">→</span></a>
+            </div>
+            <div class="cases">
+              <div class="case">
+                <div class="case-img"><span class="case-num">01</span>
+                  <img src="https://images.unsplash.com/photo-1596462502278-27bfdc4034d8?w=600&q=80" alt=""></div>
+                <div class="case-body"><span class="cat">Social &amp; Branding</span><h4>Lumière Cosmetics</h4>
+                  <a href="#contact" class="go">→</a></div>
+              </div>
+              <div class="case">
+                <div class="case-img"><span class="case-num">02</span>
+                  <img src="https://images.unsplash.com/photo-1531403009284-440f080d1e12?w=600&q=80" alt=""></div>
+                <div class="case-body"><span class="cat">Website &amp; Ads</span><h4>Elevate Coaching</h4>
+                  <a href="#contact" class="go">→</a></div>
+              </div>
+              <div class="case">
+                <div class="case-img"><span class="case-num">03</span>
+                  <img src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=600&q=80" alt=""></div>
+                <div class="case-body"><span class="cat">Content &amp; SEO</span><h4>Sofia Living</h4>
+                  <a href="#contact" class="go">→</a></div>
+              </div>
+            </div>
           </div>
-          <div class="service-list">
-            <div class="service-item"><div class="ic">🔍</div><h4>Nghiên cứu &amp; Chiến lược</h4><p>Thấu hiểu thị trường và khách hàng để định hướng đúng.</p></div>
-            <div class="service-item"><div class="ic">🎨</div><h4>Thương hiệu</h4><p>Bộ nhận diện và câu chuyện nhất quán, ấn tượng.</p></div>
-            <div class="service-item"><div class="ic">✍️</div><h4>Nội dung sáng tạo</h4><p>Nội dung đa kênh khiến khách hàng yêu thích.</p></div>
-            <div class="service-item"><div class="ic">🚀</div><h4>Quảng cáo &amp; Tối ưu</h4><p>Triển khai chiến dịch và tối ưu bằng số liệu.</p></div>
+
+          <!-- What I Do -->
+          <div class="what-panel reveal" data-delay="0.12" id="services">
+            <div class="what-head"><h3>Dịch vụ của tôi</h3><span class="plus">✦</span></div>
+            <div class="what-item"><div class="wi-ic">✳</div><div><h4>Chiến lược Digital</h4><p>Kế hoạch kênh, định vị &amp; ngân sách</p></div></div>
+            <div class="what-item"><div class="wi-ic">◈</div><div><h4>Thương hiệu</h4><p>Nhận diện, thông điệp &amp; câu chuyện</p></div></div>
+            <div class="what-item"><div class="wi-ic">✎</div><div><h4>Nội dung số</h4><p>Social, hình ảnh, video &amp; bài viết</p></div></div>
+            <div class="what-item"><div class="wi-ic">◆</div><div><h4>Quảng cáo &amp; Performance</h4><p>Google, Meta &amp; TikTok Ads, tối ưu ROI</p></div></div>
+            <div class="what-item"><div class="wi-ic">◎</div><div><h4>SEO &amp; Website</h4><p>Tăng thứ hạng &amp; tỷ lệ chuyển đổi</p></div></div>
           </div>
-          <div class="tools">
-            <h4>Công cụ tôi dùng</h4>
-            <div class="tools-grid">
-              <div class="tool"><div class="em">🎨</div><span>Figma</span></div>
-              <div class="tool"><div class="em">🖌️</div><span>Canva</span></div>
-              <div class="tool"><div class="em">📱</div><span>Meta Ads</span></div>
-              <div class="tool"><div class="em">🔍</div><span>Google Ads</span></div>
-              <div class="tool"><div class="em">📊</div><span>Analytics</span></div>
-              <div class="tool"><div class="em">✉️</div><span>Email</span></div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== ABOUT BANNER ===== -->
+    <section id="about">
+      <div class="wrap">
+        <div class="about-banner reveal">
+          <div class="about-grid">
+            <div class="about-letter">P</div>
+            <div class="about-copy">
+              <h3>Thiết kế có mục đích.<br>Sáng tạo bằng cả trái tim.</h3>
+              <p>Mình tin marketing tốt không chỉ là chạy quảng cáo — mà là kể chuyện, kết nối và
+                tạo ra tăng trưởng thật, bền vững theo thời gian.</p>
+            </div>
+            <div class="about-badge">
+              <svg class="ring" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+                <defs><path id="cir" d="M60,60 m-46,0 a46,46 0 1,1 92,0 a46,46 0 1,1 -92,0"/></defs>
+                <text fill="#2f2a58" font-family="'Plus Jakarta Sans',sans-serif" font-size="10.5" font-weight="700" letter-spacing="3.4">
+                  <textPath href="#cir">PULDIGI STUDIO · DIGITAL THAT GROWS · </textPath>
+                </text>
+              </svg>
+              <div class="core">✦</div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- ===== PROCESS ===== -->
-  <section class="section">
-    <div class="container">
-      <div class="section-head">
-        <div>
-          <span class="label">Quy trình</span>
-          <h2 style="margin-top:14px">Cách tiếp cận <em>lấy con người làm trung tâm.</em></h2>
+    <!-- ===== PROCESS (redesign) ===== -->
+    <section id="process">
+      <div class="wrap">
+        <div class="sec-head center reveal">
+          <span class="eyebrow">Quy trình</span>
+          <h2>Cách mình <span class="serif-i coral">làm việc.</span></h2>
+        </div>
+        <div class="flow">
+          <span class="flow-prog"></span>
+          <div class="fstep reveal"><div class="fnum"><span class="n">01</span><span class="ic">🔍</span></div><h4>Khám phá</h4><p>Hiểu mục tiêu, thị trường &amp; khách hàng của bạn.</p></div>
+          <div class="fstep alt reveal" data-delay="0.1"><div class="fnum"><span class="n">02</span><span class="ic">✎</span></div><h4>Chiến lược</h4><p>Lên kế hoạch kênh, nội dung &amp; ngân sách rõ ràng.</p></div>
+          <div class="fstep reveal" data-delay="0.2"><div class="fnum"><span class="n">03</span><span class="ic">🚀</span></div><h4>Triển khai</h4><p>Chạy chiến dịch &amp; sản xuất nội dung nhất quán.</p></div>
+          <div class="fstep alt reveal" data-delay="0.3"><div class="fnum"><span class="n">04</span><span class="ic">📈</span></div><h4>Tối ưu</h4><p>Đo lường số liệu, báo cáo &amp; tối ưu liên tục.</p></div>
         </div>
       </div>
-      <div class="process">
-        <div class="proc"><div class="no">01</div><div class="pic">❤️</div><h4>Thấu hiểu</h4><p>Hiểu khách hàng, nhu cầu và điểm chạm của họ.</p></div>
-        <div class="proc"><div class="no">02</div><div class="pic">🎯</div><h4>Định hướng</h4><p>Xác định đúng vấn đề và mục tiêu cần giải quyết.</p></div>
-        <div class="proc"><div class="no">03</div><div class="pic">💡</div><h4>Sáng tạo</h4><p>Lên ý tưởng và khai phá các hướng thể hiện.</p></div>
-        <div class="proc"><div class="no">04</div><div class="pic">✦</div><h4>Triển khai</h4><p>Thực thi chiến dịch và nội dung tinh tế.</p></div>
-        <div class="proc"><div class="no">05</div><div class="pic">📈</div><h4>Tối ưu</h4><p>Đo lường, lặp lại và tối ưu để đạt kết quả thật.</p></div>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- ===== TESTIMONIALS ===== -->
-  <section class="section section-soft">
-    <div class="container">
-      <div class="section-head">
-        <div>
-          <span class="label">Cảm nhận</span>
-          <h2 style="margin-top:14px">Lời từ những người<br>tôi may mắn <em>đồng hành.</em></h2>
-        </div>
-        <a href="lien-he.html" class="link-arrow">Xem tất cả →</a>
-      </div>
-      <!-- SỬA: thay bằng cảm nhận thật của khách hàng -->
-      <div class="quotes">
-        <div class="quote">
-          <div class="mark">“</div>
-          <p>puldigi đã biến sản phẩm phức tạp của chúng tôi thành trải nghiệm liền mạch. Tầm nhìn thương hiệu thật xuất sắc.</p>
-          <div class="person"><span class="av">N</span><div><b>Nhật Nam</b><span>Product Manager, Nexora</span></div></div>
-        </div>
-        <div class="quote">
-          <div class="mark">“</div>
-          <p>Làm việc cùng puldigi là một trải nghiệm tuyệt vời — tinh tế, chủ động và thật sự quan tâm đến khách hàng.</p>
-          <div class="person"><span class="av">M</span><div><b>Minh Thư</b><span>Founder, Mindful</span></div></div>
-        </div>
-        <div class="quote">
-          <div class="mark">“</div>
-          <p>Thiết kế không chỉ đẹp mà còn tạo ra kết quả. Mức độ tương tác tăng 40% sau khi tái định vị.</p>
-          <div class="person"><span class="av">Q</span><div><b>Quốc Bảo</b><span>CEO, Roamia</span></div></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== CONTACT ===== -->
-  <section class="section">
-    <div class="container">
-      <div class="contact-panel">
-        <div class="contact-cols">
-          <div>
-            <span class="label">Có dự án trong đầu?</span>
-            <h2 style="margin-top:14px">Cùng tạo nên điều gì đó <em>ý nghĩa.</em></h2>
-            <div class="info-item"><div class="ic">✉</div><div><h4>Email</h4><a href="mailto:nhungkim2468@gmail.com">nhungkim2468@gmail.com</a></div></div>
-            <div class="info-item"><div class="ic">◎</div><div><h4>Khu vực</h4><p>TP. Hồ Chí Minh, Việt Nam</p></div></div>
-          </div>
-          <form id="contact-form">
-            <!-- ⚠️ Thay YOUR_ACCESS_KEY_HERE bằng Access Key từ web3forms.com -->
-            <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY_HERE">
-            <input type="hidden" name="subject" value="Liên hệ mới từ puldigi.com">
-            <input type="hidden" name="from_name" value="Website puldigi.com">
-            <input type="checkbox" name="botcheck" style="display:none">
-            <div class="field row2">
-              <div><label for="name">Họ tên</label><input type="text" id="name" name="name" placeholder="Tên của bạn" required></div>
-              <div><label for="email">Email</label><input type="email" id="email" name="email" placeholder="email@example.com" required></div>
+    <!-- ===== CTA ===== -->
+    <section id="contact">
+      <div class="wrap">
+        <div class="cta reveal">
+          <div class="cta-grid">
+            <div>
+              <h2>Cùng tạo nên điều<br>thật <span class="coral serif-i">tuyệt đẹp.</span></h2>
+              <p>Mình luôn sẵn sàng cho những cơ hội và dự án mới. Hãy biến ý tưởng của bạn thành hiện thực.</p>
+              <a href="mailto:hello@puldigi.com" class="btn btn-coral">Liên hệ ngay <span class="arw">→</span></a>
             </div>
-            <div class="field"><label for="message">Nội dung</label><textarea id="message" name="message" placeholder="Kể tôi nghe về dự án của bạn..." required></textarea></div>
-            <button type="submit" class="btn btn-gold" style="width:100%;justify-content:center">Gửi tin nhắn <span class="arrow">→</span></button>
-            <div id="form-status" class="form-status"></div>
-            <p class="form-note">Thông tin của bạn được bảo mật và chỉ dùng để liên hệ lại.</p>
-          </form>
+            <ul class="cta-contact">
+              <li><span class="ic">◎</span> TP. Hồ Chí Minh, Việt Nam</li>
+              <li><span class="ic">✉</span> <a href="mailto:hello@puldigi.com">hello@puldigi.com</a></li>
+              <li><span class="ic">◈</span> <a href="https://puldigi.com">www.puldigi.com</a></li>
+              <li><span class="ic">◆</span> <a href="#">@puldigi</a></li>
+            </ul>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- ===== FOOTER ===== -->
-  <footer class="site-footer">
-    <div class="container">
-      <div class="footer-big">Cùng xây dựng <a href="lien-he.html">điều ý nghĩa ✦</a></div>
-      <div class="footer-grid">
-        <div>
-          <div class="brand" style="margin-bottom:14px"><span class="logo-mark">P</span> puldigi</div>
-          <p>Thiết kế tương lai — mỗi lần một trải nghiệm.</p>
-        </div>
-        <div>
-          <h4>Khám phá</h4>
-          <ul class="footer-links">
-            <li><a href="index.html">Trang chủ</a></li>
-            <li><a href="gioi-thieu.html">Về tôi</a></li>
-            <li><a href="dich-vu.html">Dịch vụ</a></li>
-            <li><a href="lien-he.html">Liên hệ</a></li>
-          </ul>
-        </div>
-        <div>
-          <h4>Kết nối</h4>
-          <ul class="footer-links">
-            <li><a href="mailto:nhungkim2468@gmail.com">Email</a></li>
-            <li><a href="#">Facebook</a></li>
-            <li><a href="#">Instagram</a></li>
-            <li><a href="#">LinkedIn</a></li>
-          </ul>
-        </div>
+    <!-- ===== FOOTER ===== -->
+    <footer class="foot wrap">
+      <div class="foot-inner">
+        <span>© 2026 puldigi.com — Digital Marketing</span>
+        <span><a href="#work">Dự án</a> · <a href="#services">Dịch vụ</a> · <a href="#contact">Liên hệ</a></span>
       </div>
-      <div class="footer-bottom">
-        <span>© 2026 puldigi.com</span>
-        <span>Made with ✦ care</span>
-      </div>
-    </div>
-  </footer>
+    </footer>
 
-  <script src="main.js"></script>
+  </main>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="app.js"></script>
 </body>
 </html>
