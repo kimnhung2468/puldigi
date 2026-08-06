@@ -1,211 +1,406 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>puldigi — Digital Marketing Specialist</title>
-  <meta name="description" content="puldigi — chuyên gia Digital Marketing. Chiến lược, nội dung, quảng cáo và SEO giúp thương hiệu của bạn tăng trưởng trên môi trường số.">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;0,900;1,600;1,700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Dancing+Script:wght@600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Puldigi — Digital Marketing cho BĐS &amp; thương hiệu nhỏ</title>
+<meta name="description" content="Puldigi — Facebook Ads, video TikTok, landing page và nội dung cho các dự án bất động sản và thương hiệu nhỏ. Tối ưu từng đồng ngân sách, đo lường từng kết quả.">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Puldigi — Digital Marketing cho BĐS &amp; thương hiệu nhỏ">
+<meta property="og:description" content="Facebook Ads, video TikTok, landing page và nội dung. Tăng trưởng thật, kết quả rõ ràng.">
+<meta property="og:image" content="https://puldigi.com/assets/og-image.jpg">
+<meta property="og:url" content="https://puldigi.com">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="icon" href="assets/favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,600&family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-  <!-- ===== TOP NAV ===== -->
-  <header class="nav">
-    <div class="nav-inner">
-      <a href="#home" class="brand"><span class="bstar">✦</span> puldigi</a>
-      <nav>
-        <ul class="nav-links">
-          <li><a href="#work" data-spy="work">Dự án</a></li>
-          <li><a href="#services">Dịch vụ</a></li>
-          <li><a href="#about" data-spy="about">Giới thiệu</a></li>
-          <li><a href="#process" data-spy="process">Quy trình</a></li>
-        </ul>
-      </nav>
-      <div class="nav-cta">
-        <a href="#contact" class="btn btn-coral">Liên hệ <span class="arw">→</span></a>
-        <button class="menu-btn" aria-label="Menu">☰</button>
+<!-- thanh tiến trình cuộn trang -->
+<div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+
+<!-- ===== SVG DEFS: logo mark, gradient, icon library ===== -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <linearGradient id="ig" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#D9663C"/><stop offset="1" stop-color="#0E9384"/>
+    </linearGradient>
+    <clipPath id="lensClip"><circle cx="20" cy="20" r="20"/></clipPath>
+    <g id="pulmark">
+      <circle cx="20" cy="20" r="20" fill="#D9663C"/>
+      <circle cx="40" cy="20" r="20" fill="#0E9384"/>
+      <g clip-path="url(#lensClip)"><circle cx="40" cy="20" r="20" fill="#0C3B1F"/></g>
+    </g>
+    <g id="v-ads"><path d="M6 13v6h4l11 5V8L10 13H6z"/><path d="M25 13c2.4 1.2 2.4 5.8 0 7"/><path d="M10 19v3.5a2 2 0 0 0 4 0V21"/></g>
+    <g id="v-video"><rect x="5" y="7" width="22" height="18" rx="3"/><path d="M13 12.5v7l6-3.5z"/></g>
+    <g id="v-web"><rect x="5" y="7" width="22" height="18" rx="2"/><path d="M5 12h22"/><path d="M8.5 9.5h.01M11.5 9.5h.01"/></g>
+    <g id="v-content"><path d="M8 6h12a2 2 0 0 1 2 2v18l-4-3-4 3-4-3-4 3V8a2 2 0 0 1 2-2z"/><path d="M11 12h8M11 16h6"/></g>
+    <g id="v-target"><circle cx="16" cy="16" r="10"/><circle cx="16" cy="16" r="5"/><circle cx="16" cy="16" r="1"/></g>
+    <g id="v-badge"><path d="M16 4l3 3 4 .5.5 4 3 3-3 3-.5 4-4 .5-3 3-3-3-4-.5-.5-4-3-3 3-3 .5-4 4-.5z"/><path d="M12 16l3 3 5-6"/></g>
+    <g id="v-chart"><path d="M6 25V7M6 25h20"/><path d="M10 21l5-6 4 3 7-9"/></g>
+    <g id="v-mobile"><rect x="9" y="3" width="14" height="26" rx="3"/><path d="M14 25h4"/></g>
+    <g id="v-flower"><circle cx="16" cy="16" r="3"/><path d="M16 13c0-4 4-6 4-2M16 19c0 4 4 6 4 2M13 16c-4 0-6-4-2-4M19 16c4 0 6 4 2 4M13.6 13.6C10.8 10.8 11 7 14 9M18.4 18.4c2.8 2.8 2.6 6.6-.4 4.6"/></g>
+    <g id="v-plane"><path d="M4 15l22-8-8 22-4-8-10-6z"/><path d="M14 21l4-4"/></g>
+    <g id="v-building"><rect x="7" y="4" width="12" height="24" rx="1"/><path d="M19 12h6v16h-6M11 9h1M15 9h1M11 14h1M15 14h1M11 19h1M15 19h1"/></g>
+    <g id="i-play"><path d="M8 6l11 6-11 6z"/></g>
+    <g id="i-heart"><path d="M12 20.5S4 15.5 4 9.8A4.2 4.2 0 0 1 12 7.5 4.2 4.2 0 0 1 20 9.8c0 5.7-8 10.7-8 10.7z"/></g>
+    <g id="i-mail"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M4 8l8 5 8-5"/></g>
+    <g id="i-chat"><path d="M4 5h16v11H9l-5 4V5z"/></g>
+    <g id="i-arrow"><path d="M4 12h15M12 5l7 7-7 7"/></g>
+    <g id="i-check"><path d="M4 12l5 5 11-11"/></g>
+    <g id="i-grid"><rect x="4" y="4" width="7" height="7" rx="1"/><rect x="13" y="4" width="7" height="7" rx="1"/><rect x="4" y="13" width="7" height="7" rx="1"/><rect x="13" y="13" width="7" height="7" rx="1"/></g>
+    <g id="i-send"><path d="M22 3 11 14M22 3l-7 19-4-8-8-4 19-7z"/></g>
+    <g id="s-talk"><path d="M5 5h14v10H10l-5 4V5z"/><path d="M9 9h6M9 12h4"/></g>
+    <g id="s-doc"><path d="M8 4h8l4 4v12a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/><path d="M16 4v4h4M10 15l2 2 4-4"/></g>
+    <g id="s-gear"><circle cx="12" cy="12" r="3.2"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M18.4 5.6l-2.1 2.1M7.7 16.3l-2.1 2.1"/></g>
+    <g id="s-line"><path d="M4 20V5M4 20h16"/><path d="M8 16l4-5 3 2 5-7"/></g>
+  </defs>
+</svg>
+
+<!-- ===== NAV ===== -->
+<header class="nav" id="nav">
+  <div class="wrap nav-inner">
+    <a href="#top" class="logo" aria-label="Puldigi trang chủ">
+      <svg class="mk" viewBox="0 0 60 40" aria-hidden="true"><use href="#pulmark"/></svg>
+      <b>Puldigi</b>
+    </a>
+    <nav id="navmenu" aria-label="Điều hướng chính">
+      <ul>
+        <li><a href="#services">Dịch vụ</a></li>
+        <li><a href="#video">Video</a></li>
+        <li><a href="#process">Quy trình</a></li>
+        <li><a href="#work">Portfolio</a></li>
+        <li><a href="#contact" class="btn btn-grad">Nhận tư vấn <svg class="ico"><use href="#i-arrow"/></svg></a></li>
+      </ul>
+    </nav>
+    <button class="nav-toggle" id="toggle" aria-label="Mở menu" aria-expanded="false">
+      <svg class="ico" width="26" height="26" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+  </div>
+</header>
+
+<!-- ===== HERO ===== -->
+<section class="hero" id="top">
+  <div class="hero-bg" aria-hidden="true">
+    <span class="orb orb-a" data-parallax="0.18"></span>
+    <span class="orb orb-b" data-parallax="-0.12"></span>
+    <span class="hero-grid-lines"></span>
+  </div>
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <span class="eyebrow reveal-up">Performance Digital Marketing</span>
+      <h1 class="reveal-up d1">Tăng trưởng thật,<br><span class="grad-text">kết quả rõ ràng.</span></h1>
+      <p class="lead reveal-up d2">Facebook Ads, landing page, nội dung và video cho các dự án bất động sản và thương hiệu nhỏ.</p>
+      <div class="hero-cta reveal-up d3">
+        <a href="#contact" class="btn btn-grad">Nhận tư vấn miễn phí <svg class="ico"><use href="#i-arrow"/></svg></a>
+        <a href="#work" class="btn btn-line">Xem việc đã làm</a>
+      </div>
+      <div class="trust reveal-up d4">
+        <span><svg class="ico"><use href="#i-check"/></svg> Chi phí rõ ràng từ đầu</span>
+        <span><svg class="ico"><use href="#i-check"/></svg> Báo cáo đúng thực tế</span>
+        <span><svg class="ico"><use href="#i-check"/></svg> Tối ưu từng đồng</span>
       </div>
     </div>
-  </header>
-
-  <main>
-
-    <!-- ===== HERO ===== -->
-    <section class="hero wrap" id="home">
-      <div class="hero-top">
-        <span class="eyebrow">puldigi studio</span>
-        <span class="rule"></span>
-        <span class="eyebrow" style="flex-direction:row-reverse">Digital Marketing</span>
+    <div class="mosaic" data-parallax="-0.06">
+      <div class="tile tall g-coral reveal-pop d2">
+        <div class="art"><svg class="ico"><use href="#v-video"/></svg></div>
+        <div class="cap"><svg class="ico"><use href="#v-video"/></svg> Video TikTok</div>
       </div>
+      <div class="tile g-teal reveal-pop d3">
+        <div class="art"><svg class="ico"><use href="#v-ads"/></svg></div>
+        <div class="cap"><svg class="ico"><use href="#v-ads"/></svg> Facebook Ads</div>
+      </div>
+      <div class="tile g-cream reveal-pop d4">
+        <div class="art"><svg class="ico"><use href="#v-web"/></svg></div>
+        <div class="cap"><svg class="ico"><use href="#v-web"/></svg> Website</div>
+      </div>
+    </div>
+  </div>
+  <a href="#services" class="scroll-cue" aria-label="Cuộn xuống">
+    <span class="mouse"><span class="wheel"></span></span>
+  </a>
+</section>
 
-      <div class="hero-grid">
-        <div class="hero-left">
-          <!-- SỬA: đổi chữ lớn ở đây nếu muốn -->
-          <h1 class="hero-title reveal">Sáng tạo<span class="coral">.</span></h1>
-          <p class="hero-sub reveal" data-delay="0.05">Tôi xây dựng &amp; tăng trưởng thương hiệu<br><span class="coral">trên môi trường số</span></p>
-          <p class="lead reveal" data-delay="0.1">Chuyên gia Digital Marketing — kết hợp chiến lược, nội dung và dữ liệu
-            để giúp thương hiệu của bạn tiếp cận đúng người và tăng trưởng bền vững.</p>
+<!-- ===== MARQUEE ===== -->
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track">
+    <span>Facebook Ads</span><span>Video ads TikTok</span><span>Content &amp; Entity SEO</span><span>Website &amp; Landing page</span><span>Thiết kế Canva</span>
+    <span>Facebook Ads</span><span>Video ads TikTok</span><span>Content &amp; Entity SEO</span><span>Website &amp; Landing page</span><span>Thiết kế Canva</span>
+  </div>
+</div>
 
-          <div class="reveal" data-delay="0.15">
-            <div class="signature">puldigi</div>
-            <div class="sig-role">Digital Marketing Specialist</div>
-          </div>
+<!-- ===== SERVICES ===== -->
+<section id="services">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Dịch vụ</span>
+      <h2>Bốn thế mạnh cốt lõi</h2>
+      <p>Rõ ràng, đo được, tập trung vào kết quả kinh doanh của bạn.</p>
+    </div>
+    <div class="svc-grid stagger">
+      <article class="svc reveal">
+        <div class="ico-wrap"><svg class="ico" viewBox="0 0 32 32"><use href="#v-ads"/></svg></div>
+        <h3>Facebook Ads</h3>
+        <p>Setup, chạy và tối ưu chiến dịch để ra lead thật — không chạy cho đủ chỉ tiêu hiển thị.</p>
+        <ul><li>Nghiên cứu đối tượng</li><li>Tối ưu chi phí mỗi lead</li><li>Báo cáo định kỳ</li></ul>
+      </article>
+      <article class="svc reveal">
+        <div class="ico-wrap"><svg class="ico" viewBox="0 0 32 32"><use href="#v-video"/></svg></div>
+        <h3>Video ads TikTok</h3>
+        <p>Kịch bản, quay dựng và hoàn thiện clip quảng cáo cho TikTok và Facebook.</p>
+        <ul><li>Kịch bản từng cảnh</li><li>Edit bằng CapCut</li><li>Nhạc &amp; text on-screen</li></ul>
+      </article>
+      <article class="svc reveal">
+        <div class="ico-wrap"><svg class="ico" viewBox="0 0 32 32"><use href="#v-web"/></svg></div>
+        <h3>Website &amp; Landing page</h3>
+        <p>Trang giới thiệu dự án hoặc landing page thu lead — HTML thuần hoặc WordPress.</p>
+        <ul><li>Responsive mọi màn hình</li><li>Form nhận lead</li><li>Tối ưu tốc độ &amp; SEO</li></ul>
+      </article>
+      <article class="svc reveal">
+        <div class="ico-wrap"><svg class="ico" viewBox="0 0 32 32"><use href="#v-content"/></svg></div>
+        <h3>Content &amp; Entity SEO</h3>
+        <p>Viết bài cho website và xây hồ sơ thực thể để Google nhận diện thương hiệu.</p>
+        <ul><li>Bài chuẩn SEO on-page</li><li>Xây entity thương hiệu</li><li>Rà soát &amp; sửa lỗi</li></ul>
+      </article>
+    </div>
+    <div class="tools reveal">
+      <span class="tools-label">Công cụ sử dụng</span>
+      <div class="tools-row">
+        <span>Meta Ads Manager</span><span>CapCut</span><span>Canva</span><span>WordPress / Elementor</span><span>HTML · CSS · JS</span><span>Google Analytics</span>
+      </div>
+    </div>
+  </div>
+</section>
 
-          <div class="hero-meta reveal" data-delay="0.2">
-            <div class="mi"><span class="ic">◎</span><div><small>Khu vực</small><b>TP. Hồ Chí Minh, VN</b></div></div>
-            <div class="mi"><span class="ic">✦</span><div><small>Trạng thái</small><b>Nhận dự án freelance</b></div></div>
-            <div class="mi"><span class="ic">✉</span><div><small>Email</small><b>hello@puldigi.com</b></div></div>
+<!-- ===== PHILOSOPHY ===== -->
+<section class="philo" id="philo">
+  <div class="wrap reveal">
+    <div class="mark-ico"><svg class="ico"><use href="#i-heart"/></svg></div>
+    <h2>Làm việc có mục đích.<span class="l2">Sáng tạo bằng cả trái tim.</span></h2>
+    <p>Marketing tốt không chỉ là chạy quảng cáo — mà là kể chuyện, kết nối và tạo ra tăng trưởng thật. Chi phí rõ ràng từ đầu, báo cáo đúng thực tế, tối ưu từng đồng ngân sách.</p>
+  </div>
+</section>
+
+<!-- ===== VIDEO SHOWCASE (điện thoại thật phát video TikTok) ===== -->
+<section class="show" id="video">
+  <div class="wrap show-grid">
+    <div class="phone-stage reveal-left" data-parallax="0.05">
+      <div class="phone" id="vlastaPhone" data-video="assets/video/vlasta-tiktok.mp4" role="button" tabindex="0" aria-label="Phát video TikTok dự án Vlasta ở chế độ toàn màn hình">
+        <span class="side-btn side-power" aria-hidden="true"></span>
+        <span class="side-btn side-vol-up" aria-hidden="true"></span>
+        <span class="side-btn side-vol-dn" aria-hidden="true"></span>
+        <div class="phone-body">
+          <span class="island" aria-hidden="true"></span>
+          <div class="screen">
+            <video class="phone-video" muted loop playsinline preload="metadata"
+                    poster="assets/img/portfolio/vlasta-tiktok-thumb.webp">
+              <source src="assets/video/vlasta-tiktok.mp4" type="video/mp4">
+            </video>
+            <span class="scrim" aria-hidden="true"></span>
+            <button class="sound-btn" aria-label="Bật tiếng">
+              <svg class="ico i-muted" viewBox="0 0 24 24"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path d="M17 9l4 6M21 9l-4 6"/></svg>
+              <svg class="ico i-loud" viewBox="0 0 24 24"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path d="M16 8a5 5 0 0 1 0 8M18.5 5.5a9 9 0 0 1 0 13"/></svg>
+            </button>
+            <div class="tag">
+              <b>Vlasta Premier Phú Thuận</b>
+              <small>Video TikTok · dọc 9:16</small>
+            </div>
           </div>
         </div>
-
-        <!-- Visual -->
-        <div class="hero-visual reveal" data-delay="0.1">
-          <div class="hv-halo"></div>
-          <span class="spark s1">✦</span>
-          <span class="spark s2">✦</span>
-          <span class="spark s3">✧</span>
-          <div class="hv-photo">
-            <!-- SỬA: thay bằng ảnh của bạn (bỏ vào images/ rồi đổi src) -->
-            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=800&q=80" alt="puldigi">
-          </div>
-        </div>
       </div>
-    </section>
+    </div>
+    <div class="reveal-right">
+      <span class="eyebrow">Thế mạnh nổi bật</span>
+      <h2>Video bất động sản chốt khách nhanh</h2>
+      <p class="lead show-lead">Mỗi video kể câu chuyện của dự án và dẫn khách đến quyết định.</p>
+      <div class="show-list stagger">
+        <div class="row reveal r"><div class="ic"><svg class="ico"><use href="#v-target"/></svg></div><div><h4>Kịch bản bám dự án</h4><p>Làm nổi bật vị trí, tiện ích, giá trị đầu tư.</p></div></div>
+        <div class="row reveal r"><div class="ic"><svg class="ico"><use href="#v-video"/></svg></div><div><h4>Dựng bằng CapCut</h4><p>Text on-screen và nhạc nền theo định vị dự án.</p></div></div>
+        <div class="row reveal r"><div class="ic"><svg class="ico"><use href="#v-mobile"/></svg></div><div><h4>Chuẩn đa nền tảng</h4><p>Sẵn sàng đăng TikTok, Reels và Facebook.</p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <!-- ===== MARQUEE ===== -->
-    <div class="marquee" aria-hidden="true">
-      <div class="marquee-track">
-        <span>Digital Marketing</span><span class="star">✦</span><span>Content</span><span class="star">✦</span><span>SEO</span><span class="star">✦</span><span>Performance Ads</span><span class="star">✦</span><span>Social Media</span><span class="star">✦</span><span>Branding</span><span class="star">✦</span>
-        <span>Digital Marketing</span><span class="star">✦</span><span>Content</span><span class="star">✦</span><span>SEO</span><span class="star">✦</span><span>Performance Ads</span><span class="star">✦</span><span>Social Media</span><span class="star">✦</span><span>Branding</span><span class="star">✦</span>
+<!-- ===== PROCESS ===== -->
+<section id="process">
+  <div class="wrap">
+    <div class="sec-head center reveal">
+      <span class="eyebrow">Quy trình</span>
+      <h2>Bốn bước, rõ ràng từ đầu</h2>
+      <p>Không mập mờ ở bất kỳ khâu nào — bạn luôn biết đang ở đâu.</p>
+    </div>
+    <div class="steps stagger">
+      <div class="step reveal">
+        <span class="step-no">01</span>
+        <div class="step-ic"><svg class="ico"><use href="#s-talk"/></svg></div>
+        <h4>Trao đổi</h4>
+        <p>Hiểu sản phẩm, khách hàng mục tiêu và ngân sách.</p>
+      </div>
+      <div class="step reveal">
+        <span class="step-no">02</span>
+        <div class="step-ic"><svg class="ico"><use href="#s-doc"/></svg></div>
+        <h4>Đề xuất</h4>
+        <p>Gửi kế hoạch và báo giá cụ thể, không mập mờ.</p>
+      </div>
+      <div class="step reveal">
+        <span class="step-no">03</span>
+        <div class="step-ic"><svg class="ico"><use href="#s-gear"/></svg></div>
+        <h4>Thực thi</h4>
+        <p>Làm và cập nhật tiến độ định kỳ.</p>
+      </div>
+      <div class="step reveal">
+        <span class="step-no">04</span>
+        <div class="step-ic"><svg class="ico"><use href="#s-line"/></svg></div>
+        <h4>Báo cáo</h4>
+        <p>Số liệu rõ ràng, đề xuất bước tiếp theo.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PORTFOLIO ===== -->
+<section id="work">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Portfolio</span>
+      <h2>Một số việc đã làm</h2>
+      <p>Cho bạn hình dung các loại công việc Puldigi nhận thực hiện.</p>
+    </div>
+
+    <div class="filters reveal" role="tablist">
+      <button class="filter active" data-filter="all"><svg class="ico"><use href="#i-grid"/></svg> Tất cả</button>
+      <button class="filter" data-filter="website"><svg class="ico"><use href="#v-web"/></svg> Website</button>
+      <button class="filter" data-filter="ads"><svg class="ico"><use href="#v-ads"/></svg> Facebook Ads</button>
+    </div>
+
+    <div class="work-grid stagger">
+      <!-- Vlasta website -->
+      <article class="work reveal sc" data-type="website">
+        <div class="work-media">
+          <img src="assets/img/portfolio/vlasta-website.webp" alt="Trang giới thiệu dự án Vlasta Premier Phú Thuận" loading="lazy" width="1200" height="574">
+        </div>
+        <div class="work-body">
+          <span class="tag">Website</span>
+          <h4>Vlasta · Trang giới thiệu dự án</h4>
+          <p>Thiết kế và code landing page: gallery, mặt bằng, form nhận thông tin khách.</p>
+        </div>
+      </article>
+
+      <!-- Ads: flower -->
+      <article class="work reveal sc" data-type="ads">
+        <div class="work-media icon-card ic-coral"><svg class="ico"><use href="#v-flower"/></svg></div>
+        <div class="work-body">
+          <span class="tag">Facebook Ads</span>
+          <h4>Tiệm hoa</h4>
+          <p>Setup và tối ưu chiến dịch quảng cáo cho cửa hàng hoa tươi.</p>
+        </div>
+      </article>
+
+      <!-- Ads: travel -->
+      <article class="work reveal sc" data-type="ads">
+        <div class="work-media icon-card ic-teal"><svg class="ico"><use href="#v-plane"/></svg></div>
+        <div class="work-body">
+          <span class="tag">Facebook Ads</span>
+          <h4>Du lịch</h4>
+          <p>Chạy quảng cáo cho sản phẩm dịch vụ du lịch.</p>
+        </div>
+      </article>
+
+      <!-- Ads: real estate -->
+      <article class="work reveal sc" data-type="ads">
+        <div class="work-media icon-card ic-deep"><svg class="ico"><use href="#v-building"/></svg></div>
+        <div class="work-body">
+          <span class="tag">Facebook Ads</span>
+          <h4>Bất động sản</h4>
+          <p>Quảng cáo thu lead cho dự án bất động sản.</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CONTACT ===== -->
+<section class="contact" id="contact">
+  <div class="wrap contact-grid">
+    <div class="reveal l">
+      <span class="eyebrow">Liên hệ</span>
+      <h2>Bắt đầu dự án cùng Puldigi</h2>
+      <p class="lead">Để lại thông tin — Puldigi phản hồi trong vòng 24 giờ.</p>
+      <div class="contact-info stagger">
+        <a class="cinfo reveal" href="https://zalo.me/0972177282" target="_blank" rel="noopener">
+          <div class="ic"><svg class="ico"><use href="#i-chat"/></svg></div>
+          <div><b>Zalo</b><span>0972 177 282</span></div>
+        </a>
+        <a class="cinfo reveal" href="mailto:nhungkim2468@gmail.com">
+          <div class="ic"><svg class="ico"><use href="#i-mail"/></svg></div>
+          <div><b>Email</b><span>nhungkim2468@gmail.com</span></div>
+        </a>
       </div>
     </div>
 
-    <!-- ===== SELECTED WORK + WHAT I DO ===== -->
-    <section id="work">
-      <div class="wrap">
-        <div class="work-grid">
-
-          <!-- Selected Work -->
-          <div class="work-left reveal">
-            <div class="head-row">
-              <div><span class="eyebrow">Dự án tiêu biểu</span>
-                <h2 style="font-size:clamp(1.8rem,3.4vw,2.6rem);margin-top:12px">Selected Work<span class="coral">.</span></h2></div>
-              <a href="#contact" class="link-arw">Xem tất cả <span class="arw">→</span></a>
-            </div>
-            <div class="cases">
-              <div class="case">
-                <div class="case-img"><span class="case-num">01</span>
-                  <img src="https://images.unsplash.com/photo-1596462502278-27bfdc4034d8?w=600&q=80" alt=""></div>
-                <div class="case-body"><span class="cat">Social &amp; Branding</span><h4>Lumière Cosmetics</h4>
-                  <a href="#contact" class="go">→</a></div>
-              </div>
-              <div class="case">
-                <div class="case-img"><span class="case-num">02</span>
-                  <img src="https://images.unsplash.com/photo-1531403009284-440f080d1e12?w=600&q=80" alt=""></div>
-                <div class="case-body"><span class="cat">Website &amp; Ads</span><h4>Elevate Coaching</h4>
-                  <a href="#contact" class="go">→</a></div>
-              </div>
-              <div class="case">
-                <div class="case-img"><span class="case-num">03</span>
-                  <img src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=600&q=80" alt=""></div>
-                <div class="case-body"><span class="cat">Content &amp; SEO</span><h4>Sofia Living</h4>
-                  <a href="#contact" class="go">→</a></div>
-              </div>
-            </div>
-          </div>
-
-          <!-- What I Do -->
-          <div class="what-panel reveal" data-delay="0.12" id="services">
-            <div class="what-head"><h3>Dịch vụ của tôi</h3><span class="plus">✦</span></div>
-            <div class="what-item"><div class="wi-ic">✳</div><div><h4>Chiến lược Digital</h4><p>Kế hoạch kênh, định vị &amp; ngân sách</p></div></div>
-            <div class="what-item"><div class="wi-ic">◈</div><div><h4>Thương hiệu</h4><p>Nhận diện, thông điệp &amp; câu chuyện</p></div></div>
-            <div class="what-item"><div class="wi-ic">✎</div><div><h4>Nội dung số</h4><p>Social, hình ảnh, video &amp; bài viết</p></div></div>
-            <div class="what-item"><div class="wi-ic">◆</div><div><h4>Quảng cáo &amp; Performance</h4><p>Google, Meta &amp; TikTok Ads, tối ưu ROI</p></div></div>
-            <div class="what-item"><div class="wi-ic">◎</div><div><h4>SEO &amp; Website</h4><p>Tăng thứ hạng &amp; tỷ lệ chuyển đổi</p></div></div>
-          </div>
-
-        </div>
+    <form id="leadForm" class="reveal r" novalidate>
+      <!-- honeypot chống spam: người dùng không nhìn thấy -->
+      <div class="hp" aria-hidden="true">
+        <label>Đừng điền ô này<input type="text" name="website" tabindex="-1" autocomplete="off"></label>
       </div>
-    </section>
-
-    <!-- ===== ABOUT BANNER ===== -->
-    <section id="about">
-      <div class="wrap">
-        <div class="about-banner reveal">
-          <div class="about-grid">
-            <div class="about-letter">P</div>
-            <div class="about-copy">
-              <h3>Thiết kế có mục đích.<br>Sáng tạo bằng cả trái tim.</h3>
-              <p>Mình tin marketing tốt không chỉ là chạy quảng cáo — mà là kể chuyện, kết nối và
-                tạo ra tăng trưởng thật, bền vững theo thời gian.</p>
-            </div>
-            <div class="about-badge">
-              <svg class="ring" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
-                <defs><path id="cir" d="M60,60 m-46,0 a46,46 0 1,1 92,0 a46,46 0 1,1 -92,0"/></defs>
-                <text fill="#2f2a58" font-family="'Plus Jakarta Sans',sans-serif" font-size="10.5" font-weight="700" letter-spacing="3.4">
-                  <textPath href="#cir">PULDIGI STUDIO · DIGITAL THAT GROWS · </textPath>
-                </text>
-              </svg>
-              <div class="core">✦</div>
-            </div>
-          </div>
-        </div>
+      <div class="field">
+        <label for="f-name">Họ và tên</label>
+        <input id="f-name" type="text" name="name" placeholder="Nguyễn Văn A" required>
       </div>
-    </section>
-
-    <!-- ===== PROCESS (redesign) ===== -->
-    <section id="process">
-      <div class="wrap">
-        <div class="sec-head center reveal">
-          <span class="eyebrow">Quy trình</span>
-          <h2>Cách mình <span class="serif-i coral">làm việc.</span></h2>
-        </div>
-        <div class="flow">
-          <span class="flow-prog"></span>
-          <div class="fstep reveal"><div class="fnum"><span class="n">01</span><span class="ic">🔍</span></div><h4>Khám phá</h4><p>Hiểu mục tiêu, thị trường &amp; khách hàng của bạn.</p></div>
-          <div class="fstep alt reveal" data-delay="0.1"><div class="fnum"><span class="n">02</span><span class="ic">✎</span></div><h4>Chiến lược</h4><p>Lên kế hoạch kênh, nội dung &amp; ngân sách rõ ràng.</p></div>
-          <div class="fstep reveal" data-delay="0.2"><div class="fnum"><span class="n">03</span><span class="ic">🚀</span></div><h4>Triển khai</h4><p>Chạy chiến dịch &amp; sản xuất nội dung nhất quán.</p></div>
-          <div class="fstep alt reveal" data-delay="0.3"><div class="fnum"><span class="n">04</span><span class="ic">📈</span></div><h4>Tối ưu</h4><p>Đo lường số liệu, báo cáo &amp; tối ưu liên tục.</p></div>
-        </div>
+      <div class="field">
+        <label for="f-contact">Số điện thoại / Email</label>
+        <input id="f-contact" type="text" name="contact" placeholder="09xx xxx xxx" required>
       </div>
-    </section>
-
-    <!-- ===== CTA ===== -->
-    <section id="contact">
-      <div class="wrap">
-        <div class="cta reveal">
-          <div class="cta-grid">
-            <div>
-              <h2>Cùng tạo nên điều<br>thật <span class="coral serif-i">tuyệt đẹp.</span></h2>
-              <p>Mình luôn sẵn sàng cho những cơ hội và dự án mới. Hãy biến ý tưởng của bạn thành hiện thực.</p>
-              <a href="mailto:hello@puldigi.com" class="btn btn-coral">Liên hệ ngay <span class="arw">→</span></a>
-            </div>
-            <ul class="cta-contact">
-              <li><span class="ic">◎</span> TP. Hồ Chí Minh, Việt Nam</li>
-              <li><span class="ic">✉</span> <a href="mailto:hello@puldigi.com">hello@puldigi.com</a></li>
-              <li><span class="ic">◈</span> <a href="https://puldigi.com">www.puldigi.com</a></li>
-              <li><span class="ic">◆</span> <a href="#">@puldigi</a></li>
-            </ul>
-          </div>
-        </div>
+      <div class="field">
+        <label for="f-service">Dịch vụ quan tâm</label>
+        <select id="f-service" name="service">
+          <option>Facebook Ads</option>
+          <option>Video ads TikTok</option>
+          <option>Website &amp; Landing page</option>
+          <option>Content &amp; Entity SEO</option>
+        </select>
       </div>
-    </section>
-
-    <!-- ===== FOOTER ===== -->
-    <footer class="foot wrap">
-      <div class="foot-inner">
-        <span>© 2026 puldigi.com — Digital Marketing</span>
-        <span><a href="#work">Dự án</a> · <a href="#services">Dịch vụ</a> · <a href="#contact">Liên hệ</a></span>
+      <div class="field">
+        <label for="f-msg">Nội dung cần tư vấn</label>
+        <textarea id="f-msg" name="message" rows="3" placeholder="Mô tả ngắn về nhu cầu của bạn..."></textarea>
       </div>
-    </footer>
+      <button type="submit" class="btn btn-grad" id="submitBtn">
+        Gửi yêu cầu tư vấn <svg class="ico"><use href="#i-send"/></svg>
+      </button>
+      <p class="form-note" id="formNote" role="status"></p>
+    </form>
+  </div>
+</section>
 
-  </main>
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <a href="#top" class="logo"><svg class="mk" viewBox="0 0 60 40" aria-hidden="true"><use href="#pulmark"/></svg><b>Puldigi</b></a>
+      <div class="foot-links">
+        <a href="#services">Dịch vụ</a><a href="#process">Quy trình</a><a href="#work">Portfolio</a><a href="#contact">Liên hệ</a>
+      </div>
+      <div class="foot-social">
+        <a href="https://zalo.me/0972177282" target="_blank" rel="noopener" aria-label="Zalo"><svg class="ico"><use href="#i-chat"/></svg></a>
+        <a href="mailto:nhungkim2468@gmail.com" aria-label="Email"><svg class="ico"><use href="#i-mail"/></svg></a>
+      </div>
+    </div>
+    <p class="copy">© 2026 Puldigi · Digital Marketing. Sáng tạo bằng cả trái tim.</p>
+  </div>
+</footer>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-  <script src="app.js"></script>
+<!-- ===== VIDEO LIGHTBOX ===== -->
+<div class="lightbox" id="lightbox" aria-hidden="true">
+  <button class="lb-close" id="lbClose" aria-label="Đóng video">&times;</button>
+  <div class="lb-inner" id="lbInner"></div>
+</div>
+
+<script src="js/main.js"></script>
 </body>
 </html>
