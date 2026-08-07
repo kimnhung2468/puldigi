@@ -161,11 +161,13 @@ nav a:hover{color:var(--coral)}
 .tile.glass .g-ico .ico{width:32px;height:32px;stroke:url(#ig)}
 .tile.glass .g-label{font-family:var(--font-body);font-weight:700;font-size:1.06rem;color:var(--ink);letter-spacing:-.01em}
 
-/* ---------- MARQUEE ---------- */
-.marquee{overflow:hidden;padding:.9rem 0;border-block:1px solid var(--line);background:var(--bg-2)}
+/* ---------- MARQUEE (nền tối trong suốt — kính mờ) ---------- */
+.marquee{overflow:hidden;padding:1rem 0;background:rgba(12,59,31,.78);
+  -webkit-backdrop-filter:blur(8px) saturate(1.2);backdrop-filter:blur(8px) saturate(1.2);
+  border-block:1px solid rgba(255,255,255,.12)}
 .marquee-track{display:flex;gap:2.4rem;white-space:nowrap;width:max-content;animation:scroll 32s linear infinite}
-.marquee span{font-family:var(--font-head);font-weight:600;font-size:1.12rem;display:inline-flex;align-items:center;gap:2.4rem;color:var(--ink)}
-.marquee span::after{content:"";width:7px;height:7px;border-radius:50%;background:var(--coral)}
+.marquee span{font-family:var(--font-head);font-weight:600;font-size:1.12rem;display:inline-flex;align-items:center;gap:2.4rem;color:#F3ECE3}
+.marquee span::after{content:"";width:7px;height:7px;border-radius:50%;background:var(--coral-soft)}
 @keyframes scroll{to{transform:translateX(-50%)}}
 
 /* ---------- SECTION ---------- */
