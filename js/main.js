@@ -68,6 +68,29 @@ document.addEventListener('DOMContentLoaded', () => {
   }, { threshold: 0.14, rootMargin: '0px 0px -8% 0px' });
   document.querySelectorAll(revealSelector).forEach(el => io.observe(el));
 
+  /* ---------- ĐẾM SỐ Ở QUY TRÌNH (01 → 04) ---------- */
+  const stepNos = document.querySelectorAll('.step-no');
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (stepNos.length && !reduceMotion) {
+    const countIO = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (!e.isIntersecting) return;
+        const el = e.target;
+        const target = parseInt(el.textContent, 10) || 0;
+        const dur = 900, start = performance.now();
+        const tick = (now) => {
+          const p = Math.min((now - start) / dur, 1);
+          el.textContent = String(Math.round(p * target)).padStart(2, '0');
+          if (p < 1) requestAnimationFrame(tick);
+        };
+        el.textContent = '00';
+        requestAnimationFrame(tick);
+        countIO.unobserve(el);
+      });
+    }, { threshold: 0.6 });
+    stepNos.forEach(el => countIO.observe(el));
+  }
+
   /* ---------- LỌC PORTFOLIO ---------- */
   const filters = document.querySelectorAll('.filter');
   const works = document.querySelectorAll('.work');

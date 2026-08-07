@@ -161,13 +161,15 @@ nav a:hover{color:var(--coral)}
 .tile.glass .g-ico .ico{width:32px;height:32px;stroke:url(#ig)}
 .tile.glass .g-label{font-family:var(--font-body);font-weight:700;font-size:1.06rem;color:var(--ink);letter-spacing:-.01em}
 
-/* ---------- MARQUEE (nền tối trong suốt — kính mờ) ---------- */
-.marquee{overflow:hidden;padding:1rem 0;background:rgba(12,59,31,.78);
-  -webkit-backdrop-filter:blur(8px) saturate(1.2);backdrop-filter:blur(8px) saturate(1.2);
-  border-block:1px solid rgba(255,255,255,.12)}
+/* ---------- MARQUEE (nền gradient chuyển sắc + chữ chạy) ---------- */
+.marquee{overflow:hidden;padding:1.05rem 0;border-block:1px solid rgba(255,255,255,.16);
+  background:linear-gradient(90deg,#D9663C,#E88A6B,#0E9384,#5FC3B2,#0E9384,#D9663C);
+  background-size:220% 100%;
+  animation:marqueeGrad 10s ease-in-out infinite}
+@keyframes marqueeGrad{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
 .marquee-track{display:flex;gap:2.4rem;white-space:nowrap;width:max-content;animation:scroll 32s linear infinite}
-.marquee span{font-family:var(--font-head);font-weight:600;font-size:1.12rem;display:inline-flex;align-items:center;gap:2.4rem;color:#F3ECE3}
-.marquee span::after{content:"";width:7px;height:7px;border-radius:50%;background:var(--coral-soft)}
+.marquee span{font-family:var(--font-head);font-weight:600;font-size:1.12rem;display:inline-flex;align-items:center;gap:2.4rem;color:#fff;text-shadow:0 1px 3px rgba(0,0,0,.28)}
+.marquee span::after{content:"";width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.92)}
 @keyframes scroll{to{transform:translateX(-50%)}}
 
 /* ---------- SECTION ---------- */
@@ -274,27 +276,31 @@ section{padding:6rem 0}
 
 /* ---------- PROCESS (mỗi bước 1 màu gradient) ---------- */
 .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:1.3rem}
-.step{border:1px solid transparent;border-radius:var(--radius);padding:1.9rem 1.5rem;position:relative;overflow:hidden;transition:transform .35s cubic-bezier(.2,.7,.3,1), box-shadow .35s}
-.step:hover{transform:translateY(-6px);box-shadow:var(--shadow)}
-.step-no{font-family:var(--font-head);font-size:2.5rem;font-weight:700;position:absolute;top:.9rem;right:1.2rem;line-height:1;opacity:.55}
+.step{border:1px solid transparent;border-radius:var(--radius);padding:1.9rem 1.5rem;position:relative;overflow:hidden;
+  background-size:220% 220%;animation:stepShift 9s ease-in-out infinite;
+  transition:transform .35s cubic-bezier(.2,.7,.3,1), box-shadow .35s}
+.step:hover{transform:translateY(-8px) scale(1.02);box-shadow:var(--shadow)}
+@keyframes stepShift{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+.step-no{font-family:var(--font-head);font-size:2.9rem;font-weight:700;position:absolute;top:.7rem;right:1.2rem;line-height:1;opacity:.6;font-variant-numeric:tabular-nums;transition:transform .35s}
+.step:hover .step-no{transform:scale(1.12)}
 .step-ic{width:52px;height:52px;border-radius:14px;display:grid;place-items:center;color:#fff;margin-bottom:1.05rem;box-shadow:0 8px 18px -10px rgba(42,29,24,.5)}
 .step-ic .ico{width:26px;height:26px}
 .step h4{font-family:var(--font-body);font-weight:700;font-size:1.12rem;margin-bottom:.4rem;color:var(--ink)}
 .step p{color:var(--ink-soft);font-size:.9rem}
 /* bước 1 — cam */
-.step:nth-child(1){background:linear-gradient(165deg,#FCEFE8,#F7DDCF)}
+.step:nth-child(1){background-image:linear-gradient(135deg,#FCEFE8,#F4C4A8,#F7DDCF)}
 .step:nth-child(1) .step-no{color:var(--coral)}
 .step:nth-child(1) .step-ic{background:linear-gradient(150deg,var(--coral-soft),var(--coral-d))}
 /* bước 2 — xanh ngọc */
-.step:nth-child(2){background:linear-gradient(165deg,#E6F5F0,#CFEBE1)}
+.step:nth-child(2){animation-delay:-2.2s;background-image:linear-gradient(135deg,#E6F5F0,#B4E1D4,#CFEBE1)}
 .step:nth-child(2) .step-no{color:var(--teal)}
 .step:nth-child(2) .step-ic{background:linear-gradient(150deg,var(--teal-soft),var(--teal-d))}
 /* bước 3 — xanh đậm */
-.step:nth-child(3){background:linear-gradient(165deg,#E7EEE9,#D3E1D6)}
+.step:nth-child(3){animation-delay:-4.4s;background-image:linear-gradient(135deg,#E7EEE9,#B9D2C3,#D3E1D6)}
 .step:nth-child(3) .step-no{color:var(--deep)}
 .step:nth-child(3) .step-ic{background:linear-gradient(150deg,var(--teal-d),var(--deep))}
 /* bước 4 — cam + xanh (gradient thương hiệu) */
-.step:nth-child(4){background:linear-gradient(165deg,#F7EEE4,#EFE0CC)}
+.step:nth-child(4){animation-delay:-6.6s;background-image:linear-gradient(135deg,#F7EEE4,#E9CBB6,#CFE7DF,#EFE0CC)}
 .step:nth-child(4) .step-no{color:var(--coral-d)}
 .step:nth-child(4) .step-ic{background:var(--grad)}
 
@@ -391,6 +397,27 @@ footer{padding:3rem 0 2rem;border-top:1px solid var(--line);background:var(--bg-
 }
 /* độ trễ theo lớp — dùng cho stagger banner */
 .d1{transition-delay:.08s}.d2{transition-delay:.18s}.d3{transition-delay:.30s}.d4{transition-delay:.42s}
+
+/* ---------- TESTIMONIALS (Cảm nhận — thẻ tự chạy) ---------- */
+.tmz{background:var(--bg-alt);overflow:hidden}
+.tmarquee{overflow:hidden;margin-top:2.6rem;padding:.6rem 0;
+  -webkit-mask:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);
+          mask:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
+.tmarquee-track{display:flex;gap:1.4rem;width:max-content;animation:tscroll 36s linear infinite}
+.tmarquee:hover .tmarquee-track{animation-play-state:paused}
+@keyframes tscroll{to{transform:translateX(-50%)}}
+.tcard{flex:0 0 clamp(290px,78vw,380px);background:var(--bg-2);border:1px solid var(--line);
+  border-radius:16px;padding:1.7rem 1.8rem;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:.9rem;
+  transition:transform .35s cubic-bezier(.2,.7,.3,1), border-color .35s}
+.tcard:hover{transform:translateY(-6px);border-color:var(--teal)}
+.tcard .qmark{font-family:var(--font-head);font-size:3.2rem;line-height:.5;height:1.3rem;color:var(--coral)}
+.tcard blockquote{color:var(--ink-soft);font-size:1rem;line-height:1.62;flex:1}
+.tperson{display:flex;align-items:center;gap:.85rem;margin-top:.3rem}
+.tavatar{width:46px;height:46px;border-radius:50%;background:var(--grad);color:#fff;display:grid;place-items:center;
+  font-family:var(--font-head);font-weight:700;font-size:1.15rem;flex:0 0 auto}
+.tinfo{display:flex;flex-direction:column;line-height:1.35}
+.tinfo b{color:var(--ink);font-weight:700}
+.tinfo small{color:var(--muted);font-size:.82rem}
 
 /* ---------- RESPONSIVE ---------- */
 @media(max-width:1024px){
