@@ -274,36 +274,21 @@ section{padding:6rem 0}
 .phone .tag::after{content:"";position:absolute;top:-9px;right:14px;width:8px;height:8px;border-radius:50%;background:var(--coral);box-shadow:0 0 0 0 rgba(217,102,60,.6);animation:livePulse 2s infinite}
 @keyframes livePulse{0%{box-shadow:0 0 0 0 rgba(217,102,60,.5)}70%{box-shadow:0 0 0 10px rgba(217,102,60,0)}100%{box-shadow:0 0 0 0 rgba(217,102,60,0)}}
 
-/* ---------- PROCESS (mỗi bước 1 màu gradient) ---------- */
-.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:1.3rem}
-.step{border:1px solid transparent;border-radius:var(--radius);padding:1.9rem 1.5rem;position:relative;overflow:hidden;
-  background-size:220% 220%;animation:stepShift 9s ease-in-out infinite;
-  transition:transform .35s cubic-bezier(.2,.7,.3,1), box-shadow .35s}
-.step:hover{transform:translateY(-8px) scale(1.02);box-shadow:var(--shadow)}
-@keyframes stepShift{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
-.step-no{font-family:var(--font-head);font-size:2.9rem;font-weight:700;position:absolute;top:.7rem;right:1.2rem;line-height:1;opacity:.5;font-variant-numeric:tabular-nums;transition:transform .35s}
-.step:hover .step-no{transform:scale(1.12)}
-/* icon dạng huy hiệu tròn, tông nhạt hoà vào nền thẻ — mềm hơn khối đặc trước đây */
-.step-ic{width:52px;height:52px;border-radius:50%;display:grid;place-items:center;margin-bottom:1.05rem}
-.step-ic .ico{width:24px;height:24px;stroke-width:1.8}
-.step h4{font-family:var(--font-body);font-weight:700;font-size:1.12rem;margin-bottom:.4rem;color:var(--ink)}
-.step p{color:var(--ink-soft);font-size:.9rem}
-/* bước 1 — cam */
-.step:nth-child(1){background-image:linear-gradient(135deg,#FCEFE8,#F4C4A8,#F7DDCF)}
-.step:nth-child(1) .step-no{color:var(--coral)}
-.step:nth-child(1) .step-ic{background:rgba(255,255,255,.6);color:var(--coral-d)}
-/* bước 2 — xanh ngọc */
-.step:nth-child(2){animation-delay:-2.2s;background-image:linear-gradient(135deg,#E6F5F0,#B4E1D4,#CFEBE1)}
-.step:nth-child(2) .step-no{color:var(--teal)}
-.step:nth-child(2) .step-ic{background:rgba(255,255,255,.6);color:var(--teal-d)}
-/* bước 3 — xanh đậm */
-.step:nth-child(3){animation-delay:-4.4s;background-image:linear-gradient(135deg,#E7EEE9,#B9D2C3,#D3E1D6)}
-.step:nth-child(3) .step-no{color:var(--deep)}
-.step:nth-child(3) .step-ic{background:rgba(255,255,255,.6);color:var(--deep)}
-/* bước 4 — cam + xanh (gradient thương hiệu) */
-.step:nth-child(4){animation-delay:-6.6s;background-image:linear-gradient(135deg,#F7EEE4,#E9CBB6,#CFE7DF,#EFE0CC)}
-.step:nth-child(4) .step-no{color:var(--coral-d)}
-.step:nth-child(4) .step-ic{background:rgba(255,255,255,.65);color:var(--coral-d)}
+/* ---------- PROCESS (timeline ngang, không khung) ---------- */
+.timeline{position:relative;padding-top:.4rem}
+.tl-line{position:absolute;top:32px;left:6%;right:6%;height:2px;background:var(--line);display:block;overflow:hidden;z-index:0}
+.tl-fill{display:block;height:100%;width:100%;background:var(--grad);transform:scaleX(0);transform-origin:0 50%;
+  transition:transform 1.4s cubic-bezier(.2,.7,.3,1)}
+.timeline.in .tl-fill{transform:scaleX(1)}
+.tl-items{position:relative;z-index:1;display:grid;grid-template-columns:repeat(4,1fr);gap:1.3rem}
+.tl-item{display:flex;flex-direction:column;align-items:center;text-align:center;gap:.5rem}
+.tl-dot{width:64px;height:64px;border-radius:50%;background:var(--bg-2);border:2px solid var(--line);
+  display:grid;place-items:center;margin-bottom:.3rem;transition:transform .3s cubic-bezier(.2,.7,.3,1), border-color .3s, box-shadow .3s}
+.tl-item:hover .tl-dot{transform:translateY(-5px) scale(1.07);border-color:var(--teal);box-shadow:0 12px 24px -12px rgba(14,147,132,.45)}
+.tl-dot .ico{width:26px;height:26px;stroke:url(#ig);stroke-width:1.8}
+.tl-no{font-family:var(--font-head);font-weight:700;font-size:.74rem;letter-spacing:.16em;color:var(--coral-d)}
+.tl-item h4{font-family:var(--font-body);font-weight:700;font-size:1.08rem;color:var(--ink)}
+.tl-item p{color:var(--muted);font-size:.86rem;max-width:24ch}
 
 /* ---------- PORTFOLIO ---------- */
 .work-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem}
@@ -364,15 +349,22 @@ section{padding:6rem 0}
 .bdot-coral{fill:var(--coral)}
 .bdot-teal{fill:var(--teal)}
 
-/* ---------- BÁO GIÁ (thẻ gradient mềm, mỗi gói 1 tông) ---------- */
+/* ---------- BÁO GIÁ (4 thẻ cùng 1 style, có đổ bóng mặc định) ---------- */
 .price-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.2rem}
 .price-card{border:1px solid transparent;border-radius:var(--radius);padding:1.8rem 1.5rem;
+  background-image:linear-gradient(135deg,#FCEFE8,#E6F5F0,#F7EEE4);
   background-size:200% 200%;animation:priceShift 11s ease-in-out infinite;
+  box-shadow:0 16px 36px -24px rgba(42,29,24,.32);
   display:flex;flex-direction:column;transition:transform .35s cubic-bezier(.2,.7,.3,1), box-shadow .35s}
+.price-card:nth-child(2){animation-delay:-3s}
+.price-card:nth-child(3){animation-delay:-6s}
+.price-card:nth-child(4){animation-delay:-9s}
 .price-card:hover{transform:translateY(-7px) scale(1.015);box-shadow:var(--shadow)}
 @keyframes priceShift{0%,100%{background-position:0% 40%}50%{background-position:100% 60%}}
-.price-card .ico-wrap{width:52px;height:52px;border-radius:14px;display:grid;place-items:center;margin-bottom:1.1rem}
-.price-card .ico-wrap .ico{width:26px;height:26px}
+/* icon: rõ nét hơn — 30px, viền gradient thương hiệu thay vì viền mảnh nhỏ dễ nhìn nhầm bị cắt */
+.price-card .ico-wrap{width:56px;height:56px;border-radius:14px;display:grid;place-items:center;margin-bottom:1.1rem;
+  background:linear-gradient(150deg,rgba(14,147,132,.2),rgba(217,102,60,.14))}
+.price-card .ico-wrap .ico{width:29px;height:29px;stroke:url(#ig)}
 .price-card h3{font-size:1.15rem;margin-bottom:.7rem;color:var(--ink)}
 .price-tag{font-family:var(--font-head);font-size:1.5rem;font-weight:700;color:var(--ink);margin-bottom:.3rem}
 .price-tag b{color:var(--coral-d)}
@@ -381,19 +373,12 @@ section{padding:6rem 0}
 .price-feat{list-style:none;display:flex;flex-direction:column;gap:.55rem;margin-bottom:1.4rem;flex:1}
 .price-feat li{display:flex;align-items:center;gap:.5rem;font-size:.86rem;color:var(--ink-soft)}
 .price-feat .ico{width:16px;height:16px;color:var(--teal);flex:0 0 auto}
-.price-card .btn{justify-content:center;background:var(--bg-2)}
-/* gói 1 — cam */
-.price-card:nth-child(1){background-image:linear-gradient(135deg,#FCEFE8,#F7DDCF,#FBF0E7)}
-.price-card:nth-child(1) .ico-wrap{background:linear-gradient(150deg,rgba(217,102,60,.22),rgba(217,102,60,.1));color:var(--coral-d)}
-/* gói 2 — xanh ngọc */
-.price-card:nth-child(2){animation-delay:-3s;background-image:linear-gradient(135deg,#E6F5F0,#CFEBE1,#E9F6F1)}
-.price-card:nth-child(2) .ico-wrap{background:linear-gradient(150deg,rgba(14,147,132,.22),rgba(14,147,132,.1));color:var(--teal-d)}
-/* gói 3 — kem/vàng nhạt */
-.price-card:nth-child(3){animation-delay:-6s;background-image:linear-gradient(135deg,#F7EEE4,#EFE0CC,#F5EBDD)}
-.price-card:nth-child(3) .ico-wrap{background:linear-gradient(150deg,rgba(217,102,60,.16),rgba(14,147,132,.12));color:var(--coral-d)}
-/* gói 4 — cam+xanh pha */
-.price-card:nth-child(4){animation-delay:-9s;background-image:linear-gradient(135deg,#FCEFE8,#E6F5F0,#F7EEE4)}
-.price-card:nth-child(4) .ico-wrap{background:linear-gradient(150deg,rgba(14,147,132,.2),rgba(217,102,60,.14));color:var(--teal-d)}
+/* nút "Nhận tư vấn": chạm/hover -> gradient thương hiệu tràn vào, chữ trắng */
+.price-card .btn{justify-content:center;background:var(--bg-2);position:relative;overflow:hidden;z-index:1}
+.price-card .btn::before{content:"";position:absolute;inset:0;z-index:-1;background:var(--grad);
+  transform:scaleX(0);transform-origin:0 50%;transition:transform .4s cubic-bezier(.2,.7,.3,1)}
+.price-card .btn:hover{color:#fff;border-color:transparent}
+.price-card .btn:hover::before{transform:scaleX(1)}
 
 /* ---------- CONTACT ---------- */
 .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem}
@@ -422,17 +407,22 @@ form .btn-grad{width:100%;justify-content:center;margin-top:.3rem;padding:1rem}
 .form-note.ok{color:var(--teal-d);font-weight:600}
 .form-note.err{color:var(--coral-d);font-weight:600}
 
-/* ---------- FOOTER ---------- */
-footer{padding:3rem 0 2rem;border-top:1px solid var(--line);background:var(--bg-2)}
-.foot-grid{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1.5rem;padding-bottom:1.6rem;border-bottom:1px solid var(--line)}
+/* ---------- FOOTER (nền tối, không dùng trắng) ---------- */
+footer{padding:3.4rem 0 2rem;background:var(--ink);position:relative;overflow:hidden}
+footer::before{content:"";position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(60% 90% at 90% 0%,rgba(14,147,132,.16),transparent 60%),
+             radial-gradient(50% 80% at 6% 100%,rgba(217,102,60,.14),transparent 60%)}
+footer .wrap{position:relative}
+footer .logo b{color:#fff}
+.foot-grid{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1.5rem;padding-bottom:1.6rem;border-bottom:1px solid rgba(255,255,255,.14)}
 .foot-links{display:flex;gap:1.4rem;flex-wrap:wrap}
-.foot-links a{font-size:.9rem;color:var(--muted);font-weight:500;transition:.22s}
-.foot-links a:hover{color:var(--coral)}
+.foot-links a{font-size:.9rem;color:rgba(255,255,255,.72);font-weight:500;transition:.22s}
+.foot-links a:hover{color:var(--coral-soft)}
 .foot-social{display:flex;gap:.6rem}
-.foot-social a{width:40px;height:40px;border-radius:11px;background:var(--bg);border:1px solid var(--line);display:grid;place-items:center;color:var(--ink-soft);transition:.24s}
-.foot-social a:hover{color:var(--teal);border-color:var(--teal);transform:translateY(-2px)}
+.foot-social a{width:40px;height:40px;border-radius:11px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);display:grid;place-items:center;color:rgba(255,255,255,.85);transition:.24s}
+.foot-social a:hover{color:var(--teal-soft);border-color:var(--teal-soft);transform:translateY(-2px)}
 .foot-social .ico{width:18px;height:18px}
-.copy{text-align:center;margin-top:1.4rem;font-size:.84rem;color:var(--muted)}
+.copy{text-align:center;margin-top:1.4rem;font-size:.84rem;color:rgba(255,255,255,.5)}
 
 /* ---------- VIDEO LIGHTBOX ---------- */
 .lightbox{position:fixed;inset:0;z-index:100;background:rgba(12,59,31,.86);display:none;align-items:center;justify-content:center;padding:1.5rem}
@@ -482,7 +472,6 @@ footer{padding:3rem 0 2rem;border-top:1px solid var(--line);background:var(--bg-
 
 /* ---------- RESPONSIVE ---------- */
 @media(max-width:1024px){
-  .steps{grid-template-columns:repeat(2,1fr)}
   .work-grid{grid-template-columns:repeat(2,1fr)}
   .stat-row{grid-template-columns:repeat(2,1fr)}
   .chart-grid{grid-template-columns:1fr}
@@ -497,6 +486,16 @@ footer{padding:3rem 0 2rem;border-top:1px solid var(--line);background:var(--bg-
   nav ul{display:none}
   .nav-toggle{display:block}
   nav.open ul{display:flex;position:absolute;top:120%;left:0;right:0;flex-direction:column;background:rgba(255,255,255,.97);backdrop-filter:blur(14px);padding:1.3rem;gap:1rem;border-radius:16px;border:1px solid var(--line)}
+}
+/* timeline: hàng ngang -> cột dọc trên màn hình hẹp */
+@media(max-width:760px){
+  .tl-line{top:0;bottom:0;left:31px;right:auto;width:2px;height:auto}
+  .tl-fill{width:2px;height:100%;transform:scaleY(0);transform-origin:50% 0}
+  .timeline.in .tl-fill{transform:scaleY(1)}
+  .tl-items{grid-template-columns:1fr;gap:1.8rem;justify-items:stretch}
+  .tl-item{flex-direction:row;text-align:left;align-items:flex-start;gap:1rem}
+  .tl-dot{flex:0 0 auto;margin-bottom:0}
+  .tl-item p{max-width:none}
 }
 @media(max-width:560px){
   .svc-grid{grid-template-columns:1fr}
