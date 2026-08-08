@@ -134,21 +134,6 @@ document.addEventListener('DOMContentLoaded', () => {
     rchart.addEventListener('touchmove', (e) => e.touches[0] && showAt(e.touches[0].clientX), { passive: true });
   }
 
-  /* ---------- LỌC PORTFOLIO ---------- */
-  const filters = document.querySelectorAll('.filter');
-  const works = document.querySelectorAll('.work');
-  filters.forEach(btn => {
-    btn.addEventListener('click', () => {
-      filters.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      const type = btn.dataset.filter;
-      works.forEach(w => {
-        const show = (type === 'all' || w.dataset.type === type);
-        w.classList.toggle('hide', !show);
-      });
-    });
-  });
-
   /* ---------- FACADE VIDEO (mở lightbox khi bấm) ---------- */
   const lightbox = document.getElementById('lightbox');
   const lbInner = document.getElementById('lbInner');
