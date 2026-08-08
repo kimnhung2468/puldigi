@@ -331,10 +331,18 @@ section{padding:6rem 0}
 .rchart-line{width:100%;height:auto;overflow:visible}
 .rgrid{stroke:var(--line);stroke-width:1}
 .raxis{font-family:var(--font-body);font-size:11px;fill:var(--muted)}
-.rarea{fill:var(--teal);opacity:.1;stroke:none}
-.rline{fill:none;stroke:var(--teal);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-.rdot-peak{fill:var(--teal);stroke:var(--bg-2);stroke-width:2}
-.rpeaklabel{font-family:var(--font-body);font-size:11px;font-weight:700;fill:var(--ink)}
+/* --- biểu đồ "vẽ" dần khi cuộn tới: line chạy theo dashoffset, area + đỉnh hiện sau --- */
+.rarea{fill:var(--teal);opacity:0;stroke:none;transition:opacity 1s ease .9s}
+.rline{fill:none;stroke:var(--teal);stroke-width:2;stroke-linecap:round;stroke-linejoin:round;
+  stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset 1.7s cubic-bezier(.3,.6,.2,1)}
+.rdot-peak{fill:var(--teal);stroke:var(--bg-2);stroke-width:2;opacity:0;transform:scale(.3);transform-origin:313.5px 26.6px;
+  transition:opacity .5s ease 1.5s, transform .5s cubic-bezier(.3,1.4,.4,1) 1.5s}
+.rpeaklabel{font-family:var(--font-body);font-size:11px;font-weight:700;fill:var(--ink);opacity:0;
+  transition:opacity .5s ease 1.6s}
+.chart-card.in .rline{stroke-dashoffset:0}
+.chart-card.in .rarea{opacity:.1}
+.chart-card.in .rdot-peak{opacity:1;transform:scale(1)}
+.chart-card.in .rpeaklabel{opacity:1}
 .rguide{stroke:var(--ink-soft);stroke-width:1;stroke-dasharray:3 3;opacity:0;pointer-events:none}
 .rhoverdot{fill:var(--coral);stroke:var(--bg-2);stroke-width:2;opacity:0;pointer-events:none}
 .rtooltip{position:absolute;top:8px;left:8px;pointer-events:none;background:var(--deep);color:#fff;
@@ -413,7 +421,8 @@ footer::before{content:"";position:absolute;inset:0;pointer-events:none;
   background:radial-gradient(60% 90% at 90% 0%,rgba(14,147,132,.16),transparent 60%),
              radial-gradient(50% 80% at 6% 100%,rgba(217,102,60,.14),transparent 60%)}
 footer .wrap{position:relative}
-footer .logo b{color:#fff}
+.foot-logo{display:inline-flex;align-items:center}
+.foot-logo img{height:38px;width:auto;display:block}
 .foot-grid{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1.5rem;padding-bottom:1.6rem;border-bottom:1px solid rgba(255,255,255,.14)}
 .foot-links{display:flex;gap:1.4rem;flex-wrap:wrap}
 .foot-links a{font-size:.9rem;color:rgba(255,255,255,.72);font-weight:500;transition:.22s}
