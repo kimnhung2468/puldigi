@@ -334,6 +334,62 @@ section{padding:6rem 0}
 .work-body h4{font-family:var(--font-body);font-weight:700;font-size:1.05rem;margin:.35rem 0;color:var(--ink)}
 .work-body p{color:var(--muted);font-size:.88rem}
 
+/* ---------- KẾT QUẢ THỰC TẾ (stat tiles + biểu đồ) ---------- */
+.results .sec-head p b{color:var(--ink);font-weight:700}
+.stat-row{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:1.6rem}
+.stat-tile{background:var(--bg-2);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem 1.4rem;
+  display:flex;flex-direction:column;gap:.5rem;transition:transform .3s cubic-bezier(.2,.7,.3,1), box-shadow .3s}
+.stat-tile:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
+.stat-label{font-size:.8rem;color:var(--muted);font-weight:600}
+.stat-value{font-family:var(--font-head);font-size:2rem;font-weight:700;color:var(--ink)}
+.stat-delta{display:inline-flex;align-items:center;gap:.3rem;font-size:.82rem;font-weight:700;width:fit-content;padding:.2rem .55rem;border-radius:999px}
+.stat-delta.up{color:var(--teal-d);background:rgba(14,147,132,.12)}
+.stat-delta .ico-up{width:13px;height:13px;stroke-width:3}
+
+.chart-grid{display:grid;grid-template-columns:1.5fr 1fr;gap:1.4rem}
+.chart-card{background:var(--bg-2);border:1px solid var(--line);border-radius:var(--radius);padding:1.5rem 1.6rem}
+.chart-head{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:.4rem;margin-bottom:.9rem}
+.chart-head h4{font-family:var(--font-body);font-weight:700;font-size:1rem;color:var(--ink)}
+.chart-sub{font-size:.78rem;color:var(--muted)}
+.chart-footnote{margin-top:1rem;font-size:.78rem;color:var(--muted);text-align:center}
+
+.rchart-wrap{position:relative}
+.rchart-line{width:100%;height:auto;overflow:visible}
+.rgrid{stroke:var(--line);stroke-width:1}
+.raxis{font-family:var(--font-body);font-size:11px;fill:var(--muted)}
+.rarea{fill:var(--teal);opacity:.1;stroke:none}
+.rline{fill:none;stroke:var(--teal);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.rdot-peak{fill:var(--teal);stroke:var(--bg-2);stroke-width:2}
+.rpeaklabel{font-family:var(--font-body);font-size:11px;font-weight:700;fill:var(--ink)}
+.rguide{stroke:var(--ink-soft);stroke-width:1;stroke-dasharray:3 3;opacity:0;pointer-events:none}
+.rhoverdot{fill:var(--coral);stroke:var(--bg-2);stroke-width:2;opacity:0;pointer-events:none}
+.rtooltip{position:absolute;top:8px;left:8px;pointer-events:none;background:var(--deep);color:#fff;
+  font-size:.78rem;font-weight:600;padding:.4rem .65rem;border-radius:9px;opacity:0;transition:opacity .15s;
+  box-shadow:0 8px 18px -10px rgba(0,0,0,.5);white-space:nowrap}
+
+.rchart-bar{width:100%;height:auto}
+.blabel{font-size:11px;font-weight:600;fill:var(--ink-soft)}
+.bvalue{font-family:var(--font-body);font-size:12px;font-weight:700;fill:var(--ink)}
+.bbar-coral{fill:var(--coral)}
+.bbar-teal{fill:var(--teal)}
+.bdot-coral{fill:var(--coral)}
+.bdot-teal{fill:var(--teal)}
+
+/* ---------- BÁO GIÁ ---------- */
+.price-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.2rem}
+.price-card{background:var(--bg-2);border:1px solid var(--line);border-radius:var(--radius);padding:1.8rem 1.5rem;
+  display:flex;flex-direction:column;transition:transform .35s cubic-bezier(.2,.7,.3,1), box-shadow .35s, border-color .35s}
+.price-card:hover{transform:translateY(-6px);box-shadow:var(--shadow);border-color:transparent}
+.price-card h3{font-size:1.15rem;margin-bottom:.7rem;color:var(--ink)}
+.price-tag{font-family:var(--font-head);font-size:1.5rem;font-weight:700;color:var(--ink);margin-bottom:.3rem}
+.price-tag b{color:var(--coral-d)}
+.price-tag span{font-family:var(--font-body);font-size:.85rem;font-weight:500;color:var(--muted)}
+.price-note{font-size:.78rem;color:var(--muted);margin-bottom:1.1rem;min-height:2.2em}
+.price-feat{list-style:none;display:flex;flex-direction:column;gap:.55rem;margin-bottom:1.4rem;flex:1}
+.price-feat li{display:flex;align-items:center;gap:.5rem;font-size:.86rem;color:var(--ink-soft)}
+.price-feat .ico{width:16px;height:16px;color:var(--teal);flex:0 0 auto}
+.price-card .btn{justify-content:center}
+
 /* ---------- CONTACT ---------- */
 .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem}
 .contact h2{font-size:clamp(2rem,4vw,3rem);margin:1rem 0;color:var(--ink)}
@@ -423,6 +479,9 @@ footer{padding:3rem 0 2rem;border-top:1px solid var(--line);background:var(--bg-
 @media(max-width:1024px){
   .steps{grid-template-columns:repeat(2,1fr)}
   .work-grid{grid-template-columns:repeat(2,1fr)}
+  .stat-row{grid-template-columns:repeat(2,1fr)}
+  .chart-grid{grid-template-columns:1fr}
+  .price-grid{grid-template-columns:repeat(2,1fr)}
 }
 @media(max-width:900px){
   .hero-grid,.contact-grid{grid-template-columns:1fr}
@@ -441,6 +500,8 @@ footer{padding:3rem 0 2rem;border-top:1px solid var(--line);background:var(--bg-
   .hero{padding:7rem 0 3rem}
   .foot-grid{justify-content:center;text-align:center}
   .phone{width:262px;height:533px}
+  .stat-row{grid-template-columns:1fr}
+  .price-grid{grid-template-columns:1fr}
 }
 
 /* ---------- THANH TIẾN TRÌNH CUỘN ---------- */

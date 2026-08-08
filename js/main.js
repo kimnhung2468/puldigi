@@ -91,6 +91,49 @@ document.addEventListener('DOMContentLoaded', () => {
     stepNos.forEach(el => countIO.observe(el));
   }
 
+  /* ---------- BIỂU ĐỒ KẾT QUẢ: tooltip khi rê chuột (đường lượt xem) ---------- */
+  const rchart = document.querySelector('.rchart-line');
+  if (rchart) {
+    const points = JSON.parse(rchart.dataset.points);
+    const guide = rchart.querySelector('.rguide');
+    const hoverDot = rchart.querySelector('.rhoverdot');
+    const wrap = rchart.closest('.rchart-wrap');
+    const tooltip = wrap.querySelector('.rtooltip');
+    const VB_W = 640, VB_H = 220, Y_MAX = 120000, Y_TOP = 20, Y_BASE = 186;
+
+    const nearestPoint = (svgX) => points.reduce((a, b) =>
+      Math.abs(b.x - svgX) < Math.abs(a.x - svgX) ? b : a
+    );
+
+    const showAt = (clientX) => {
+      const rect = rchart.getBoundingClientRect();
+      const svgX = ((clientX - rect.left) / rect.width) * VB_W;
+      const p = nearestPoint(svgX);
+      const y = Y_BASE - (p.v / Y_MAX) * (Y_BASE - Y_TOP);
+
+      guide.setAttribute('x1', p.x); guide.setAttribute('x2', p.x);
+      guide.style.opacity = '1';
+      hoverDot.setAttribute('cx', p.x); hoverDot.setAttribute('cy', y);
+      hoverDot.style.opacity = '1';
+      tooltip.textContent = p.label + ' · ' + p.v.toLocaleString('vi-VN') + ' lượt xem';
+      tooltip.style.opacity = '1';
+
+      const wrapRect = wrap.getBoundingClientRect();
+      const leftPx = Math.min(Math.max((p.x / VB_W) * wrapRect.width - 46, 4), wrapRect.width - 150);
+      tooltip.style.left = leftPx + 'px';
+    };
+    const hideTooltip = () => {
+      guide.style.opacity = '0';
+      hoverDot.style.opacity = '0';
+      tooltip.style.opacity = '0';
+    };
+
+    rchart.addEventListener('mousemove', (e) => showAt(e.clientX));
+    rchart.addEventListener('mouseleave', hideTooltip);
+    rchart.addEventListener('touchstart', (e) => e.touches[0] && showAt(e.touches[0].clientX), { passive: true });
+    rchart.addEventListener('touchmove', (e) => e.touches[0] && showAt(e.touches[0].clientX), { passive: true });
+  }
+
   /* ---------- LỌC PORTFOLIO ---------- */
   const filters = document.querySelectorAll('.filter');
   const works = document.querySelectorAll('.work');
