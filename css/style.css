@@ -281,28 +281,29 @@ section{padding:6rem 0}
   transition:transform .35s cubic-bezier(.2,.7,.3,1), box-shadow .35s}
 .step:hover{transform:translateY(-8px) scale(1.02);box-shadow:var(--shadow)}
 @keyframes stepShift{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
-.step-no{font-family:var(--font-head);font-size:2.9rem;font-weight:700;position:absolute;top:.7rem;right:1.2rem;line-height:1;opacity:.6;font-variant-numeric:tabular-nums;transition:transform .35s}
+.step-no{font-family:var(--font-head);font-size:2.9rem;font-weight:700;position:absolute;top:.7rem;right:1.2rem;line-height:1;opacity:.5;font-variant-numeric:tabular-nums;transition:transform .35s}
 .step:hover .step-no{transform:scale(1.12)}
-.step-ic{width:52px;height:52px;border-radius:14px;display:grid;place-items:center;color:#fff;margin-bottom:1.05rem;box-shadow:0 8px 18px -10px rgba(42,29,24,.5)}
-.step-ic .ico{width:26px;height:26px}
+/* icon dạng huy hiệu tròn, tông nhạt hoà vào nền thẻ — mềm hơn khối đặc trước đây */
+.step-ic{width:52px;height:52px;border-radius:50%;display:grid;place-items:center;margin-bottom:1.05rem}
+.step-ic .ico{width:24px;height:24px;stroke-width:1.8}
 .step h4{font-family:var(--font-body);font-weight:700;font-size:1.12rem;margin-bottom:.4rem;color:var(--ink)}
 .step p{color:var(--ink-soft);font-size:.9rem}
 /* bước 1 — cam */
 .step:nth-child(1){background-image:linear-gradient(135deg,#FCEFE8,#F4C4A8,#F7DDCF)}
 .step:nth-child(1) .step-no{color:var(--coral)}
-.step:nth-child(1) .step-ic{background:linear-gradient(150deg,var(--coral-soft),var(--coral-d))}
+.step:nth-child(1) .step-ic{background:rgba(255,255,255,.6);color:var(--coral-d)}
 /* bước 2 — xanh ngọc */
 .step:nth-child(2){animation-delay:-2.2s;background-image:linear-gradient(135deg,#E6F5F0,#B4E1D4,#CFEBE1)}
 .step:nth-child(2) .step-no{color:var(--teal)}
-.step:nth-child(2) .step-ic{background:linear-gradient(150deg,var(--teal-soft),var(--teal-d))}
+.step:nth-child(2) .step-ic{background:rgba(255,255,255,.6);color:var(--teal-d)}
 /* bước 3 — xanh đậm */
 .step:nth-child(3){animation-delay:-4.4s;background-image:linear-gradient(135deg,#E7EEE9,#B9D2C3,#D3E1D6)}
 .step:nth-child(3) .step-no{color:var(--deep)}
-.step:nth-child(3) .step-ic{background:linear-gradient(150deg,var(--teal-d),var(--deep))}
+.step:nth-child(3) .step-ic{background:rgba(255,255,255,.6);color:var(--deep)}
 /* bước 4 — cam + xanh (gradient thương hiệu) */
 .step:nth-child(4){animation-delay:-6.6s;background-image:linear-gradient(135deg,#F7EEE4,#E9CBB6,#CFE7DF,#EFE0CC)}
 .step:nth-child(4) .step-no{color:var(--coral-d)}
-.step:nth-child(4) .step-ic{background:var(--grad)}
+.step:nth-child(4) .step-ic{background:rgba(255,255,255,.65);color:var(--coral-d)}
 
 /* ---------- PORTFOLIO ---------- */
 .work-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem}
@@ -314,11 +315,6 @@ section{padding:6rem 0}
 .play-badge{position:absolute;inset:0;margin:auto;width:64px;height:64px;border-radius:50%;background:rgba(255,255,255,.94);display:grid;place-items:center;color:var(--coral-d);box-shadow:0 8px 20px -8px rgba(0,0,0,.4);transition:transform .3s}
 .play-badge .ico{width:28px;height:28px;fill:currentColor;stroke:none;margin-left:3px}
 .video-facade:hover .play-badge{transform:scale(1.08)}
-.icon-card{display:grid;place-items:center}
-.icon-card .ico{width:64px;height:64px;stroke-width:1.6}
-.ic-coral{background:#FAECE7;color:var(--coral)}
-.ic-teal{background:#E1F5EE;color:var(--teal)}
-.ic-deep{background:var(--bg-alt);color:var(--deep)}
 .work-body{padding:1.2rem 1.3rem 1.4rem}
 .work-body .tag{font-size:.72rem;font-weight:600;color:var(--teal);letter-spacing:.04em}
 .work-body h4{font-family:var(--font-body);font-weight:700;font-size:1.05rem;margin:.35rem 0;color:var(--ink)}
@@ -368,11 +364,15 @@ section{padding:6rem 0}
 .bdot-coral{fill:var(--coral)}
 .bdot-teal{fill:var(--teal)}
 
-/* ---------- BÁO GIÁ ---------- */
+/* ---------- BÁO GIÁ (thẻ gradient mềm, mỗi gói 1 tông) ---------- */
 .price-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.2rem}
-.price-card{background:var(--bg-2);border:1px solid var(--line);border-radius:var(--radius);padding:1.8rem 1.5rem;
-  display:flex;flex-direction:column;transition:transform .35s cubic-bezier(.2,.7,.3,1), box-shadow .35s, border-color .35s}
-.price-card:hover{transform:translateY(-6px);box-shadow:var(--shadow);border-color:transparent}
+.price-card{border:1px solid transparent;border-radius:var(--radius);padding:1.8rem 1.5rem;
+  background-size:200% 200%;animation:priceShift 11s ease-in-out infinite;
+  display:flex;flex-direction:column;transition:transform .35s cubic-bezier(.2,.7,.3,1), box-shadow .35s}
+.price-card:hover{transform:translateY(-7px) scale(1.015);box-shadow:var(--shadow)}
+@keyframes priceShift{0%,100%{background-position:0% 40%}50%{background-position:100% 60%}}
+.price-card .ico-wrap{width:52px;height:52px;border-radius:14px;display:grid;place-items:center;margin-bottom:1.1rem}
+.price-card .ico-wrap .ico{width:26px;height:26px}
 .price-card h3{font-size:1.15rem;margin-bottom:.7rem;color:var(--ink)}
 .price-tag{font-family:var(--font-head);font-size:1.5rem;font-weight:700;color:var(--ink);margin-bottom:.3rem}
 .price-tag b{color:var(--coral-d)}
@@ -381,7 +381,19 @@ section{padding:6rem 0}
 .price-feat{list-style:none;display:flex;flex-direction:column;gap:.55rem;margin-bottom:1.4rem;flex:1}
 .price-feat li{display:flex;align-items:center;gap:.5rem;font-size:.86rem;color:var(--ink-soft)}
 .price-feat .ico{width:16px;height:16px;color:var(--teal);flex:0 0 auto}
-.price-card .btn{justify-content:center}
+.price-card .btn{justify-content:center;background:var(--bg-2)}
+/* gói 1 — cam */
+.price-card:nth-child(1){background-image:linear-gradient(135deg,#FCEFE8,#F7DDCF,#FBF0E7)}
+.price-card:nth-child(1) .ico-wrap{background:linear-gradient(150deg,rgba(217,102,60,.22),rgba(217,102,60,.1));color:var(--coral-d)}
+/* gói 2 — xanh ngọc */
+.price-card:nth-child(2){animation-delay:-3s;background-image:linear-gradient(135deg,#E6F5F0,#CFEBE1,#E9F6F1)}
+.price-card:nth-child(2) .ico-wrap{background:linear-gradient(150deg,rgba(14,147,132,.22),rgba(14,147,132,.1));color:var(--teal-d)}
+/* gói 3 — kem/vàng nhạt */
+.price-card:nth-child(3){animation-delay:-6s;background-image:linear-gradient(135deg,#F7EEE4,#EFE0CC,#F5EBDD)}
+.price-card:nth-child(3) .ico-wrap{background:linear-gradient(150deg,rgba(217,102,60,.16),rgba(14,147,132,.12));color:var(--coral-d)}
+/* gói 4 — cam+xanh pha */
+.price-card:nth-child(4){animation-delay:-9s;background-image:linear-gradient(135deg,#FCEFE8,#E6F5F0,#F7EEE4)}
+.price-card:nth-child(4) .ico-wrap{background:linear-gradient(150deg,rgba(14,147,132,.2),rgba(217,102,60,.14));color:var(--teal-d)}
 
 /* ---------- CONTACT ---------- */
 .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem}
