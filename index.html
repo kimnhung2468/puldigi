@@ -690,5 +690,112 @@
 </div>
 
 <script src="js/main.js"></script>
+
+<!-- ===== MASCOT PULDIGI (thêm vào) ===== -->
+<!-- ============================================================
+     MASCOT NHUNG - dán nguyên khối này vào 1 widget HTML của Elementor
+     (hoặc khối "Custom HTML" của WordPress). Chỉnh nhanh ở phần :root bên dưới.
+     ============================================================ -->
+<div id="pulpul-mascot" role="img" aria-label="Mascot chibi">
+  <svg id="pm-svg" viewBox="0 0 200 220" xmlns="http://www.w3.org/2000/svg">
+    <g id="pm-body">
+      <path d="M89,140 h22 v14 c0,9 -22,9 -22,0 Z" fill="#f0c49f"/>
+      <path d="M28,220 C28,182 58,160 100,160 C142,160 172,182 172,220 Z" fill="#211f27"/>
+      <path d="M100,154 L82,220 L118,220 Z" fill="#fbfbfb"/>
+      <path d="M100,156 L86,150 L92,168 Z" fill="#fff"/>
+      <path d="M100,156 L114,150 L108,168 Z" fill="#fff"/>
+      <path d="M100,164 L80,220 L93,220 L100,182 Z" fill="#171620"/>
+      <path d="M100,164 L120,220 L107,220 L100,182 Z" fill="#171620"/>
+    </g>
+    <g id="pm-head">
+      <path d="M100,22 C54,22 46,66 49,106 C51,80 62,66 100,66 C138,66 149,80 151,106 C154,66 146,22 100,22 Z" fill="#1e1b22"/>
+      <path d="M52,94 C43,124 46,170 60,200 L82,200 C70,162 67,120 72,94 C64,90 57,90 52,94 Z" fill="#1e1b22"/>
+      <path d="M148,94 C157,124 154,170 140,200 L118,200 C130,162 133,120 128,94 C136,90 143,90 148,94 Z" fill="#1e1b22"/>
+      <ellipse cx="59" cy="104" rx="7" ry="10" fill="#f4ceac"/>
+      <ellipse cx="141" cy="104" rx="7" ry="10" fill="#f4ceac"/>
+      <ellipse cx="100" cy="100" rx="43" ry="47" fill="#f6d1b0"/>
+      <ellipse cx="73" cy="116" rx="8.5" ry="5.5" fill="#f2a6a0" opacity=".65"/>
+      <ellipse cx="127" cy="116" rx="8.5" ry="5.5" fill="#f2a6a0" opacity=".65"/>
+      <path d="M72,84 Q83,79 94,83" stroke="#2b2530" stroke-width="3" fill="none" stroke-linecap="round"/>
+      <path d="M106,83 Q117,79 128,84" stroke="#2b2530" stroke-width="3" fill="none" stroke-linecap="round"/>
+      <ellipse cx="83" cy="101" rx="10" ry="12" fill="#fbf6f0"/>
+      <ellipse cx="117" cy="101" rx="10" ry="12" fill="#fbf6f0"/>
+      <g id="pm-pupils">
+        <circle cx="83" cy="102" r="7.5" fill="#4a382f"/>
+        <circle cx="117" cy="102" r="7.5" fill="#4a382f"/>
+        <circle cx="83" cy="102" r="3.6" fill="#22150f"/>
+        <circle cx="117" cy="102" r="3.6" fill="#22150f"/>
+        <circle cx="86" cy="98" r="2.3" fill="#fff"/>
+        <circle cx="120" cy="98" r="2.3" fill="#fff"/>
+      </g>
+      <rect class="pm-lid" x="72" y="88" width="22" height="26" rx="11" fill="#f6d1b0"/>
+      <rect class="pm-lid" x="106" y="88" width="22" height="26" rx="11" fill="#f6d1b0"/>
+      <ellipse cx="100" cy="114" rx="2.2" ry="1.6" fill="#e2ab84"/>
+      <path d="M89,122 Q100,131 111,122 Q100,127 89,122 Z" fill="#d98a80"/>
+      <path d="M100,56 C73,56 56,74 55,102 C55,86 62,74 79,72 C85,82 96,84 100,74 C104,84 115,82 121,72 C138,74 145,86 145,102 C144,74 127,56 100,56 Z" fill="#221f27"/>
+    </g>
+  </svg>
+</div>
+
+<style>
+  /* ==== CHỈNH NHANH Ở ĐÂY ==== */
+  #pulpul-mascot{
+    --pm-size: 130px;      /* to/nhỏ con mascot */
+    --pm-right: 20px;      /* cách mép phải */
+    --pm-bottom: 20px;     /* cách mép dưới */
+    position: fixed;
+    right: var(--pm-right);
+    bottom: var(--pm-bottom);
+    width: var(--pm-size);
+    height: auto;
+    z-index: 50;
+    cursor: pointer;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    animation: pm-float 4s ease-in-out infinite;
+    /* để đầu ở góc TRÊN thay vì góc dưới: đổi bottom -> top và bỏ dòng right nếu muốn góc trái */
+  }
+  #pm-svg{ width:100%; height:auto; overflow:visible; display:block; }
+  #pm-head{ transform-box:view-box; transform-origin:100px 152px; transition:transform .18s ease-out; }
+  #pm-pupils{ transition:transform .13s ease-out; }
+  .pm-lid{ transform-box:fill-box; transform-origin:center; transform:scaleY(0); transition:transform .08s ease; }
+  @keyframes pm-float{ 0%,100%{ transform:translateY(0) } 50%{ transform:translateY(-7px) } }
+  @media (prefers-reduced-motion:reduce){ #pulpul-mascot{ animation:none } }
+  /* trên điện thoại thu nhỏ lại một chút */
+  @media (max-width:600px){ #pulpul-mascot{ --pm-size:96px; --pm-right:12px; --pm-bottom:12px; } }
+</style>
+
+<script>
+(function(){
+  var box=document.getElementById('pulpul-mascot');
+  var svg=document.getElementById('pm-svg');
+  var head=document.getElementById('pm-head');
+  var pupils=document.getElementById('pm-pupils');
+  var lids=document.querySelectorAll('.pm-lid');
+  if(!box||!head)return;
+  function clamp(v,a,b){return Math.max(a,Math.min(b,v));}
+  function move(e){
+    var r=svg.getBoundingClientRect();
+    var cx=r.left+r.width/2, cy=r.top+r.height*0.42;
+    var t=e.touches&&e.touches[0];
+    var px=t?t.clientX:e.clientX, py=t?t.clientY:e.clientY;
+    if(px==null)return;
+    var dx=px-cx, dy=py-cy, d=Math.max(Math.hypot(dx,dy),1);
+    head.style.transform='translate('+clamp(dx*0.02,-5,5).toFixed(2)+'px,'+clamp(dy*0.02,-3,5).toFixed(2)+'px) rotate('+clamp(dx*0.06,-12,12).toFixed(2)+'deg)';
+    pupils.style.transform='translate('+((dx/d)*3).toFixed(2)+'px,'+((dy/d)*2.6).toFixed(2)+'px)';
+  }
+  window.addEventListener('mousemove',move);
+  window.addEventListener('touchmove',move,{passive:true});
+  var busy=false;
+  function blink(){
+    if(busy)return;busy=true;
+    lids.forEach(function(l){l.style.transform='scaleY(1)';});
+    setTimeout(function(){lids.forEach(function(l){l.style.transform='scaleY(0)';});busy=false;},130);
+  }
+  box.addEventListener('click',blink);
+  setInterval(function(){if(Math.random()<0.5)blink();},3400);
+})();
+</script>
+
 </body>
 </html>
