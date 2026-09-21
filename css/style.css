@@ -21,7 +21,7 @@
   --shadow:0 18px 44px -28px rgba(42,29,24,.32);   /* nhẹ hơn source */
   --grad:linear-gradient(115deg,var(--coral),var(--teal));
 
-  --font-head:'Fraunces',Georgia,serif;
+  --font-head:'Space Grotesk','Be Vietnam Pro',sans-serif;
   --font-body:'Be Vietnam Pro',system-ui,sans-serif;
 }
 
@@ -40,15 +40,16 @@ body::before{
     radial-gradient(50% 40% at 60% 100%, rgba(217,102,60,.06), transparent 60%);
 }
 img{max-width:100%;display:block}
-h1,h2,h3,.serif{font-family:var(--font-head);font-weight:600;line-height:1.1;letter-spacing:-.015em}
+h1,h2,h3,.serif{font-family:var(--font-head);font-weight:500;line-height:1.12;letter-spacing:-.01em}
 a{color:inherit;text-decoration:none}
 
 .wrap{width:min(1180px,92vw);margin-inline:auto}
 .ico{fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;width:24px;height:24px}
 
+/* Nhãn nhỏ phía trên tiêu đề — đã ẩn theo yêu cầu (đổi display:none -> flex nếu muốn bật lại) */
 .eyebrow{
   font-size:.74rem;letter-spacing:.22em;text-transform:uppercase;font-weight:700;
-  color:var(--coral-d);display:inline-flex;align-items:center;gap:.7rem;
+  color:var(--coral-d);display:none;align-items:center;gap:.7rem;
 }
 .eyebrow::before{content:"";width:28px;height:2px;background:var(--grad);border-radius:2px}
 .grad-text{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
@@ -109,12 +110,43 @@ nav a:hover{color:var(--coral)}
 .scroll-cue .wheel{position:absolute;top:7px;left:50%;transform:translateX(-50%);width:4px;height:8px;border-radius:3px;background:var(--coral);animation:wheel 1.7s ease-in-out infinite}
 @keyframes wheel{0%{opacity:0;transform:translate(-50%,0)}30%{opacity:1}100%{opacity:0;transform:translate(-50%,12px)}}
 @keyframes cueFade{from{opacity:0}to{opacity:1}}
-.hero h1{font-size:clamp(2.9rem,6vw,5rem);margin:1.3rem 0;color:var(--ink);font-weight:700}
+.hero h1{font-size:clamp(2.9rem,6vw,5rem);margin:1.3rem 0;color:var(--ink);font-weight:500}
 .hero .lead{font-size:1.14rem;color:var(--ink-soft);max-width:42ch}
 .hero-cta{display:flex;gap:1rem;margin-top:2.2rem;flex-wrap:wrap}
 .trust{display:flex;gap:1.6rem;margin-top:2.4rem;flex-wrap:wrap;color:var(--muted);font-size:.86rem;font-weight:500}
 .trust span{display:inline-flex;align-items:center;gap:.5rem}
 .trust svg{width:18px;height:18px;color:var(--teal)}
+
+/* ===== HERO PHOTO — ảnh cắt nền tự do (không khung) + hình trang trí ===== */
+.hero-photo{position:relative;align-self:stretch;display:flex;justify-content:center;align-items:flex-end;min-height:520px}
+.hero-photo .cut{position:relative;z-index:3;height:min(580px,68vh);width:auto;max-width:100%;object-fit:contain;
+  filter:drop-shadow(0 30px 46px rgba(42,29,24,.26));animation:floatY 6s ease-in-out infinite}
+@keyframes floatY{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+.hero-photo .blob{position:absolute;z-index:0;bottom:1%;left:50%;transform:translateX(-50%);
+  width:106%;aspect-ratio:1/1.04;border-radius:48% 52% 46% 54%/54% 46% 54% 46%;
+  background:radial-gradient(120% 110% at 50% 32%,rgba(232,138,107,.5),rgba(95,195,178,.34) 55%,transparent 72%)}
+.hero-photo .shape{position:absolute;z-index:1;pointer-events:none}
+.hero-photo .ring{width:92px;height:92px;border:9px solid rgba(14,147,132,.30);border-radius:50%;top:5%;right:1%;animation:spin 20s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.hero-photo .c-coral{width:20px;height:20px;border-radius:50%;background:var(--coral);top:24%;left:2%;animation:floatY 5s ease-in-out infinite}
+.hero-photo .c-teal{width:13px;height:13px;border-radius:50%;background:var(--teal);bottom:18%;left:9%;animation:floatY 7s ease-in-out infinite}
+.hero-photo .squig{width:64px;height:auto;bottom:8%;right:1%;color:var(--coral);opacity:.85;animation:floatY 8s ease-in-out infinite}
+.hero-photo .dots{width:80px;height:56px;top:2%;left:8%;opacity:.55;
+  background-image:radial-gradient(var(--teal) 2px,transparent 2px);background-size:14px 14px}
+.hero-photo .hchip{position:absolute;z-index:4;display:inline-flex;align-items:center;gap:.5rem;
+  background:rgba(255,255,255,.82);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);
+  border:1px solid rgba(255,255,255,.85);border-radius:14px;padding:.55rem .85rem;
+  font-weight:600;font-size:.85rem;color:var(--ink);box-shadow:0 16px 34px -20px rgba(42,29,24,.42)}
+.hero-photo .hchip .ico{width:18px;height:18px;stroke:url(#ig)}
+.hero-photo .hchip.c1{top:15%;left:-5%;animation:floatY 6.5s ease-in-out infinite}
+.hero-photo .hchip.c2{bottom:24%;right:-5%;animation:floatY 7.5s ease-in-out infinite}
+@media (max-width:860px){
+  .hero-photo{min-height:0;margin-top:1.4rem}
+  .hero-photo .cut{height:min(420px,58vh)}
+  .hero-photo .hchip.c1{left:0}
+  .hero-photo .hchip.c2{right:0}
+  .hero-photo .ring{width:66px;height:66px}
+}
 
 /* hero mosaic */
 .mosaic{display:grid;grid-template-columns:1fr 1fr;grid-auto-rows:158px;gap:14px}
@@ -522,8 +554,8 @@ footer .wrap{position:relative}
 
 /* ---------- GIẢM CHUYỂN ĐỘNG (accessibility) ---------- */
 @media(prefers-reduced-motion:reduce){
-  *{animation:none!important;transition:none!important}
-  .reveal,.reveal-up,.reveal-left,.reveal-right,.reveal-pop{opacity:1!important;transform:none!important;filter:none!important}
-  .orb,.hero-grid-lines,.scroll-cue{display:none}
-  .phone{transform:rotate(-4deg)}
+  /* Vẫn giữ animation trang trí nhẹ (ảnh trôi, vòng xoay, chữ sáng, marquee...).
+     Chỉ bỏ hiệu ứng parallax & reveal gây giật khi cuộn. */
+  [data-parallax]{transform:none!important}
+  .reveal,.reveal-up,.reveal-left,.reveal-right,.reveal-pop{opacity:1!important;transform:none!important;filter:none!important;transition:none!important}
 }
