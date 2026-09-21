@@ -233,7 +233,8 @@ section{padding:6rem 0}
 .tools{margin-top:2.6rem;text-align:center}
 .tools-label{font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);font-weight:700}
 .tools-row{display:flex;flex-wrap:wrap;justify-content:center;gap:.6rem;margin-top:1rem}
-.tools-row span{font-size:.82rem;font-weight:500;padding:.45rem 1rem;border-radius:999px;background:var(--bg-alt);color:var(--teal-d);border:1px solid var(--line)}
+.tools-row span{display:inline-flex;align-items:center;gap:.5rem;font-size:.82rem;font-weight:500;padding:.45rem 1rem;border-radius:999px;background:var(--bg-2);color:var(--ink-soft);border:1px solid var(--line);box-shadow:0 6px 16px -12px rgba(42,29,24,.4)}
+.tools-row .tlogo{width:18px;height:18px;object-fit:contain;display:block;flex:none}
 
 /* ---------- PHILOSOPHY ---------- */
 .philo{background:var(--deep);color:#fff;position:relative;overflow:hidden}
