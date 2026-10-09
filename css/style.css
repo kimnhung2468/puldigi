@@ -716,3 +716,14 @@ footer .wrap{position:relative}
 .philo-sky .deck{position:relative;width:118%;left:-9%;height:16px;margin-top:-2px;background:linear-gradient(#4b5055,#2f3338);border-radius:3px 3px 13px 13px;box-shadow:0 16px 26px -14px rgba(40,46,52,.7)}
 .philo-sky .deck::before{content:"";position:absolute;top:0;left:50%;transform:translateX(-50%);width:16%;height:6px;background:#23272b;border-radius:0 0 8px 8px}
 @media(max-width:620px){ .philo-sky{min-height:460px} }
+
+/* ===== Mục Video: neo điện thoại + bó 3 dòng + số 01-03 + CTA ===== */
+.phone-stage{position:relative}
+.phone-stage .phone{z-index:1}
+.phone-stage::before{content:"";position:absolute;z-index:0;width:min(460px,88%);aspect-ratio:1;left:50%;top:47%;transform:translate(-50%,-50%);border-radius:50%;pointer-events:none;
+  background:radial-gradient(circle at 50% 42%, rgba(217,102,60,.24), rgba(14,147,132,.15) 52%, transparent 72%);filter:blur(4px)}
+.phone-stage::after{content:"";position:absolute;z-index:0;left:50%;bottom:2%;transform:translateX(-50%);width:56%;height:26px;border-radius:50%;background:rgba(42,29,24,.2);filter:blur(13px);pointer-events:none}
+.show-list .row{padding:.95rem .5rem}
+.show-list .rno{position:absolute;top:.75rem;right:.6rem;font-family:var(--font-head);font-weight:700;font-size:.76rem;color:rgba(42,29,24,.22);letter-spacing:.5px;transition:color .3s}
+.show-list .row:hover .rno{color:var(--coral-d)}
+.show-cta{margin-top:1.7rem}
