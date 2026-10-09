@@ -679,3 +679,40 @@ footer .wrap{position:relative}
   .svc-stage{min-height:380px}
   .svc-panel{padding:1.8rem} .svc-panel h3{font-size:1.6rem} .svc-panel .no{font-size:4.5rem;top:1rem;right:1.4rem}
 }
+
+/* ===== Mục triết lý -> Quote trên màn laptop giữa mây (laptop graphite đậm) ===== */
+.philo-sky{position:relative;overflow:hidden;min-height:560px;display:flex;align-items:center;justify-content:center;
+  background:linear-gradient(180deg,#dcecec 0%,#eef3ec 45%,#FBF7F0 100%)}
+.philo-sky::before{content:"";position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(40% 50% at 15% 10%,rgba(217,102,60,.10),transparent 60%),
+             radial-gradient(40% 50% at 88% 20%,rgba(14,147,132,.10),transparent 60%)}
+.philo-sky .cloud{position:absolute;background:#fff;border-radius:100px;filter:drop-shadow(0 12px 18px rgba(99,120,130,.18))}
+.philo-sky .cloud::before,.philo-sky .cloud::after{content:"";position:absolute;background:#fff;border-radius:50%}
+.philo-sky .cloud::before{width:55%;height:150%;top:-55%;left:14%}
+.philo-sky .cloud::after{width:38%;height:120%;top:-38%;right:14%}
+.philo-sky .c-front{filter:drop-shadow(0 18px 26px rgba(99,120,130,.22))}
+.philo-sky .m1{width:150px;height:46px;top:14%;left:-20%;animation:driftA 34s linear infinite}
+.philo-sky .m2{width:110px;height:34px;top:30%;left:-20%;animation:driftA 46s linear infinite;animation-delay:-10s}
+.philo-sky .m3{width:180px;height:54px;bottom:16%;left:-25%;animation:driftA 40s linear infinite;animation-delay:-22s}
+.philo-sky .m4{width:90px;height:30px;top:20%;left:-15%;animation:driftA 52s linear infinite;animation-delay:-30s}
+.philo-sky .f1{width:210px;height:62px;top:46%;left:-30%;z-index:6;animation:driftB 30s linear infinite;animation-delay:-8s}
+.philo-sky .f2{width:150px;height:46px;bottom:12%;left:-30%;z-index:6;animation:driftB 38s linear infinite;animation-delay:-22s}
+@keyframes driftA{from{transform:translateX(0)}to{transform:translateX(165vw)}}
+@keyframes driftB{from{transform:translateX(0)}to{transform:translateX(175vw)}}
+.philo-sky .laptop{position:relative;z-index:3;width:min(600px,84vw);animation:lapbob 6s ease-in-out infinite}
+@keyframes lapbob{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+.philo-sky .lid{position:relative;background:linear-gradient(#6a6f76,#474c52);border-radius:18px;padding:12px;box-shadow:0 34px 56px -26px rgba(40,46,52,.6)}
+.philo-sky .screen{position:relative;background:#fff;border-radius:9px;overflow:hidden;aspect-ratio:16/10;box-shadow:inset 0 0 0 1px rgba(0,0,0,.06)}
+.philo-sky .l-bar{height:30px;display:flex;align-items:center;gap:7px;padding:0 14px;background:#f3eee6;border-bottom:1px solid rgba(42,29,24,.06)}
+.philo-sky .l-bar .d{width:9px;height:9px;border-radius:50%}
+.philo-sky .l-bar .d1{background:#E8825A}.philo-sky .l-bar .d2{background:#E7C06A}.philo-sky .l-bar .d3{background:#5FC3B2}
+.philo-sky .l-bar .url{margin-left:12px;font-size:.66rem;color:var(--muted);background:#fff;border:1px solid rgba(42,29,24,.08);padding:3px 14px;border-radius:20px}
+.philo-sky .l-page{height:calc(100% - 30px);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:6% 10%;background:radial-gradient(70% 90% at 50% 30%,#fff,#fbf7f0)}
+.philo-sky .qm{font-family:Georgia,serif;font-style:italic;font-size:2.4rem;line-height:.3;color:var(--coral);height:1rem}
+.philo-sky blockquote{font-family:var(--font-head);font-weight:600;font-size:clamp(1.05rem,2.6vw,1.7rem);line-height:1.24;letter-spacing:-.01em;color:var(--ink);margin:10px 0 14px}
+.philo-sky blockquote .cor{color:var(--coral)}
+.philo-sky .l-sig{display:inline-flex;align-items:center;gap:9px;font-family:var(--font-head);font-weight:600;font-size:.64rem;letter-spacing:2.5px;text-transform:uppercase;color:var(--muted)}
+.philo-sky .l-sig .ln{width:26px;height:1px;background:linear-gradient(90deg,transparent,#C9922E,transparent)}
+.philo-sky .deck{position:relative;width:118%;left:-9%;height:16px;margin-top:-2px;background:linear-gradient(#4b5055,#2f3338);border-radius:3px 3px 13px 13px;box-shadow:0 16px 26px -14px rgba(40,46,52,.7)}
+.philo-sky .deck::before{content:"";position:absolute;top:0;left:50%;transform:translateX(-50%);width:16%;height:6px;background:#23272b;border-radius:0 0 8px 8px}
+@media(max-width:620px){ .philo-sky{min-height:460px} }
