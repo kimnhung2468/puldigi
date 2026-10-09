@@ -281,3 +281,20 @@ document.addEventListener('DOMContentLoaded', () => {
   });
   hero.addEventListener('mouseleave', function(){ tx=0; ty=0; if(!raf) raf=requestAnimationFrame(loop); });
 })();
+
+/* Mục Dịch vụ: tab showcase (bấm/rê menu -> đổi panel, không cuộn) */
+(function(){
+  var tabs=[].slice.call(document.querySelectorAll('.svc-tab'));
+  var panels=[].slice.call(document.querySelectorAll('.svc-panel'));
+  var sc=document.querySelector('.svc-showcase');
+  if(!tabs.length||!panels.length||!sc) return;
+  function activate(i){
+    tabs.forEach(function(t,k){ t.classList.toggle('active',k===i); });
+    panels.forEach(function(p,k){ p.classList.toggle('active',k===i); });
+    sc.style.setProperty('--svc-accent', panels[i].getAttribute('data-accent'));
+  }
+  tabs.forEach(function(t){
+    t.addEventListener('click',function(){ activate(+t.dataset.i); });
+    t.addEventListener('mouseenter',function(){ activate(+t.dataset.i); });
+  });
+})();
