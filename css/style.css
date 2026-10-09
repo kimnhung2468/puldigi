@@ -590,3 +590,25 @@ footer .wrap{position:relative}
   [data-parallax]{transform:none!important}
   .reveal,.reveal-up,.reveal-left,.reveal-right,.reveal-pop{opacity:1!important;transform:none!important;filter:none!important;transition:none!important}
 }
+
+/* ===== Hero banner: chuyển động theo chuột (mouse parallax) + lấp lánh (bling) ===== */
+/* dùng thuộc tính translate/rotate riêng để ghép chồng lên animation có sẵn, không xung đột */
+.hero-photo .cut{translate:calc(var(--px,0)*14px) calc(var(--py,0)*10px);rotate:calc(var(--px,0)*1.6deg)}
+.hero-photo .blob{translate:calc(var(--px,0)*-8px) calc(var(--py,0)*-6px)}
+.hero-photo .dots{translate:calc(var(--px,0)*22px) calc(var(--py,0)*18px)}
+.hero-photo .ring{translate:calc(var(--px,0)*26px) calc(var(--py,0)*20px)}
+.hero-photo .c-coral{translate:calc(var(--px,0)*30px) calc(var(--py,0)*24px)}
+.hero-photo .c-teal{translate:calc(var(--px,0)*18px) calc(var(--py,0)*16px)}
+.hero-photo .squig{translate:calc(var(--px,0)*-20px) calc(var(--py,0)*14px)}
+.hero-photo .hchip.c1{translate:calc(var(--px,0)*24px) calc(var(--py,0)*18px)}
+.hero-photo .hchip.c2{translate:calc(var(--px,0)*-24px) calc(var(--py,0)*-16px)}
+/* sao lấp lánh */
+.hero-photo .spark{position:absolute;z-index:5;color:#fff;line-height:1;pointer-events:none;opacity:0;
+  text-shadow:0 0 6px rgba(255,255,255,.95),0 0 16px rgba(246,217,140,.9);
+  animation:twinkle 3.2s ease-in-out infinite}
+@keyframes twinkle{0%,100%{opacity:0;transform:scale(.3) rotate(0deg)}42%{opacity:1;transform:scale(1.18) rotate(90deg)}68%{opacity:.55;transform:scale(.8) rotate(150deg)}}
+.hero-photo .spark.s1{top:11%;right:17%;font-size:24px;color:#F6D98C;animation-delay:0s;translate:calc(var(--px,0)*30px) calc(var(--py,0)*24px)}
+.hero-photo .spark.s2{top:38%;right:5%;font-size:15px;animation-delay:.9s;translate:calc(var(--px,0)*34px) calc(var(--py,0)*26px)}
+.hero-photo .spark.s3{top:25%;left:13%;font-size:19px;color:#F6D98C;animation-delay:1.6s;translate:calc(var(--px,0)*28px) calc(var(--py,0)*22px)}
+.hero-photo .spark.s4{bottom:25%;right:21%;font-size:17px;animation-delay:2.2s;translate:calc(var(--px,0)*26px) calc(var(--py,0)*20px)}
+.hero-photo .spark.s5{bottom:40%;left:9%;font-size:13px;animation-delay:1.2s;translate:calc(var(--px,0)*32px) calc(var(--py,0)*24px)}

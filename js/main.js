@@ -259,3 +259,25 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
 });
+
+/* Hero banner: ảnh + hình trang trí chuyển động theo chuột (mouse parallax) */
+(function(){
+  var hero = document.querySelector('.hero');
+  var photo = document.querySelector('.hero-photo');
+  if (!hero || !photo) return;
+  var tx=0, ty=0, cx=0, cy=0, raf=null;
+  function loop(){
+    cx += (tx-cx)*0.08; cy += (ty-cy)*0.08;
+    photo.style.setProperty('--px', cx.toFixed(3));
+    photo.style.setProperty('--py', cy.toFixed(3));
+    if (Math.abs(tx-cx)>0.0015 || Math.abs(ty-cy)>0.0015){ raf=requestAnimationFrame(loop); }
+    else { photo.style.setProperty('--px', tx.toFixed(3)); photo.style.setProperty('--py', ty.toFixed(3)); raf=null; }
+  }
+  hero.addEventListener('mousemove', function(e){
+    var r = hero.getBoundingClientRect();
+    tx = ((e.clientX - r.left)/r.width - 0.5) * 2;
+    ty = ((e.clientY - r.top)/r.height - 0.5) * 2;
+    if (!raf) raf = requestAnimationFrame(loop);
+  });
+  hero.addEventListener('mouseleave', function(){ tx=0; ty=0; if(!raf) raf=requestAnimationFrame(loop); });
+})();
