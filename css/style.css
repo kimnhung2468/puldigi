@@ -727,3 +727,41 @@ footer .wrap{position:relative}
 .show-list .rno{position:absolute;top:.75rem;right:.6rem;font-family:var(--font-head);font-weight:700;font-size:.76rem;color:rgba(42,29,24,.22);letter-spacing:.5px;transition:color .3s}
 .show-list .row:hover .rno{color:var(--coral-d)}
 .show-cta{margin-top:1.7rem}
+
+
+/* ===== Portfolio: "dây phơi" Polaroid (cuộn trượt ngang) ===== */
+#work.rope-sec{height:300vh;position:relative;padding:0}
+.rope-sticky{position:sticky;top:0;height:100vh;overflow:hidden;background:linear-gradient(180deg,#bfe0ea 0%,#dcecec 42%,#f3efe7 100%)}
+.rcloud{position:absolute;background:#fff;border-radius:100px;opacity:.9;filter:drop-shadow(0 10px 14px rgba(99,120,130,.15));z-index:1}
+.rcloud::before,.rcloud::after{content:"";position:absolute;background:#fff;border-radius:50%}
+.rcloud::before{width:55%;height:150%;top:-55%;left:14%} .rcloud::after{width:38%;height:120%;top:-38%;right:14%}
+.rc1{width:150px;height:44px;top:10%;left:7%} .rc2{width:110px;height:34px;top:18%;right:10%} .rc3{width:130px;height:40px;bottom:12%;left:18%}
+.rope-title{position:absolute;top:7%;left:0;right:0;text-align:center;z-index:5}
+.rope-title h2{font-family:var(--font-head);font-weight:700;font-size:clamp(1.6rem,4vw,2.2rem);color:var(--ink)}
+.rope-title p{color:var(--muted);font-size:.92rem;margin-top:2px}
+.rope-track{position:absolute;top:0;left:0;height:100%;display:flex;align-items:flex-start;gap:3vw;padding:34vh 10vw 0;will-change:transform}
+.rope-line{position:absolute;top:34vh;left:0;width:100%;height:16px;border-radius:9px;z-index:0;
+  background:linear-gradient(180deg,rgba(255,255,255,.45) 0%,rgba(255,255,255,.12) 26%,transparent 50%,rgba(70,46,14,.4) 100%),
+    repeating-linear-gradient(-54deg,#8f6a33 0,#b98f54 3px,#e7c68c 6px,#d3a968 9px,#a87f44 12px,#8f6a33 14px);
+  box-shadow:0 5px 9px rgba(90,60,20,.4),inset 0 -2px 3px rgba(60,40,10,.45),inset 0 2px 2px rgba(255,255,255,.35)}
+.hang{position:relative;z-index:2;flex:0 0 auto;transform-origin:50% -2px;animation:sway 4s ease-in-out infinite}
+.hang:nth-child(odd){animation-duration:4.4s} .hang:nth-child(3n){animation-duration:3.6s;animation-delay:-1s}
+@keyframes sway{0%,100%{transform:rotate(-2.3deg)}50%{transform:rotate(2.3deg)}}
+.hang .peg{position:absolute;top:-15px;left:50%;transform:translateX(-50%);width:22px;height:48px;z-index:4;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 28 56'%3E%3Cdefs%3E%3ClinearGradient id='w' x1='0' x2='1' y1='0' y2='0'%3E%3Cstop offset='0' stop-color='%23eccb92'/%3E%3Cstop offset='0.45' stop-color='%23d0a567'/%3E%3Cstop offset='1' stop-color='%23a2793f'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d='M9 3c-3 0-4.5 2-4.5 6v40c0 4 2 6 5 6h1.5V3z' fill='url(%23w)'/%3E%3Cpath d='M19 3c3 0 4.5 2 4.5 6v40c0 4-2 6-5 6h-1.5V3z' fill='url(%23w)'/%3E%3Crect x='11' y='3' width='6' height='52' fill='%23b88b50'/%3E%3Cpath d='M8 13v34M20 13v34' stroke='%23795320' stroke-opacity='.45' stroke-width='1'/%3E%3Ccircle cx='14' cy='25' r='6.2' fill='none' stroke='%23878d95' stroke-width='2.8'/%3E%3Ccircle cx='14' cy='25' r='2.4' fill='%23b7bcc2'/%3E%3C/svg%3E") center/contain no-repeat;filter:drop-shadow(0 3px 4px rgba(60,40,10,.4))}
+.polaroid{width:210px;background:#fff;border-radius:4px;padding:12px 12px 0;margin-top:-5px;box-shadow:0 20px 34px -18px rgba(42,29,24,.45),0 2px 4px rgba(0,0,0,.08)}
+.rphoto{height:190px;border-radius:2px;position:relative;overflow:hidden;background:#e9e2d4}
+.rphoto img{width:100%;height:100%;object-fit:cover;display:block}
+.rphoto .rtag{position:absolute;left:8px;bottom:8px;font-family:var(--font-head);font-weight:700;font-size:.6rem;letter-spacing:1px;text-transform:uppercase;color:#fff;background:rgba(0,0,0,.42);-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px);padding:3px 9px;border-radius:20px}
+.polaroid .cap{font-family:'Caveat',cursive;font-weight:700;font-size:1.4rem;color:var(--ink);text-align:center;padding:8px 4px 14px;line-height:1}
+.rscrollhint{position:absolute;bottom:5%;left:0;right:0;text-align:center;color:var(--muted);font-size:.8rem;letter-spacing:1px;z-index:5}
+/* mobile: vuốt ngang mượt (bỏ scroll-jack) */
+@media(max-width:860px){
+  #work.rope-sec{height:auto}
+  .rope-sticky{position:static;height:auto;overflow:visible;padding:30px 0 40px}
+  .rope-title{position:static;margin-bottom:0}
+  .rope-track{position:relative;transform:none!important;overflow-x:auto;overflow-y:visible;height:auto;padding:54px 18px 12px;gap:26px;scroll-snap-type:x proximity;-webkit-overflow-scrolling:touch;will-change:auto}
+  .rope-line{top:54px}
+  .hang{scroll-snap-align:center}
+  .rscrollhint{position:static;margin-top:14px}
+  .rcloud{display:none}
+}

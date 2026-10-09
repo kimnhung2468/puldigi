@@ -298,3 +298,21 @@ document.addEventListener('DOMContentLoaded', () => {
     t.addEventListener('mouseenter',function(){ activate(+t.dataset.i); });
   });
 })();
+
+
+/* Portfolio "dây phơi": cuộn dọc -> track trượt ngang (desktop); mobile vuốt ngang native */
+(function(){
+  var sec=document.getElementById('work');
+  var track=document.getElementById('ropeTrack');
+  if(!sec||!track||!sec.classList.contains('rope-sec')) return;
+  function onScroll(){
+    if(window.innerWidth<=860){ track.style.transform=''; return; }
+    var rect=sec.getBoundingClientRect();
+    var total=sec.offsetHeight-window.innerHeight;
+    var prog=Math.min(1,Math.max(0,(-rect.top)/total));
+    var maxX=Math.max(0,track.scrollWidth-window.innerWidth);
+    track.style.transform='translateX('+(-prog*maxX)+'px)';
+  }
+  window.addEventListener('scroll',onScroll,{passive:true});
+  window.addEventListener('resize',onScroll); onScroll();
+})();
