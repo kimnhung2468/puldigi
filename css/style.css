@@ -227,11 +227,18 @@ section{padding:6rem 0}
 .center{text-align:center;margin-inline:auto}
 
 /* ---------- SERVICES ---------- */
-.svc-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.4rem}
+.svc-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.4rem;counter-reset:svc;align-items:start}
 .svc{
-  background:var(--bg-2);border:1px solid var(--line);border-radius:var(--radius);padding:2.1rem;
+  counter-increment:svc;
+  background:var(--bg-2);border:1px solid var(--line);border-radius:var(--radius);padding:2.1rem 2.1rem 2.1rem;
   transition:transform .35s cubic-bezier(.2,.7,.3,1), box-shadow .35s, border-color .35s;position:relative;overflow:hidden;
 }
+/* số thứ tự khổng lồ kiểu editorial */
+.svc > *{position:relative;z-index:1}
+.svc::before{content:counter(svc,decimal-leading-zero);position:absolute;top:.3rem;right:1.2rem;z-index:0;
+  font-family:var(--font-head);font-weight:700;font-size:4.8rem;line-height:1;color:transparent;
+  -webkit-text-stroke:1.6px rgba(42,29,24,.10);transition:-webkit-text-stroke-color .4s, transform .4s}
+.svc:hover::before{-webkit-text-stroke-color:rgba(217,102,60,.4);transform:translateY(-4px)}
 .svc::after{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--grad);transform:scaleY(0);transform-origin:top;transition:.4s}
 .svc:hover{transform:translateY(-6px);box-shadow:var(--shadow);border-color:transparent}
 .svc:hover::after{transform:scaleY(1)}
@@ -617,3 +624,16 @@ footer .wrap{position:relative}
 .hero-photo .spark.s3{top:25%;left:13%;font-size:19px;color:#F6D98C;animation-delay:1.6s;translate:calc(var(--px,0)*28px) calc(var(--py,0)*22px)}
 .hero-photo .spark.s4{bottom:25%;right:21%;font-size:17px;animation-delay:2.2s;translate:calc(var(--px,0)*26px) calc(var(--py,0)*20px)}
 .hero-photo .spark.s5{bottom:40%;left:9%;font-size:13px;animation-delay:1.2s;translate:calc(var(--px,0)*32px) calc(var(--py,0)*24px)}
+
+/* ===== Dịch vụ "phá cách": thẻ nổi bật tối màu + bố cục so le (zigzag) ===== */
+.svc.feat{background:linear-gradient(155deg,#124a33,#0C3B1F 58%,#09260f);border-color:transparent;color:#fff}
+.svc.feat h3{color:#fff}
+.svc.feat p{color:rgba(255,255,255,.82)}
+.svc.feat li{background:rgba(255,255,255,.10);border-color:rgba(255,255,255,.2);color:#fff}
+.svc.feat .ico-wrap{background:var(--grad)}
+.svc.feat .ico-wrap .ico{stroke:#fff}
+.svc.feat::before{-webkit-text-stroke-color:rgba(246,217,140,.42)}
+.svc.feat::after{background:#F6D98C}
+.svc.feat:hover::before{-webkit-text-stroke-color:rgba(246,217,140,.72)}
+/* so le trên desktop: cột phải trượt xuống */
+@media(min-width:721px){ .svc-grid > .svc:nth-child(even){margin-top:3rem} }
