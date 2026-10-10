@@ -730,8 +730,8 @@ footer .wrap{position:relative}
 
 
 /* ===== Portfolio: "dây phơi" Polaroid (cuộn trượt ngang) ===== */
-#work.rope-sec{height:300vh;position:relative;padding:0;margin-top:3rem}
-.show{padding-bottom:3rem}
+#work.rope-sec{height:300vh;position:relative;padding:0;margin-top:2rem}
+@media(min-width:861px){.show{padding-bottom:12rem}}
 .rope-sticky{position:sticky;top:0;height:100vh;overflow:hidden;background:linear-gradient(180deg,#faf6ef 0%,#e6f0ea 14%,#c3e2ea 42%,#d6eae7 70%,#faf6ef 100%)}
 .rcloud{position:absolute;background:#fff;border-radius:100px;opacity:.9;filter:drop-shadow(0 10px 14px rgba(99,120,130,.15));z-index:1}
 .rcloud::before,.rcloud::after{content:"";position:absolute;background:#fff;border-radius:50%}
