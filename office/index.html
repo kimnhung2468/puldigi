@@ -28,6 +28,10 @@ canvas{position:fixed;inset:0;display:block;cursor:grab;touch-action:none}
 #ht header button{font:500 11.5px "IBM Plex Mono",Consolas,monospace;background:#fff;color:var(--navy);border:1.5px solid var(--navy);padding:2px 8px;cursor:pointer;text-transform:uppercase}
 #loc-ht{font:500 11.5px "IBM Plex Mono",Consolas,monospace;color:var(--navy);background:#fff;border:1.5px solid var(--navy);max-width:105px;padding:1px 2px}
 #thu-ht{border:0!important;background:none!important;padding:0 2px!important;font-size:13px!important}
+#nut-zoom .nho-chu{font-size:10.5px}
+#goi-y{position:fixed;left:50%;bottom:14px;transform:translateX(-50%);padding:4px 12px;font-size:12.5px;transition:opacity .8s;pointer-events:none;white-space:nowrap}
+#pad{display:none;position:fixed;right:8px;top:250px;width:108px;grid-template:repeat(2,36px)/repeat(3,36px)}#pad button{background:#fff;border:1.5px solid var(--navy);color:var(--navy);font-size:12px;touch-action:none}#pad [data-p=u]{grid-area:1/2}#pad [data-p=l]{grid-area:2/1}#pad [data-p=d]{grid-area:2/2}#pad [data-p=r]{grid-area:2/3}
+@media(pointer:coarse){#pad{display:grid}#goi-y{display:none}}
 #ds-ht{overflow:auto;padding:2px 10px 6px;max-height:190px;border-top:1.5px solid var(--navy)}#ht.rong #ds-ht{max-height:calc(100vh - 130px)}
 .tin{display:flex;gap:9px;padding:7px 0;border-top:1px solid var(--xam)}.tin:first-child{border-top:0}
 .ava{flex:none;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;background:var(--navy);color:#fff;font-size:12px;font-weight:600}.ava.nh{background:#B8457A}
@@ -56,7 +60,9 @@ a{color:var(--xanh)}
 <div id="tren" class="mono"><div class="o" id="luc"></div><div class="o manh" id="che-do"></div><div class="o manh" id="tom-tat"></div></div>
 <nav id="tabs" class="o"></nav>
 <aside id="bang-tab" class="o manh" hidden></aside>
-<div id="nut-zoom" class="o manh"><button data-z="to" aria-label="Phóng to" title="Phóng to">+</button><button data-z="nho" aria-label="Thu nhỏ" title="Thu nhỏ">&minus;</button><button data-z="giua" aria-label="Về toàn cảnh" title="Về toàn cảnh">&#8962;</button></div>
+<div id="nut-zoom" class="o manh"><button data-z="to" aria-label="Phóng to" title="Phóng to">+</button><button data-z="nho" aria-label="Thu nhỏ" title="Thu nhỏ">&minus;</button><button data-z="giua" aria-label="Về toàn cảnh" title="Về toàn cảnh">&#8962;</button><button data-z="ghe" class="nho-chu" aria-label="Cho Nhung về ghế" title="Cho Nhung về ghế">Ghế</button></div>
+<div id="pad"><button data-p="u" aria-label="Đi lên">&#9650;</button><button data-p="l" aria-label="Sang trái">&#9664;</button><button data-p="d" aria-label="Đi xuống">&#9660;</button><button data-p="r" aria-label="Sang phải">&#9654;</button></div>
+<div id="goi-y" class="o">Dùng phím mũi tên hoặc W A S D để Nhung đi lại</div>
 <section id="ht" class="o manh"><header><button id="thu-ht" aria-label="Thu gọn">&#9662;</button><span class="mono" id="so-tin">Phòng hội thoại</span><select id="loc-ht" aria-label="Lọc theo việc"></select><button id="ct-ht">Chi tiết &rarr;</button></header><div id="ds-ht"></div></section>
 <script type="module">
 import * as THREE from 'three';
@@ -241,7 +247,7 @@ hop(2.7, 0.04, 0.72, 1.7, 0.62, 10.05, TRANG, { m: 0.25 }); hop(0.05, 0.62, 0.66
 [0.95, 2.4].forEach(x => { hop(0.56, 0.32, 0.018, x, 0.72, 9.85, DEN, { m: 0.3 }); hop(0.53, 0.29, 0.004, x, 0.735, 9.865, null, { mat: banDo, ns: true }); ghe(x, 10.85, Math.PI); });
 ghiBanh(2.7, 14.2, 0.3); cay(0.55, 14.4, 1.05);
 // bàn thờ
-const BT = { x: 13.5, z: 9.8 };
+const BT = { x: 14.98, z: 3.8 };
 hop(0.98, 0.6, 0.5, BT.x, 0, BT.z, '#5A1F14', { m: 0.35 }); hop(1.04, 0.04, 0.56, BT.x, 0.6, BT.z, '#7A2C1A', { m: 0.22 }); hop(0.86, 0.5, 0.012, BT.x, 0.05, BT.z + 0.252, '#6B2618', { m: 0.3, ns: true });
 hop(0.92, 0.44, 0.012, BT.x, 0.65, BT.z - 0.2, null, { ns: true, mat: new THREE.MeshBasicMaterial({ toneMapped: false, map: tex(184, 88, (g, w, h) => { const c = g.createRadialGradient(w / 2, h * 0.55, 6, w / 2, h * 0.55, w * 0.6); c.addColorStop(0, '#FFB23E'); c.addColorStop(0.55, '#C4361F'); c.addColorStop(1, '#7E1712'); g.fillStyle = c; g.fillRect(0, 0, w, h); g.strokeStyle = '#E8B84A'; g.lineWidth = 5; g.strokeRect(4, 4, w - 8, h - 8); }) }) });
 tru(0.085, 0.1, BT.x, 0.64, BT.z + 0.02, '#C9A24A', { r2: 0.1, m: 0.3, k: 0.6 });
@@ -292,15 +298,18 @@ function taoNguoi(ao, quan, da, toc) {
 const COTHE_DONG = true; // Nhung yêu cầu có chuyển động nhỏ; máy này bật chế độ giảm chuyển động của Windows nên không dò theo chế độ đó
 function cuDong(n, t, dt) {
   if (n.sb !== 'an') chayNguoi(n, dt);
-  const p = n.pha, lam = n.tt === 'dang-lam', di = n.sb === 'di', k = n.k, s2 = di ? Math.sin(t * 6.5 + p) : 0;
+  const p = n.pha, lam = n.tt === 'dang-lam', di = n.sb === 'di' || n.dangBuoc, k = n.k, s2 = di ? Math.sin(t * 6.5 + p) : 0;
   n.CL.h.rotation.x = -Math.PI / 2 * k + s2 * 0.48; n.CR.h.rotation.x = -Math.PI / 2 * k - s2 * 0.48;
   n.CL.k.rotation.x = Math.PI / 2 * k + (di ? Math.max(0, -s2) * 0.7 : 0); n.CR.k.rotation.x = Math.PI / 2 * k + (di ? Math.max(0, s2) * 0.7 : 0);
   n.g.position.y = 0.34 * (1 - k) + (di ? Math.abs(Math.cos(t * 6.5 + p)) * 0.012 : 0);
-  if (n.vong) { const y = 0.02 - n.g.position.y; n.vong.nen.position.y = y; n.vong.vien.position.y = y + 0.002; }
+  if (n.vong) {
+    const y = 0.02 - n.g.position.y, co = lam || n.tt === 'cho', sg = n.vong.song; n.vong.nen.position.y = y; n.vong.vien.position.y = y + 0.002; sg.visible = co;
+    if (co) { const f = (t * (lam ? 0.7 : 0.45) + p) % 1; sg.position.y = y + 0.003; sg.scale.setScalar(1 + f * 0.9); sg.material.opacity = (1 - f) * 0.75; }
+  }
   n.than.scale.y = 1 + Math.sin(t * 1.1 + p) * 0.012;
-  n.dauG.rotation.y = di ? 0 : Math.sin(t * 0.35 + p) * (lam ? 0.07 : 0.22); n.dauG.rotation.x = (lam ? 0.1 : 0) + Math.sin(t * 0.5 + p * 2) * 0.025;
+  n.dauG.rotation.y = di ? 0 : Math.sin(t * 0.35 + p) * (lam ? 0.07 : 0.22); n.dauG.rotation.x = lam ? 0.13 + Math.sin(t * 2.4 + p) * 0.05 : Math.sin(t * 0.5 + p * 2) * 0.025;
   if (k < 0.6) { n.L.a.rotation.x = -s2 * 0.42; n.R.a.rotation.x = s2 * 0.42; n.L.c.rotation.x = n.R.c.rotation.x = -0.28; return; }
-  const go = lam ? Math.sin(t * 5 + p) * 0.05 : 0;
+  const go = lam ? Math.sin(t * 7 + p) * 0.15 : 0;
   n.L.a.rotation.x = -0.45; n.L.c.rotation.x = -1.1 + go;
   if (n.tt === 'cho') { n.R.a.rotation.x = -2.95 + Math.sin(t * 1.8 + p) * 0.08; n.R.c.rotation.x = -0.1; } else { n.R.a.rotation.x = -0.45; n.R.c.rotation.x = -1.1 - go; }
 }
@@ -310,12 +319,13 @@ function taoVong(g) {
   const nen = new THREE.Mesh(new THREE.CircleGeometry(0.42, 40), new THREE.MeshBasicMaterial({ transparent: true, opacity: 0.16, depthWrite: false, toneMapped: false }));
   const vien = new THREE.Mesh(new THREE.RingGeometry(0.39, 0.42, 48), new THREE.MeshBasicMaterial({ transparent: true, opacity: 0.85, depthWrite: false, toneMapped: false }));
   [nen, vien].forEach((m, i) => { m.rotation.x = -Math.PI / 2; m.position.y = 0.02 + i * 0.002; m.renderOrder = 1; g.add(m); });
-  return { nen, vien };
+  const song = new THREE.Mesh(new THREE.RingGeometry(0.4, 0.44, 48), new THREE.MeshBasicMaterial({ transparent: true, opacity: 0, depthWrite: false, toneMapped: false })); song.rotation.x = -Math.PI / 2; song.renderOrder = 1; song.visible = false; g.add(song);
+  return { nen, vien, song };
 }
 const nhung = taoNguoi('#EFA9C0', '#2A2E3A', '#EFC7AB', '#2B1D16'); nhung.g.position.set(12.25, 0, 10.3); nhung.than.scale.x = 0.86;
 [[0, -0.075, -0.062, 0.072, 0.2, 1.2, 0.7], [-0.072, -0.05, -0.008, 0.026, 0.17, 1, 1], [0.072, -0.05, -0.008, 0.026, 0.17, 1, 1]].forEach(([x, y, z, r, l, sx, sz]) => { const m = new THREE.Mesh(new THREE.CapsuleGeometry(r, l, 6, 14), mat('#2B1D16', 0.8)); m.position.set(x, y, z); m.scale.set(sx, 1, sz); m.castShadow = true; nhung.dauG.add(m); });
 function themNS(x) {
-  const [a, q, d, t] = NVMAU[hash(x.id) % NVMAU.length], n = taoNguoi(a, q, d, t); n.id = x.id; n.g.userData.id = x.id; n.vong = taoVong(n.g);
+  const [a, q, d, t] = NVMAU[hash(x.id) % NVMAU.length], n = taoNguoi(a, q, d, t); n.id = x.id; n.g.userData.id = x.id; n.vong = taoVong(n.g); n.tag = taoTag(n.g);
   const k = [...(GHE[x.phong] || []), ...BAN].find(y => !y.ai) || BAN[0]; renderer.shadowMap.needsUpdate = true; k.ai = x.id; n.ghe = k; n.g.position.set(k.x, 0, k.z); n.g.rotation.y = k.ry;
   const sf = k.loi ? SOFA[NV.size] : null; if (sf) { n.g.position.set(sf.x, 0, sf.z); n.g.rotation.y = sf.ry; n.sb = 'cho'; n.tre = 2.5 + NV.size * 0.55; n.duong = [sf.ra, ...timDuong(sf.loi, k.loi).map(m => NODE[m]), ...(k.qua || []), [k.x, k.z]]; }
   const c = document.createElement('canvas'); c.width = 480; c.height = 176; n.ctx = c.getContext('2d'); n.tex = new THREE.CanvasTexture(c); n.tex.colorSpace = THREE.SRGBColorSpace; n.tex.anisotropy = renderer.capabilities.getMaxAnisotropy();
@@ -338,10 +348,23 @@ $('bang-tab').addEventListener('click', ev => { const h = ev.target.closest('[da
 $('loc-ht').onchange = ev => { locHT = ev.target.value; veHT(); };
 $('thu-ht').onclick = () => { const d = $('ds-ht'); d.hidden = !d.hidden; $('thu-ht').innerHTML = d.hidden ? '&#9656;' : '&#9662;'; };
 $('ct-ht').onclick = () => { $('ds-ht').hidden = false; $('thu-ht').innerHTML = '&#9662;'; $('ht').classList.toggle('rong'); };
-function veVong(n) { const chon = n.id === nsChon, c = MAU_TT[n.tt] || NAVY; n.vong.nen.visible = n.vong.vien.visible = !!n.tt || chon; n.vong.nen.material.color.set(c); n.vong.vien.material.color.set(c); n.vong.nen.material.opacity = chon ? 0.34 : 0.16; n.vong.vien.scale.setScalar(chon ? 1.08 : 1); }
+const TAG_TT = { 'dang-lam': '#2F5BEA', cho: '#E08A1E', 'co-the-ket': '#C9302C', loi: '#C9302C', xong: '#0E8A5A', dung: '#0E8A5A' };
+function taoTag(g) { const c = document.createElement('canvas'); c.width = 420; c.height = 104; const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; const sp = new THREE.Sprite(new THREE.SpriteMaterial({ map: t, transparent: true, depthWrite: false, depthTest: false, toneMapped: false })); sp.position.y = 1.3; sp.scale.set(1.3, 0.322, 1); sp.renderOrder = 6; g.add(sp); return { sp, t, ctx: c.getContext('2d'), cu: '' }; }
+function veTag(tag, ten, mau, viec = '') {
+  const ma = ten + mau + viec; if (tag.cu === ma) return; tag.cu = ma; const g = tag.ctx, c = g.canvas; g.clearRect(0, 0, c.width, c.height);
+  g.font = `600 38px ${FONT}`; const w1 = g.measureText(ten).width + (mau ? 42 : 0); g.font = `400 28px ${FONT}`; const w2 = viec ? g.measureText(viec).width : 0;
+  const w = Math.min(c.width - 4, Math.max(w1, w2) + 30), h = viec ? 96 : 56, x = (c.width - w) / 2, y = c.height - h - 2;
+  g.fillStyle = '#FFFFFF'; g.strokeStyle = 'rgba(23,36,79,.45)'; g.lineWidth = 2.5; g.beginPath(); g.roundRect(x, y, w, h, 12); g.fill(); g.stroke();
+  g.textAlign = 'left'; g.textBaseline = 'middle'; const lx = (c.width - w1) / 2;
+  if (mau) { g.fillStyle = mau; g.beginPath(); g.arc(lx + 12, y + 28, 11, 0, 7); g.fill(); }
+  g.fillStyle = '#17244F'; g.font = `600 38px ${FONT}`; g.fillText(ten, lx + (mau ? 34 : 0), y + 30);
+  if (viec) { g.fillStyle = '#5D6980'; g.font = `400 28px ${FONT}`; g.textAlign = 'center'; g.fillText(viec, c.width / 2, y + 70); }
+  tag.t.needsUpdate = true; canVe = Math.max(canVe, 2);
+}
+function veVong(n) { const chon = n.id === nsChon, c = MAU_TT[n.tt] || NAVY; n.vong.nen.visible = n.vong.vien.visible = !!n.tt || chon; n.vong.nen.material.color.set(c); n.vong.vien.material.color.set(c); n.vong.song.material.color.set(c); n.vong.nen.material.opacity = chon ? 0.34 : 0.16; n.vong.vien.scale.setScalar(chon ? 1.08 : 1); }
 function chonNS(id) { nsChon = nsChon === id ? null : id; if (nsChon) { tabMo = 'nhan-su'; const x = duLieu?.nhan_vien.find(y => y.id === nsChon); if (x?.viec[0]) locHT = x.viec[0].id; } for (const n of NV.values()) veVong(n); canVe = Math.max(canVe, 2); veTab(); veHT(); }
 function chonNV(id) { dangChon = dangChon === id ? null : id; if (dangChon) { tabMo = 'viec'; locHT = id; } else locHT = ''; veTab(); veHT(); }
-const CHU_THICH = 'Vòng sáng dưới chân: xanh dương là đang làm, cam là chờ Nhung, đỏ là cần xem lại, xanh lá là xong lượt, không có vòng là đang rảnh. Bấm vào người để xem việc của họ. Phòng đang có việc sẽ sáng nhẹ. Bấm vào phòng để xem MCP và skill. Kéo để xoay mọi hướng, cuộn chuột hoặc bấm + và &minus; để phóng to, thu nhỏ, kéo chuột phải để di chuyển. Trên điện thoại: một ngón để xoay, hai ngón để phóng to và di chuyển.';
+const CHU_THICH = 'Nhãn trên đầu là tên agent kèm chấm màu: xanh dương là đang làm, cam là chờ Nhung, đỏ là cần xem lại, xanh lá là rảnh hoặc xong lượt. Agent đang có việc thì nhãn ghi thêm tên việc. Bấm vào người để xem việc của họ. Phòng đang có việc sẽ sáng nhẹ. Bấm vào phòng để xem MCP và skill. Kéo để xoay mọi hướng, cuộn chuột hoặc bấm + và &minus; để phóng to, thu nhỏ, kéo chuột phải để di chuyển. Trên điện thoại: một ngón để xoay, hai ngón để phóng to và di chuyển.';
 const bangKho = (ds, co) => `<table>${ds.map(x => `<tr class="${x.lan ? '' : 'chua'}"><td>${e(x.ten)}</td>${co ? `<td>${e(x.kieu)}</td>` : ''}<td>${x.lan ? x.lan + ' lần' : 'Chưa dùng'}</td></tr>`).join('')}</table>`;
 const ttPhong = (d, k) => { const r = d.kho.phong[k]; if (!r) return ''; const dong = (x, loai) => `<tr class="${x.lan ? '' : 'chua'}"><td>${e(x.ten)}</td><td>${loai}</td><td>${x.lan ? x.lan + ' lần' : 'Chưa dùng'}</td></tr>`; const hang = [...r.mcp.map(x => dong(x, 'MCP')), ...r.skill.map(x => dong(x, 'Skill'))].join(''); return `<div style="margin-bottom:12px"><div class="hang"><b>${e(r.ten)}</b><span class="mo">${r.token}% token, 30 ngày</span></div>${hang ? `<table>${hang}</table>` : '<div class="mo">Không có MCP hay skill riêng, làm bằng code.</div>'}</div>`; };
 const ND = {
@@ -383,8 +406,9 @@ function veBen() { veTren(); veTab(); veHT(); }
 document.fonts?.ready.then(() => { nuoc.forEach(b => b.g && veSoBinh(b)); });
 function capNhat(d) {
   duLieu = d; const sang = new Set();
+  if (!nhung.tag) { nhung.tag = taoTag(nhung.g); veTag(nhung.tag, 'Nhung', null); }
   d.nhan_vien.forEach(x => {
-    const n = NV.get(x.id) || themNS(x); n.tt = x.tt; tuThe(n, x.tt === 'cho'); veVong(n); if (n.ghe.man) n.ghe.man.material = x.tt && x.tt !== 'xong' ? MAN_BAT : MAN_TAT;
+    const n = NV.get(x.id) || themNS(x); n.tt = x.tt; tuThe(n, x.tt === 'cho'); veVong(n); if (MAU) veTag(n.tag, x.ten, null); else { const v = x.viec[0], t = v && x.tt !== 'xong' ? v.ten : ''; veTag(n.tag, x.ten, TAG_TT[x.tt] || '#0E8A5A', t.length > 22 ? t.slice(0, 21) + '...' : t); } if (n.ghe.man) n.ghe.man.material = x.tt && x.tt !== 'xong' ? MAN_BAT : MAN_TAT;
     if (x.tt === 'dang-lam') sang.add(x.phong); if (x.tt === 'cho') sang.add('nhung');
     if (n.so !== x.so_viec) veNhanSan(n, x);
   });
@@ -438,8 +462,27 @@ function nhaNgon(ev) {
 cv.addEventListener('pointerup', nhaNgon); cv.addEventListener('pointercancel', nhaNgon);
 cv.addEventListener('wheel', ev => { ev.preventDefault(); thuPhong(ev.deltaY < 0 ? 1.1 : 0.91, ev.clientX, ev.clientY); }, { passive: false });
 cv.addEventListener('dblclick', veGiua);
-$('nut-zoom').addEventListener('click', ev => { const z = ev.target.closest('[data-z]')?.dataset.z; if (z === 'to') thuPhong(1.25); if (z === 'nho') thuPhong(0.8); if (z === 'giua') veGiua(); });
+$('nut-zoom').addEventListener('click', ev => { const z = ev.target.closest('[data-z]')?.dataset.z; if (z === 'to') thuPhong(1.25); if (z === 'nho') thuPhong(0.8); if (z === 'giua') veGiua(); if (z === 'ghe') nhungVeGhe(); });
 
+const OB = [[4.4, 5.9, 11.4, 7.5], [5.3, 0.25, 9.9, 0.97], [0.45, 0.1, 3.95, 0.87], [10.85, 0.1, 13.95, 0.7], [12.2, 1.15, 13, 1.95], [11.45, 1.25, 12.05, 1.85], [13.15, 1.25, 13.75, 1.85], [14.1, 0.3, 15.4, 0.8], [14.49, 3.52, 15.47, 4.08], [0.1, 3.45, 3, 3.86], [0.1, 4.7, 0.45, 7.1], [0.8, 5.3, 2.9, 6], [0.35, 9.7, 3.05, 10.4], [2.4, 13.9, 3, 14.5], [4.29, 10.4, 5.11, 14], [5.2, 13.84, 8.4, 14.66], [5.57, 9.84, 8.33, 10.66], [6.45, 11.7, 7.35, 12.6], [8.61, 10.86, 9.29, 11.54], [8.61, 11.96, 9.29, 12.64], [8.61, 13.06, 9.29, 13.74], [3.61, 10.3, 4.03, 13.9], [10.3, 9.28, 14.2, 9.42], [13.0, 9.42, 14.1, 9.45], [15.1, 10.72, 19.1, 12.08], [16.95, 0.25, 18.65, 0.95], [15.8, 1.1, 16.25, 3.1], [19.4, 4.25, 19.95, 6.15], [16.7, 6.4, 17.3, 7]];
+TUONG.forEach(([x1, z1, x2, z2, c = []]) => { const ds = c.map(q => Array.isArray(q) ? q : [q, 1]), ng = z1 === z2; let a = ng ? x1 : z1; const b = ng ? x2 : z2; [...ds, [b + 0.5, 0]].forEach(([t, r]) => { const c1 = Math.min(t - r / 2, b); if (c1 > a) OB.push(ng ? [a - 0.1, z1 - 0.1, c1 + 0.1, z1 + 0.1] : [x1 - 0.1, a - 0.1, x1 + 0.1, c1 + 0.1]); a = t + r / 2; }); });
+function biChan(x, z, r = 0.16) { if (x < 0.15 || x > 19.85 || z < 0.15 || z > 14.85) return true; if (OB.some(([a, b, c, f]) => x > a - r && x < c + r && z > b - r && z < f + r)) return true; const kc = Math.hypot(x - 12.25, z - 10.2); return kc > 1.12 && kc < 1.76 && z > 10.45; }
+const PHIM = new Set(), MA_PHIM = { ArrowUp: 'u', KeyW: 'u', ArrowDown: 'd', KeyS: 'd', ArrowLeft: 'l', KeyA: 'l', ArrowRight: 'r', KeyD: 'r' };
+addEventListener('keydown', ev => { if (/SELECT|INPUT|TEXTAREA/.test(ev.target.tagName)) return; const m = MA_PHIM[ev.code]; if (m) { PHIM.add(m); ev.preventDefault(); } });
+addEventListener('keyup', ev => { const m = MA_PHIM[ev.code]; if (m) PHIM.delete(m); }); addEventListener('blur', () => PHIM.clear());
+$('pad').addEventListener('pointerdown', ev => { const m = ev.target.closest('[data-p]')?.dataset.p; if (m) { PHIM.add(m); ev.preventDefault(); } });
+['pointerup', 'pointerleave', 'pointercancel'].forEach(t => $('pad').addEventListener(t, () => PHIM.clear()));
+function dieuKhien(dt) {
+  const n = nhung, p = n.g.position, f = (PHIM.has('u') ? 1 : 0) - (PHIM.has('d') ? 1 : 0), ng = (PHIM.has('r') ? 1 : 0) - (PHIM.has('l') ? 1 : 0); n.dangBuoc = false;
+  if (!f && !ng) return false;
+  if (n.sb === 'an') { n.sb = 'dieu'; $('goi-y').style.opacity = 0; } if (n.k > 0) { n.k = Math.max(0, n.k - dt * 2.8); return true; }
+  const c = Math.cos(goc), sn = Math.sin(goc); let dx = ng * c - f * sn, dz = -ng * sn - f * c; const l = Math.hypot(dx, dz); dx /= l; dz /= l; const b = 1.8 * dt;
+  if (!biChan(p.x + dx * b, p.z)) p.x += dx * b; if (!biChan(p.x, p.z + dz * b)) p.z += dz * b;
+  n.g.rotation.y = xoayVe(n.g.rotation.y, Math.atan2(dx, dz), dt * 10); n.dangBuoc = true; return true;
+}
+function nhungVeGhe() { const n = nhung; n.sb = 'an'; n.k = 1; n.dangBuoc = false; n.g.position.set(12.25, 0, 10.3); n.g.rotation.y = 0; renderer.shadowMap.needsUpdate = true; canVe = Math.max(canVe, 2); }
+if (qs.has('tocdo')) window.__NH = { nhung, PHIM, biChan };
+setTimeout(() => { $('goi-y').style.opacity = 0; }, 12000);
 let lanVe = 0; const dongHo = new THREE.Clock();
 function ve() {
   requestAnimationFrame(ve); const dt = Math.min(dongHo.getDelta(), 0.05);
@@ -448,7 +491,7 @@ function ve() {
   const bay = performance.now();
   if (canVe <= 0 && (!COTHE_DONG || bay - lanVe < 33)) return; if (canVe > 0) canVe--; const dtv = Math.min((bay - lanVe) / 1000, 0.1) * TOC; lanVe = bay;
   if (COTHE_DONG) {
-    const t = dongHo.elapsedTime; let dangDi = false; for (const n of NV.values()) { cuDong(n, t, dtv); if (n.sb !== 'an' && n.sb !== 'cho') dangDi = true; } cuDong(nhung, t, dtv); if (dangDi) renderer.shadowMap.needsUpdate = true; veKhoi(t);
+    const t = dongHo.elapsedTime; let dangDi = false; for (const n of NV.values()) { cuDong(n, t, dtv); if (n.sb !== 'an' && n.sb !== 'cho') dangDi = true; } if (dieuKhien(dtv)) dangDi = true; cuDong(nhung, t, dtv); if (dangDi) renderer.shadowMap.needsUpdate = true; veKhoi(t); MAN_BAT.emissiveIntensity = 0.55 + Math.sin(t * 3.2) * 0.14;
     CAY.forEach(c => { c.l.rotation.z = Math.sin(t * 0.7 + c.p) * 0.014; c.l.rotation.x = Math.sin(t * 0.5 + c.p) * 0.011; });
     denTu.forEach((m, i) => { m.visible = Math.sin(t * (0.5 + (i % 5) * 0.23) + i * 1.7) > -0.45; });
     banDo.map.offset.set(0.05 + Math.sin(t * 0.11) * 0.045, 0.05 + Math.cos(t * 0.08) * 0.045);
