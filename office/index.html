@@ -12,7 +12,8 @@
 *{box-sizing:border-box}html,body{height:100%;margin:0}
 body{background:#F0F1F4;color:var(--chu);font:14px/1.45 "Space Grotesk","Segoe UI",system-ui,-apple-system,sans-serif;overflow:hidden}
 .mono{font-family:"IBM Plex Mono",Consolas,"Cascadia Mono",monospace;text-transform:uppercase;letter-spacing:.05em}
-canvas{position:fixed;inset:0;display:block;cursor:grab}canvas:active{cursor:grabbing}
+canvas{position:fixed;inset:0;display:block;cursor:grab;touch-action:none}
+#nut-zoom{position:fixed;right:12px;bottom:12px;display:flex;flex-direction:column}#nut-zoom button{width:34px;height:32px;font:600 16px "IBM Plex Mono",Consolas,monospace;background:#fff;color:var(--navy);border:0;border-bottom:1.5px solid var(--navy);cursor:pointer}#nut-zoom button:last-child{border-bottom:0}#nut-zoom button:hover{background:#E6EAF6}canvas:active{cursor:grabbing}
 #nhan{position:fixed;inset:0;pointer-events:none;overflow:hidden}
 .ng{position:absolute;left:0;top:0;width:20px;height:20px;display:grid;place-items:center;pointer-events:auto;cursor:pointer}
 .ng::before{content:"";width:9px;height:9px;border-radius:50%;background:#2F5BEA;box-shadow:0 0 0 2px #fff}
@@ -52,7 +53,7 @@ h2{font:600 12.5px "IBM Plex Mono",Consolas,monospace;text-transform:uppercase;l
 .cot{display:flex;align-items:flex-end;gap:6px;height:96px;margin:6px 0}.cot div{flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;height:100%;min-width:0;font-size:11px;color:var(--phu)}.cot i{display:block;width:100%;background:var(--xanh);min-height:2px;margin:2px 0}.cot .nay i{background:var(--luc)}
 table{width:100%;border-collapse:collapse;font-size:13px}td{padding:5px 0;border-top:1px solid var(--xam)}tr:first-child td{border-top:0}td:nth-child(n+2){text-align:right;color:var(--phu);padding-left:8px;white-space:nowrap}.chua{color:var(--phu)}
 a{color:var(--xanh)}
-@media(max-width:800px){#tabs{left:8px;right:8px;top:8px;overflow-x:auto}#tren{left:8px;top:46px;max-width:calc(100% - 16px)}#luc{display:none!important}#bang-tab{left:8px;right:8px;top:88px;width:auto;max-height:55vh}#ht{left:8px;right:8px;bottom:8px;width:auto}#ds-ht{max-height:112px}}
+@media(max-width:800px){#tabs{left:8px;right:8px;top:8px;overflow-x:auto}#tren{left:8px;top:46px;max-width:calc(100% - 16px)}#luc{display:none!important}#bang-tab{left:8px;right:8px;top:88px;width:auto;max-height:55vh}#ht{left:8px;right:8px;bottom:8px;width:auto}#ds-ht{max-height:112px}#nut-zoom{right:8px;bottom:auto;top:92px}}
 </style>
 <script type="importmap">{"imports":{"three":"./vendor/three.module.js"}}</script>
 </head>
@@ -61,6 +62,7 @@ a{color:var(--xanh)}
 <div id="tren" class="mono"><div class="o" id="luc"></div><div class="o manh" id="che-do"></div><div class="o manh" id="tom-tat"></div></div>
 <nav id="tabs" class="o"></nav>
 <aside id="bang-tab" class="o manh" hidden></aside>
+<div id="nut-zoom" class="o manh"><button data-z="to" aria-label="Phóng to" title="Phóng to">+</button><button data-z="nho" aria-label="Thu nhỏ" title="Thu nhỏ">&minus;</button><button data-z="giua" aria-label="Về toàn cảnh" title="Về toàn cảnh">&#8962;</button></div>
 <section id="ht" class="o manh"><header><button id="thu-ht" aria-label="Thu gọn">&#9662;</button><span class="mono" id="so-tin">Phòng hội thoại</span><select id="loc-ht" aria-label="Lọc theo việc"></select><button id="ct-ht">Chi tiết &rarr;</button></header><div id="ds-ht"></div></section>
 <script type="module">
 import * as THREE from 'three';
@@ -284,7 +286,7 @@ $('loc-ht').onchange = ev => { locHT = ev.target.value; veHT(); };
 $('thu-ht').onclick = () => { const d = $('ds-ht'); d.hidden = !d.hidden; $('thu-ht').innerHTML = d.hidden ? '&#9656;' : '&#9662;'; };
 $('ct-ht').onclick = () => { $('ds-ht').hidden = false; $('thu-ht').innerHTML = '&#9662;'; $('ht').classList.toggle('rong'); };
 function chonNV(id) { dangChon = dangChon === id ? null : id; if (dangChon) { tabMo = 'viec'; locHT = id; } else locHT = ''; for (const [k, n] of NV) n.nhan.classList.toggle('chon', k === dangChon); veTab(); }
-const CHU_THICH = 'Chấm trên đầu: xanh dương là đang làm, cam là chờ Nhung, đỏ là cần xem lại, xanh lá là xong lượt. Phòng đang có việc sẽ sáng nhẹ. Bấm vào phòng để xem MCP và skill.';
+const CHU_THICH = 'Chấm trên đầu: xanh dương là đang làm, cam là chờ Nhung, đỏ là cần xem lại, xanh lá là xong lượt. Phòng đang có việc sẽ sáng nhẹ. Bấm vào phòng để xem MCP và skill. Kéo để xoay mọi hướng, cuộn chuột hoặc bấm + và &minus; để phóng to, thu nhỏ, kéo chuột phải để di chuyển. Trên điện thoại: một ngón để xoay, hai ngón để phóng to và di chuyển.';
 const bangKho = (ds, co) => `<table>${ds.map(x => `<tr class="${x.lan ? '' : 'chua'}"><td>${e(x.ten)}</td>${co ? `<td>${e(x.kieu)}</td>` : ''}<td>${x.lan ? x.lan + ' lần' : 'Chưa dùng'}</td></tr>`).join('')}</table>`;
 const ttPhong = (d, k) => { const r = d.kho.phong[k]; if (!r) return ''; const dong = (x, loai) => `<tr class="${x.lan ? '' : 'chua'}"><td>${e(x.ten)}</td><td>${loai}</td><td>${x.lan ? x.lan + ' lần' : 'Chưa dùng'}</td></tr>`; const hang = [...r.mcp.map(x => dong(x, 'MCP')), ...r.skill.map(x => dong(x, 'Skill'))].join(''); return `<div style="margin-bottom:12px"><div class="hang"><b>${e(r.ten)}</b><span class="mo">${r.token}% token, 30 ngày</span></div>${hang ? `<table>${hang}</table>` : '<div class="mo">Không có MCP hay skill riêng, làm bằng code.</div>'}</div>`; };
 const ND = {
@@ -334,21 +336,46 @@ function capNhat(d) {
 const nhanNuoc = nuoc.map(b => { const el = document.createElement('div'); el.className = 'binh'; lopNhan.append(el); return { el, b, v: new THREE.Vector3(b.x, 0, b.z + 0.82) }; });
 
 // camera nhìn gần như từ trên xuống, nhìn thẳng như bản vẽ mặt bằng
-let goc = 0, phong = 1, W = 1, H = 1; const NGANG = 1.0;
+let goc = +qs.get('goc') || 0, ngang = +qs.get('ngang') || 1, phong = 1, W = 1, H = 1, lx = 0, lz = 0, khoangCach = 40; const DICH = new THREE.Vector3();
+const kep = (v, a, b) => Math.min(b, Math.max(a, v)), TANF = Math.tan(THREE.MathUtils.degToRad(cam.fov / 2));
 function datCam() {
-  const a = W / H, t = Math.tan(THREE.MathUtils.degToRad(cam.fov / 2)); const d = Math.max(9.1 / t, 11.3 / (t * a)) / phong;
-  cam.position.set(TAM.x + Math.sin(goc) * Math.cos(NGANG) * d, Math.sin(NGANG) * d, TAM.z + Math.cos(goc) * Math.cos(NGANG) * d); cam.lookAt(TAM);
-  cam.aspect = W / H; cam.setViewOffset(W, H, W > 1000 ? -95 : 0, -14, W, H); cam.updateProjectionMatrix(); canVe = Math.max(canVe, 2);
+  const k = 1 - 1 / phong, gx = 1 + 10 * Math.max(0, k), gz = 1 + 8 * Math.max(0, k); lx = kep(lx, -gx, gx); lz = kep(lz, -gz, gz);
+  const a = W / H; khoangCach = Math.max(9.1 / TANF, 11.3 / (TANF * a)) / phong; const d = khoangCach; DICH.set(TAM.x + lx, 0, TAM.z + lz);
+  cam.position.set(DICH.x + Math.sin(goc) * Math.cos(ngang) * d, Math.sin(ngang) * d, DICH.z + Math.cos(goc) * Math.cos(ngang) * d); cam.lookAt(DICH);
+  cam.aspect = a; cam.setViewOffset(W, H, W > 1000 ? -95 : 0, -14, W, H); cam.updateProjectionMatrix(); cam.updateMatrixWorld(); canVe = Math.max(canVe, 2);
 }
 function coGian() { W = innerWidth; H = innerHeight; renderer.setSize(W, H); datCam(); }
 addEventListener('resize', coGian); coGian();
-const cv = renderer.domElement; let keo = null;
-let batDau = null; const tiaPhong = new THREE.Raycaster(), matSan = new THREE.Plane(new THREE.Vector3(0, 1, 0), 0), diem = new THREE.Vector3();
-cv.addEventListener('pointerdown', ev => { keo = ev.clientX; batDau = [ev.clientX, ev.clientY]; cv.setPointerCapture(ev.pointerId); });
-cv.addEventListener('pointermove', ev => { if (keo === null) return; goc = Math.min(0.35, Math.max(-0.35, goc - (ev.clientX - keo) * 0.003)); keo = ev.clientX; datCam(); });
-cv.addEventListener('pointerup', ev => { keo = null; if (!batDau || Math.hypot(ev.clientX - batDau[0], ev.clientY - batDau[1]) > 5) return; tiaPhong.setFromCamera(new THREE.Vector2(ev.clientX / W * 2 - 1, 1 - ev.clientY / H * 2), cam); if (!tiaPhong.ray.intersectPlane(matSan, diem)) return; const ds = Object.entries(PHONG).filter(([, [a, b, c, f]]) => diem.x >= a && diem.x <= c && diem.z >= b && diem.z <= f).sort((x, y) => (x[1][2] - x[1][0]) * (x[1][3] - x[1][1]) - (y[1][2] - y[1][0]) * (y[1][3] - y[1][1])); if (ds.length) { phongChon = ds[0][0]; tabMo = 'phong'; } else tabMo = null; veTab(); });
-cv.addEventListener('wheel', ev => { ev.preventDefault(); phong = Math.min(2.8, Math.max(0.85, phong * (ev.deltaY < 0 ? 1.08 : 0.93))); datCam(); }, { passive: false });
-cv.addEventListener('dblclick', () => { goc = 0; phong = 1; datCam(); });
+const cv = renderer.domElement, tiaPhong = new THREE.Raycaster(), matSan = new THREE.Plane(new THREE.Vector3(0, 1, 0), 0), ngon = new Map(); let keo = null, batDau = null, kcNgon = 0, giua2 = null;
+function diemSan(x, y) { tiaPhong.setFromCamera(new THREE.Vector2(x / W * 2 - 1, 1 - y / H * 2), cam); return tiaPhong.ray.intersectPlane(matSan, new THREE.Vector3()); }
+function thuPhong(he, x = W / 2, y = H / 2) { const a = diemSan(x, y); phong = kep(phong * he, 0.6, 3.5); datCam(); const b = diemSan(x, y); if (a && b) { lx += a.x - b.x; lz += a.z - b.z; datCam(); } }
+function veGiua() { goc = 0; ngang = 1; phong = 1; lx = lz = 0; datCam(); }
+function diChuyen(dx, dy) { const k = 2 * khoangCach * TANF / H, c = Math.cos(goc), n = Math.sin(goc), t = k / Math.max(0.3, Math.sin(ngang)); lx += -dx * k * c - dy * t * n; lz += dx * k * n - dy * t * c; }
+const haiNgon = () => { const [a, b] = [...ngon.values()]; return { d: Math.hypot(a.x - b.x, a.y - b.y), x: (a.x + b.x) / 2, y: (a.y + b.y) / 2 }; };
+cv.addEventListener('contextmenu', ev => ev.preventDefault());
+cv.addEventListener('pointerdown', ev => {
+  ngon.set(ev.pointerId, { x: ev.clientX, y: ev.clientY }); cv.setPointerCapture(ev.pointerId);
+  if (ngon.size === 2) { const h = haiNgon(); kcNgon = h.d; giua2 = h; batDau = keo = null; return; }
+  batDau = [ev.clientX, ev.clientY]; keo = { x: ev.clientX, y: ev.clientY, dichChuyen: ev.button === 2 || ev.shiftKey };
+});
+cv.addEventListener('pointermove', ev => {
+  if (!ngon.has(ev.pointerId)) return; ngon.set(ev.pointerId, { x: ev.clientX, y: ev.clientY });
+  if (ngon.size === 2) { const h = haiNgon(); if (giua2) diChuyen(h.x - giua2.x, h.y - giua2.y); if (kcNgon > 0) thuPhong(h.d / kcNgon, h.x, h.y); else datCam(); kcNgon = h.d; giua2 = h; return; }
+  if (!keo) return; const dx = ev.clientX - keo.x, dy = ev.clientY - keo.y; keo.x = ev.clientX; keo.y = ev.clientY;
+  if (keo.dichChuyen) diChuyen(dx, dy); else { goc -= dx * 0.005; ngang = kep(ngang + dy * 0.004, 0.22, 1.5); }
+  datCam();
+});
+function nhaNgon(ev) {
+  ngon.delete(ev.pointerId); if (ngon.size) return; keo = null;
+  if (ev.type !== 'pointerup' || !batDau || Math.hypot(ev.clientX - batDau[0], ev.clientY - batDau[1]) > 5) { batDau = null; return; } batDau = null;
+  const diem = diemSan(ev.clientX, ev.clientY); if (!diem) return;
+  const ds = Object.entries(PHONG).filter(([, [a, b, c, f]]) => diem.x >= a && diem.x <= c && diem.z >= b && diem.z <= f).sort((x, y) => (x[1][2] - x[1][0]) * (x[1][3] - x[1][1]) - (y[1][2] - y[1][0]) * (y[1][3] - y[1][1]));
+  if (ds.length) { phongChon = ds[0][0]; tabMo = 'phong'; } else tabMo = null; veTab();
+}
+cv.addEventListener('pointerup', nhaNgon); cv.addEventListener('pointercancel', nhaNgon);
+cv.addEventListener('wheel', ev => { ev.preventDefault(); thuPhong(ev.deltaY < 0 ? 1.1 : 0.91, ev.clientX, ev.clientY); }, { passive: false });
+cv.addEventListener('dblclick', veGiua);
+$('nut-zoom').addEventListener('click', ev => { const z = ev.target.closest('[data-z]')?.dataset.z; if (z === 'to') thuPhong(1.25); if (z === 'nho') thuPhong(0.8); if (z === 'giua') veGiua(); });
 
 const tam = new THREE.Vector3(), vv = new THREE.Vector3(), dongHo = new THREE.Clock();
 function dat(el, v) { tam.copy(v).project(cam); el.style.transform = `translate(${((tam.x + 1) / 2 * W).toFixed(1)}px,${((1 - tam.y) / 2 * H).toFixed(1)}px) translate(-50%,-100%)`; }
