@@ -1,0 +1,132 @@
+{
+ "cap_nhat": "05/11/2026",
+ "tong_viec": 44,
+ "nhan_vien": [
+  {
+   "id": "ladipage",
+   "ten": "Ladipage",
+   "phong": "landing",
+   "ten_phong": "Landing và web",
+   "so_viec": 9
+  },
+  {
+   "id": "wordpress",
+   "ten": "WordPress",
+   "phong": "landing",
+   "ten_phong": "Landing và web",
+   "so_viec": 4
+  },
+  {
+   "id": "web",
+   "ten": "Web",
+   "phong": "landing",
+   "ten_phong": "Landing và web",
+   "so_viec": 7
+  },
+  {
+   "id": "motion",
+   "ten": "Motion",
+   "phong": "clip",
+   "ten_phong": "Clip và showreel",
+   "so_viec": 8
+  },
+  {
+   "id": "edit",
+   "ten": "Edit video",
+   "phong": "clip",
+   "ten_phong": "Clip và showreel",
+   "so_viec": 3
+  },
+  {
+   "id": "typo",
+   "ten": "Typo",
+   "phong": "clip",
+   "ten_phong": "Clip và showreel",
+   "so_viec": 1
+  },
+  {
+   "id": "giong",
+   "ten": "Giọng đọc",
+   "phong": "clip",
+   "ten_phong": "Clip và showreel",
+   "so_viec": 1
+  },
+  {
+   "id": "map",
+   "ten": "Map",
+   "phong": "ban-do",
+   "ten_phong": "Bản đồ video",
+   "so_viec": 5
+  },
+  {
+   "id": "kich-ban-map",
+   "ten": "Kịch bản map",
+   "phong": "ban-do",
+   "ten_phong": "Bản đồ video",
+   "so_viec": 0
+  },
+  {
+   "id": "game",
+   "ten": "Game 3D",
+   "phong": "game",
+   "ten_phong": "Game lầu 9",
+   "so_viec": 1
+  },
+  {
+   "id": "ke-hoach",
+   "ten": "Kế hoạch Ads",
+   "phong": "ke-hoach",
+   "ten_phong": "Kế hoạch và báo cáo",
+   "so_viec": 1
+  },
+  {
+   "id": "slide",
+   "ten": "Slide",
+   "phong": "ke-hoach",
+   "ten_phong": "Kế hoạch và báo cáo",
+   "so_viec": 1
+  },
+  {
+   "id": "bang-tinh",
+   "ten": "Bảng tính",
+   "phong": "ke-hoach",
+   "ten_phong": "Kế hoạch và báo cáo",
+   "so_viec": 3
+  },
+  {
+   "id": "kich-ban",
+   "ten": "Kịch bản",
+   "phong": "ke-hoach",
+   "ten_phong": "Kế hoạch và báo cáo",
+   "so_viec": 0
+  },
+  {
+   "id": "wiki",
+   "ten": "Wiki",
+   "phong": "wiki",
+   "ten_phong": "Wiki và kiến thức",
+   "so_viec": 2
+  },
+  {
+   "id": "nghien-cuu",
+   "ten": "Nghiên cứu",
+   "phong": "wiki",
+   "ten_phong": "Wiki và kiến thức",
+   "so_viec": 8
+  },
+  {
+   "id": "lead",
+   "ten": "Lead",
+   "phong": "lead",
+   "ten_phong": "Lead và ứng dụng",
+   "so_viec": 2
+  },
+  {
+   "id": "app",
+   "ten": "Ứng dụng",
+   "phong": "lead",
+   "ten_phong": "Lead và ứng dụng",
+   "so_viec": 2
+  }
+ ]
+}
