@@ -1,6 +1,293 @@
 {
- "cap_nhat": "05/11/2026",
+ "cap_nhat": "06/11/2026",
  "tong_viec": 44,
+ "kho": {
+  "mcp": [
+   {
+    "ten": "Trình duyệt trong app",
+    "kieu": "Có sẵn trong app",
+    "lan": 777
+   },
+   {
+    "ten": "map-video-studio",
+    "kieu": "Trên máy",
+    "lan": 105
+   },
+   {
+    "ten": "map-video",
+    "kieu": "Trên máy",
+    "lan": 7
+   },
+   {
+    "ten": "Google Drive",
+    "kieu": "Connector",
+    "lan": 6
+   },
+   {
+    "ten": "Chrome",
+    "kieu": "Có sẵn trong app",
+    "lan": 4
+   },
+   {
+    "ten": "Vẽ hình trong chat",
+    "kieu": "Có sẵn trong app",
+    "lan": 4
+   },
+   {
+    "ten": "Claude Docs",
+    "kieu": "Connector",
+    "lan": 2
+   },
+   {
+    "ten": "Gmail",
+    "kieu": "Connector",
+    "lan": 0
+   },
+   {
+    "ten": "Make",
+    "kieu": "Connector",
+    "lan": 0
+   },
+   {
+    "ten": "Notion",
+    "kieu": "Connector",
+    "lan": 0
+   },
+   {
+    "ten": "nexus-typo",
+    "kieu": "Trên mạng",
+    "lan": 0
+   }
+  ],
+  "skill": [
+   {
+    "ten": "built-in-browser",
+    "lan": 8
+   },
+   {
+    "ten": "chrome-browser",
+    "lan": 1
+   },
+   {
+    "ten": "docs",
+    "lan": 1
+   },
+   {
+    "ten": "map-video-script",
+    "lan": 1
+   },
+   {
+    "ten": "nen-tang-truoc",
+    "lan": 1
+   },
+   {
+    "ten": "pptx",
+    "lan": 1
+   },
+   {
+    "ten": "remotion-captions",
+    "lan": 1
+   },
+   {
+    "ten": "dang-landing-len-wordpress",
+    "lan": 0
+   },
+   {
+    "ten": "edit-video-cao-cap",
+    "lan": 0
+   },
+   {
+    "ten": "edit-video-dai-youtube",
+    "lan": 0
+   },
+   {
+    "ten": "edit-video-sub-va-hieu-ung",
+    "lan": 0
+   },
+   {
+    "ten": "edit-video-toan-dien",
+    "lan": 0
+   },
+   {
+    "ten": "remotion-best-practices",
+    "lan": 0
+   },
+   {
+    "ten": "remotion-create",
+    "lan": 0
+   },
+   {
+    "ten": "remotion-docs",
+    "lan": 0
+   },
+   {
+    "ten": "remotion-interactivity",
+    "lan": 0
+   },
+   {
+    "ten": "remotion-maps",
+    "lan": 0
+   },
+   {
+    "ten": "remotion-markup",
+    "lan": 0
+   },
+   {
+    "ten": "remotion-multimedia",
+    "lan": 0
+   },
+   {
+    "ten": "remotion-render",
+    "lan": 0
+   },
+   {
+    "ten": "remotion-saas",
+    "lan": 0
+   },
+   {
+    "ten": "remotion-studio",
+    "lan": 0
+   },
+   {
+    "ten": "remotion-upgrade",
+    "lan": 0
+   },
+   {
+    "ten": "tao-video-giai-thich",
+    "lan": 0
+   },
+   {
+    "ten": "tao-video-giai-thich-noi-bat",
+    "lan": 0
+   },
+   {
+    "ten": "tao-video-motion-graphics",
+    "lan": 0
+   },
+   {
+    "ten": "tao-video-nguoi-que",
+    "lan": 0
+   }
+  ],
+  "phong": {
+   "landing": {
+    "ten": "Landing và web",
+    "mcp": [],
+    "skill": [
+     {
+      "ten": "dang-landing-len-wordpress",
+      "lan": 0
+     }
+    ]
+   },
+   "clip": {
+    "ten": "Clip và showreel",
+    "mcp": [
+     {
+      "ten": "nexus-typo",
+      "lan": 0
+     }
+    ],
+    "skill": [
+     {
+      "ten": "Bộ skill Remotion",
+      "lan": 1
+     }
+    ]
+   },
+   "game": {
+    "ten": "Game lầu 9",
+    "mcp": [],
+    "skill": []
+   },
+   "ke-hoach": {
+    "ten": "Kế hoạch và báo cáo",
+    "mcp": [],
+    "skill": [
+     {
+      "ten": "pptx",
+      "lan": 1
+     },
+     {
+      "ten": "xlsx",
+      "lan": 0
+     },
+     {
+      "ten": "docx",
+      "lan": 0
+     },
+     {
+      "ten": "pdf",
+      "lan": 0
+     },
+     {
+      "ten": "viet-kich-ban",
+      "lan": 0
+     }
+    ]
+   },
+   "ban-do": {
+    "ten": "Bản đồ video",
+    "mcp": [
+     {
+      "ten": "map-video-studio",
+      "lan": 105
+     },
+     {
+      "ten": "map-video",
+      "lan": 7
+     }
+    ],
+    "skill": [
+     {
+      "ten": "map-video-script",
+      "lan": 1
+     }
+    ]
+   },
+   "wiki": {
+    "ten": "Wiki và kiến thức",
+    "mcp": [
+     {
+      "ten": "Google Drive",
+      "lan": 6
+     },
+     {
+      "ten": "Notion",
+      "lan": 0
+     },
+     {
+      "ten": "Claude Docs",
+      "lan": 2
+     }
+    ],
+    "skill": [
+     {
+      "ten": "ingest-wiki",
+      "lan": 0
+     },
+     {
+      "ten": "nen-tang-truoc",
+      "lan": 1
+     }
+    ]
+   },
+   "lead": {
+    "ten": "Lead và ứng dụng",
+    "mcp": [
+     {
+      "ten": "Make",
+      "lan": 0
+     },
+     {
+      "ten": "Gmail",
+      "lan": 0
+     }
+    ],
+    "skill": []
+   }
+  }
+ },
  "nhan_vien": [
   {
    "id": "ladipage",
@@ -28,14 +315,14 @@
    "ten": "Motion",
    "phong": "clip",
    "ten_phong": "Clip và showreel",
-   "so_viec": 8
+   "so_viec": 9
   },
   {
    "id": "edit",
    "ten": "Edit video",
    "phong": "clip",
    "ten_phong": "Clip và showreel",
-   "so_viec": 3
+   "so_viec": 4
   },
   {
    "id": "typo",
@@ -49,7 +336,7 @@
    "ten": "Giọng đọc",
    "phong": "clip",
    "ten_phong": "Clip và showreel",
-   "so_viec": 1
+   "so_viec": 2
   },
   {
    "id": "map",
