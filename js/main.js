@@ -1,318 +1,215 @@
 /* ==========================================================================
-   PULDIGI — main.js
-   Nav · lọc portfolio · facade video · reveal khi cuộn · gửi form
+   PULDIGI - main.js (redesign)
+   Nav · hé lộ khi cuộn · đếm số · parallax chuột · portfolio ghim · lightbox · form
    Không dùng thư viện ngoài.
    ========================================================================== */
 
 /* ==== CẤU HÌNH FORM ====
-   Sau khi dựng Google Apps Script (xem hướng dẫn), dán URL endpoint vào đây.
-   Chưa có endpoint thì form vẫn báo thành công demo và không gửi đi đâu.        */
-const FORM_ENDPOINT = ""; // ví dụ: "https://script.google.com/macros/s/AKfyc.../exec"
+   Dán URL Google Apps Script (Web app, "Anyone") vào đây. Script cần trả JSON {"ok":true}.
+   Chưa có endpoint thì form KHÔNG báo thành công giả, mà hướng khách nhắn Zalo.   */
+const FORM_ENDPOINT = "";
 
 document.addEventListener('DOMContentLoaded', () => {
+  const $ = (s, r = document) => r.querySelector(s);
+  const $$ = (s, r = document) => [...r.querySelectorAll(s)];
 
-  /* ---------- CUỘN TRANG: nav đổi nền · thanh tiến trình · parallax ----------
-     Gom mọi việc theo cuộn vào 1 vòng lặp (requestAnimationFrame) cho mượt.   */
-  const nav = document.getElementById('nav');
-  const progress = document.getElementById('scrollProgress');
-  const parallaxEls = [...document.querySelectorAll('[data-parallax]')];
-  let ticking = false;
-
-  const onScroll = () => {
-    const y = window.scrollY;
-    // nav
-    nav.classList.toggle('scrolled', y > 30);
-    // thanh tiến trình
-    const h = document.documentElement.scrollHeight - window.innerHeight;
-    if (progress) progress.style.transform = 'scaleX(' + (h > 0 ? y / h : 0) + ')';
-    // parallax nhẹ — dùng thuộc tính "translate" riêng để không đè lên
-    // animation (float) hay hiệu ứng reveal (vốn dùng "transform")
-    parallaxEls.forEach(el => {
-      const speed = parseFloat(el.dataset.parallax) || 0;
-      el.style.translate = '0 ' + (y * speed).toFixed(1) + 'px';
-    });
-    ticking = false;
-  };
-  const requestScroll = () => { if (!ticking) { ticking = true; requestAnimationFrame(onScroll); } };
-  window.addEventListener('scroll', requestScroll, { passive: true });
-  window.addEventListener('resize', requestScroll, { passive: true });
+  /* ---------- NAV: nền kem khi rời đầu trang + scroll-spy ---------- */
+  const nav = $('#nav');
+  const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 24);
+  window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
 
-  const toggle = document.getElementById('toggle');
-  const menu = document.getElementById('navmenu');
+  const toggle = $('#toggle'), menu = $('#navmenu');
   toggle.addEventListener('click', () => {
     const open = menu.classList.toggle('open');
     toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
   });
-  menu.querySelectorAll('a').forEach(a =>
-    a.addEventListener('click', () => {
-      menu.classList.remove('open');
-      toggle.setAttribute('aria-expanded', 'false');
-    })
-  );
+  $$('#navmenu a').forEach(a => a.addEventListener('click', () => {
+    menu.classList.remove('open'); toggle.setAttribute('aria-expanded', 'false');
+  }));
 
-  /* ---------- REVEAL khi cuộn (stagger cho nhóm) ---------- */
-  document.querySelectorAll('.stagger').forEach(group => {
-    [...group.children].forEach((child, i) => {
-      child.style.transitionDelay = (i * 100) + 'ms';
-    });
-  });
-  const revealSelector = '.reveal,.reveal-up,.reveal-left,.reveal-right,.reveal-pop';
-  const io = new IntersectionObserver((entries) => {
+  const spyLinks = $$('[data-spy]');
+  const spyIO = new IntersectionObserver(entries => {
     entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.classList.add('in');
-        io.unobserve(e.target);
-      }
+      if (!e.isIntersecting) return;
+      spyLinks.forEach(a => a.classList.toggle('active', a.dataset.spy === e.target.id));
     });
-  }, { threshold: 0.14, rootMargin: '0px 0px -8% 0px' });
-  document.querySelectorAll(revealSelector).forEach(el => io.observe(el));
+  }, { rootMargin: '-45% 0px -50% 0px' });
+  ['services', 'process', 'work'].forEach(id => { const el = document.getElementById(id); if (el) spyIO.observe(el); });
+  // rời khỏi 3 mục thì bỏ gạch chân
+  const clearIO = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) spyLinks.forEach(a => a.classList.remove('active')); });
+  }, { rootMargin: '-45% 0px -50% 0px' });
+  ['top', 'ideas', 'video', 'results', 'pricing', 'contact'].forEach(id => { const el = document.getElementById(id); if (el) clearIO.observe(el); });
 
-  /* ---------- ĐẾM SỐ Ở QUY TRÌNH (01 → 04) ---------- */
-  const stepNos = document.querySelectorAll('.step-no');
-  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (stepNos.length && !reduceMotion) {
-    const countIO = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
-        if (!e.isIntersecting) return;
-        const el = e.target;
-        const target = parseInt(el.textContent, 10) || 0;
-        const dur = 900, start = performance.now();
-        const tick = (now) => {
-          const p = Math.min((now - start) / dur, 1);
-          el.textContent = String(Math.round(p * target)).padStart(2, '0');
-          if (p < 1) requestAnimationFrame(tick);
-        };
-        el.textContent = '00';
-        requestAnimationFrame(tick);
-        countIO.unobserve(el);
-      });
-    }, { threshold: 0.6 });
-    stepNos.forEach(el => countIO.observe(el));
+  /* ---------- HÉ LỘ KHI CUỘN ---------- */
+  // danh sách dịch vụ: 500ms, cách 80ms; bảng giá: 200ms, cách 200ms
+  $$('.svc-row').forEach((el, i) => el.style.transitionDelay = '0s,' + (i * 80) + 'ms,' + (i * 80) + 'ms');
+  $$('.price').forEach((el, i) => el.style.transitionDelay = (i * 200) + 'ms,' + (i * 200) + 'ms,0s,0s');
+  const revealIO = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); revealIO.unobserve(e.target); } });
+  }, { threshold: 0.15, rootMargin: '0px 0px -6% 0px' });
+  $$('.svc-row,.price,.reveal,.video-card,.draw').forEach(el => revealIO.observe(el));
+  // sau khi hiện xong, trả transition-delay về 0 để hover không bị trễ
+  $$('.svc-row,.price').forEach(el => el.addEventListener('transitionend', e => {
+    if (e.propertyName === 'opacity') el.style.transitionDelay = '0s';
+  }));
+
+  /* ---------- ĐẾM SỐ (1 lần, ~1.4s), giữ định dạng "398,1K" ---------- */
+  const fmt = (v, d) => v.toFixed(d).replace('.', ',');
+  const countIO = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      const el = e.target; countIO.unobserve(el);
+      const raw = el.dataset.count, target = parseFloat(raw), suf = el.dataset.suffix || '';
+      const d = (raw.split('.')[1] || '').length, dur = 1400, t0 = performance.now();
+      const tick = now => {
+        const p = Math.min((now - t0) / dur, 1), k = 1 - Math.pow(1 - p, 3);
+        el.textContent = fmt(target * k, d) + suf;
+        if (p < 1) requestAnimationFrame(tick); else el.textContent = fmt(target, d) + suf;
+      };
+      el.textContent = fmt(0, d) + suf;
+      requestAnimationFrame(tick);
+    });
+  }, { threshold: 0.6 });
+  $$('.stat-val').forEach(el => countIO.observe(el));
+
+  /* ---------- PARALLAX CHUỘT Ở THẺ ẢNH HERO (nhẹ, theo chuột, không theo cuộn) ---------- */
+  const stack = $('#heroStack');
+  if (stack && window.matchMedia('(hover:hover)').matches) {
+    const hero = $('#top');
+    let tx = 0, ty = 0, cx = 0, cy = 0, raf = null;
+    const loop = () => {
+      cx += (tx - cx) * 0.1; cy += (ty - cy) * 0.1;
+      stack.style.setProperty('--mx', cx.toFixed(3)); stack.style.setProperty('--my', cy.toFixed(3));
+      raf = (Math.abs(tx - cx) > 0.002 || Math.abs(ty - cy) > 0.002) ? requestAnimationFrame(loop) : null;
+    };
+    hero.addEventListener('mousemove', e => {
+      const r = hero.getBoundingClientRect();
+      tx = ((e.clientX - r.left) / r.width - 0.5) * 2; ty = ((e.clientY - r.top) / r.height - 0.5) * 2;
+      if (!raf) raf = requestAnimationFrame(loop);
+    });
+    hero.addEventListener('mouseleave', () => { tx = 0; ty = 0; if (!raf) raf = requestAnimationFrame(loop); });
   }
 
-  /* ---------- BIỂU ĐỒ KẾT QUẢ: tooltip khi rê chuột (đường lượt xem) ---------- */
-  const rchart = document.querySelector('.rchart-line');
-  if (rchart) {
-    const points = JSON.parse(rchart.dataset.points);
-    const guide = rchart.querySelector('.rguide');
-    const hoverDot = rchart.querySelector('.rhoverdot');
-    const wrap = rchart.closest('.rchart-wrap');
-    const tooltip = wrap.querySelector('.rtooltip');
-    const VB_W = 640, VB_H = 220, Y_MAX = 120000, Y_TOP = 20, Y_BASE = 186;
-
-    const nearestPoint = (svgX) => points.reduce((a, b) =>
-      Math.abs(b.x - svgX) < Math.abs(a.x - svgX) ? b : a
-    );
-
-    const showAt = (clientX) => {
-      const rect = rchart.getBoundingClientRect();
-      const svgX = ((clientX - rect.left) / rect.width) * VB_W;
-      const p = nearestPoint(svgX);
-      const y = Y_BASE - (p.v / Y_MAX) * (Y_BASE - Y_TOP);
-
-      guide.setAttribute('x1', p.x); guide.setAttribute('x2', p.x);
-      guide.style.opacity = '1';
-      hoverDot.setAttribute('cx', p.x); hoverDot.setAttribute('cy', y);
-      hoverDot.style.opacity = '1';
-      tooltip.textContent = p.label + ' · ' + p.v.toLocaleString('vi-VN') + ' lượt xem';
-      tooltip.style.opacity = '1';
-
-      const wrapRect = wrap.getBoundingClientRect();
-      const leftPx = Math.min(Math.max((p.x / VB_W) * wrapRect.width - 46, 4), wrapRect.width - 150);
-      tooltip.style.left = leftPx + 'px';
+  /* ---------- PORTFOLIO: ghim + trượt ngang (desktop), mobile vuốt native ---------- */
+  const work = $('#work'), track = $('#workTrack'), bar = $('#workBar');
+  if (work && track) {
+    const sizeWork = () => {
+      if (window.innerWidth <= 860) { work.style.height = ''; track.style.transform = ''; return; }
+      const maxX = Math.max(0, track.scrollWidth - window.innerWidth);
+      work.style.height = (window.innerHeight + maxX) + 'px';
     };
-    const hideTooltip = () => {
-      guide.style.opacity = '0';
-      hoverDot.style.opacity = '0';
-      tooltip.style.opacity = '0';
+    const slide = () => {
+      if (window.innerWidth <= 860) return;
+      const maxX = Math.max(0, track.scrollWidth - window.innerWidth);
+      const total = work.offsetHeight - window.innerHeight;
+      const p = Math.min(1, Math.max(0, -work.getBoundingClientRect().top / total));
+      track.style.transform = 'translateX(' + (-p * maxX).toFixed(1) + 'px)';
+      if (bar) bar.style.transform = 'scaleX(' + p.toFixed(3) + ')';
     };
-
-    rchart.addEventListener('mousemove', (e) => showAt(e.clientX));
-    rchart.addEventListener('mouseleave', hideTooltip);
-    rchart.addEventListener('touchstart', (e) => e.touches[0] && showAt(e.touches[0].clientX), { passive: true });
-    rchart.addEventListener('touchmove', (e) => e.touches[0] && showAt(e.touches[0].clientX), { passive: true });
+    sizeWork(); slide();
+    window.addEventListener('scroll', slide, { passive: true });
+    window.addEventListener('resize', () => { sizeWork(); slide(); });
+    window.addEventListener('load', () => { sizeWork(); slide(); });
+    $$('img', track).forEach(i => i.addEventListener('load', () => { sizeWork(); slide(); }));
   }
 
-  /* ---------- FACADE VIDEO (mở lightbox khi bấm) ---------- */
-  const lightbox = document.getElementById('lightbox');
-  const lbInner = document.getElementById('lbInner');
-  const lbClose = document.getElementById('lbClose');
-
-  const openVideo = (src) => {
-    lbInner.innerHTML =
-      '<video src="' + src + '" controls autoplay playsinline preload="metadata"></video>';
-    lightbox.classList.add('open');
-    lightbox.setAttribute('aria-hidden', 'false');
-    document.body.style.overflow = 'hidden';
+  /* ---------- LIGHTBOX VIDEO (250ms, nút đóng + Esc) ---------- */
+  const lb = $('#lightbox'), lbInner = $('#lbInner'), lbClose = $('#lbClose');
+  let lastFocus = null;
+  const openVideo = src => {
+    lastFocus = document.activeElement;
+    lbInner.innerHTML = '<video src="' + src + '" controls autoplay playsinline preload="metadata"></video>';
+    lb.classList.add('open'); lb.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden'; lbClose.focus();
   };
   const closeVideo = () => {
-    lightbox.classList.remove('open');
-    lightbox.setAttribute('aria-hidden', 'true');
-    lbInner.innerHTML = '';
+    if (!lb.classList.contains('open')) return;
+    lb.classList.remove('open'); lb.setAttribute('aria-hidden', 'true');
     document.body.style.overflow = '';
+    setTimeout(() => { lbInner.innerHTML = ''; }, 250);
+    if (lastFocus) lastFocus.focus();
   };
-
-  document.querySelectorAll('.video-facade').forEach(el => {
-    el.addEventListener('click', () => openVideo(el.dataset.video));
-    el.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openVideo(el.dataset.video); }
-    });
-  });
+  const vcard = $('#videoCard');
+  if (vcard) vcard.addEventListener('click', () => openVideo(vcard.dataset.video));
+  const vcardHero = $('#videoCardHero');
+  if (vcardHero) vcardHero.addEventListener('click', () => openVideo(vcardHero.dataset.video));
   lbClose.addEventListener('click', closeVideo);
-  lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeVideo(); });
-  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeVideo(); });
+  lb.addEventListener('click', e => { if (e.target === lb) closeVideo(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeVideo(); });
 
-  /* ---------- ĐIỆN THOẠI PHÁT VIDEO TIKTOK ----------
-     - Tự phát (tắt tiếng, lặp) khi khung máy lọt vào màn hình, dừng khi ra khỏi.
-     - Nút loa: bật/tắt tiếng ngay trong máy.
-     - Bấm vào máy: mở video toàn màn hình (có tiếng) qua lightbox.               */
-  const phone = document.getElementById('vlastaPhone');
-  if (phone) {
-    const pv = phone.querySelector('.phone-video');
-    const soundBtn = phone.querySelector('.sound-btn');
+  /* ---------- FORM LIÊN HỆ ----------
+     Chỉ báo thành công khi máy chủ xác nhận (HTTP ok và JSON ok:true).
+     Chưa có FORM_ENDPOINT: báo rõ chưa gửi được, hướng sang Zalo/email.            */
+  const form = $('#leadForm'), note = $('#formNote'), btn = $('#submitBtn'), btnT = $('.btn-t', btn);
+  const say = (msg, cls) => { note.className = 'form-note ' + (cls || ''); note.textContent = msg; };
+  const zaloMsg = 'Chưa gửi được. Vui lòng nhắn Zalo 0972 177 282 hoặc email nhungkim2468@gmail.com.';
 
-    // tự phát / tạm dừng theo tầm nhìn (tiết kiệm pin & băng thông)
-    const playIO = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
-        if (e.isIntersecting) pv.play().catch(() => {});
-        else pv.pause();
-      });
-    }, { threshold: 0.4 });
-    playIO.observe(phone);
-
-    // bật / tắt tiếng
-    soundBtn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      pv.muted = !pv.muted;
-      phone.classList.toggle('sound', !pv.muted);
-      soundBtn.setAttribute('aria-label', pv.muted ? 'Bật tiếng' : 'Tắt tiếng');
-      if (!pv.muted) pv.play().catch(() => {});
-    });
-
-    // bấm vào máy -> xem toàn màn hình có tiếng
-    const openPhoneVideo = () => {
-      pv.pause();
-      openVideo(phone.dataset.video);
-    };
-    phone.addEventListener('click', openPhoneVideo);
-    phone.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openPhoneVideo(); }
-    });
-  }
-
-  /* ---------- GỬI FORM ---------- */
-  const form = document.getElementById('leadForm');
-  const note = document.getElementById('formNote');
-  const submitBtn = document.getElementById('submitBtn');
-
-  form.addEventListener('submit', async (e) => {
+  form.addEventListener('submit', async e => {
     e.preventDefault();
-    note.className = 'form-note';
-    note.textContent = '';
-
-    // honeypot: nếu ô ẩn có dữ liệu -> bot -> bỏ qua
-    if (form.website.value.trim() !== '') return;
-
-    // kiểm tra tối thiểu
+    say('');
+    if (form.website.value.trim() !== '') return;               // honeypot
     if (!form.name.value.trim() || !form.contact.value.trim()) {
-      note.textContent = 'Vui lòng nhập họ tên và số điện thoại/email.';
-      note.classList.add('err');
-      return;
+      say('Vui lòng nhập họ tên và số điện thoại hoặc email.', 'err'); return;
     }
-
     const data = {
-      name: form.name.value.trim(),
-      contact: form.contact.value.trim(),
-      service: form.service.value,
-      message: form.message.value.trim(),
+      name: form.name.value.trim(), contact: form.contact.value.trim(),
+      service: form.service.value, message: form.message.value.trim(),
       time: new Date().toLocaleString('vi-VN')
     };
-
-    // chưa cấu hình endpoint -> báo thành công demo
     if (!FORM_ENDPOINT) {
-      note.textContent = 'Cảm ơn bạn! Puldigi sẽ phản hồi trong vòng 24h.';
-      note.classList.add('ok');
-      form.reset();
+      // Chưa nối backend: mở sẵn email đã điền để khách gửi bằng 1 cú bấm.
+      const sub = 'Yêu cầu tư vấn - ' + data.service + ' - ' + data.name;
+      const body =
+        'Họ tên: ' + data.name + '\n' +
+        'Liên hệ: ' + data.contact + '\n' +
+        'Dịch vụ: ' + data.service + '\n' +
+        'Nội dung: ' + (data.message || '(chưa ghi)') + '\n' +
+        'Thời gian: ' + data.time;
+      window.location.href = 'mailto:nhungkim2468@gmail.com?subject=' +
+        encodeURIComponent(sub) + '&body=' + encodeURIComponent(body);
+      say('Đang mở email đã điền sẵn. Hoặc nhắn nhanh Zalo 0972 177 282.', 'ok');
       return;
     }
 
+    btn.disabled = true; btnT.textContent = 'Đang xử lý...';
     try {
-      submitBtn.disabled = true;
-      submitBtn.style.opacity = '.7';
-      await fetch(FORM_ENDPOINT, {
-        method: 'POST',
-        mode: 'no-cors',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data)
+      const res = await fetch(FORM_ENDPOINT, {
+        method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(data)
       });
-      note.textContent = 'Cảm ơn bạn! Puldigi sẽ phản hồi trong vòng 24h.';
-      note.classList.add('ok');
+      const j = await res.json();
+      if (!res.ok || !(j && (j.ok === true || j.result === 'success'))) throw new Error('not-confirmed');
+      say('Đã nhận thông tin. Puldigi sẽ phản hồi trong vòng 24 giờ.', 'ok');
       form.reset();
     } catch (err) {
-      note.textContent = 'Có lỗi khi gửi. Vui lòng nhắn Zalo 0972 177 282 giúp mình nhé.';
-      note.classList.add('err');
+      say(zaloMsg, 'err');
     } finally {
-      submitBtn.disabled = false;
-      submitBtn.style.opacity = '1';
+      btn.disabled = false; btnT.textContent = 'Gửi yêu cầu';
     }
   });
 
+  /* ---------- ① đèn spotlight theo chuột (mục nền đen) ---------- */
+  const ideas = $('#ideas'), spot = ideas && $('.spot', ideas);
+  if (ideas && spot) {
+    ideas.addEventListener('mousemove', e => {
+      const r = ideas.getBoundingClientRect();
+      spot.style.left = (e.clientX - r.left) + 'px';
+      spot.style.top = (e.clientY - r.top) + 'px';
+      spot.style.opacity = '1';
+    });
+    ideas.addEventListener('mouseleave', () => {
+      spot.style.opacity = '.6'; spot.style.left = '50%'; spot.style.top = '50%';
+    });
+  }
+
+  /* ---------- ④ thẻ bảng giá nghiêng 3D theo chuột ---------- */
+  $$('.price').forEach(card => {
+    card.addEventListener('mousemove', e => {
+      const r = card.getBoundingClientRect();
+      const px = (e.clientX - r.left) / r.width - .5, py = (e.clientY - r.top) / r.height - .5;
+      card.style.transform = 'rotateY(' + (px * 8).toFixed(2) + 'deg) rotateX(' + (-py * 8).toFixed(2) + 'deg) translateY(-4px)';
+    });
+    card.addEventListener('mouseleave', () => { card.style.transform = ''; });
+  });
 });
-
-/* Hero banner: ảnh + hình trang trí chuyển động theo chuột (mouse parallax) */
-(function(){
-  var hero = document.querySelector('.hero');
-  var photo = document.querySelector('.hero-photo');
-  if (!hero || !photo) return;
-  var tx=0, ty=0, cx=0, cy=0, raf=null;
-  function loop(){
-    cx += (tx-cx)*0.08; cy += (ty-cy)*0.08;
-    photo.style.setProperty('--px', cx.toFixed(3));
-    photo.style.setProperty('--py', cy.toFixed(3));
-    if (Math.abs(tx-cx)>0.0015 || Math.abs(ty-cy)>0.0015){ raf=requestAnimationFrame(loop); }
-    else { photo.style.setProperty('--px', tx.toFixed(3)); photo.style.setProperty('--py', ty.toFixed(3)); raf=null; }
-  }
-  hero.addEventListener('mousemove', function(e){
-    var r = hero.getBoundingClientRect();
-    tx = ((e.clientX - r.left)/r.width - 0.5) * 2;
-    ty = ((e.clientY - r.top)/r.height - 0.5) * 2;
-    if (!raf) raf = requestAnimationFrame(loop);
-  });
-  hero.addEventListener('mouseleave', function(){ tx=0; ty=0; if(!raf) raf=requestAnimationFrame(loop); });
-})();
-
-/* Mục Dịch vụ: tab showcase (bấm/rê menu -> đổi panel, không cuộn) */
-(function(){
-  var tabs=[].slice.call(document.querySelectorAll('.svc-tab'));
-  var panels=[].slice.call(document.querySelectorAll('.svc-panel'));
-  var sc=document.querySelector('.svc-showcase');
-  if(!tabs.length||!panels.length||!sc) return;
-  function activate(i){
-    tabs.forEach(function(t,k){ t.classList.toggle('active',k===i); });
-    panels.forEach(function(p,k){ p.classList.toggle('active',k===i); });
-    sc.style.setProperty('--svc-accent', panels[i].getAttribute('data-accent'));
-  }
-  tabs.forEach(function(t){
-    t.addEventListener('click',function(){ activate(+t.dataset.i); });
-    t.addEventListener('mouseenter',function(){ activate(+t.dataset.i); });
-  });
-})();
-
-
-/* Portfolio "dây phơi": cuộn dọc -> track trượt ngang (desktop); mobile vuốt ngang native */
-(function(){
-  var sec=document.getElementById('work');
-  var track=document.getElementById('ropeTrack');
-  if(!sec||!track||!sec.classList.contains('rope-sec')) return;
-  function onScroll(){
-    if(window.innerWidth<=860){ track.style.transform=''; return; }
-    var rect=sec.getBoundingClientRect();
-    var total=sec.offsetHeight-window.innerHeight;
-    var prog=Math.min(1,Math.max(0,(-rect.top)/total));
-    var maxX=Math.max(0,track.scrollWidth-window.innerWidth);
-    track.style.transform='translateX('+(-prog*maxX)+'px)';
-  }
-  window.addEventListener('scroll',onScroll,{passive:true});
-  window.addEventListener('resize',onScroll); onScroll();
-})();
