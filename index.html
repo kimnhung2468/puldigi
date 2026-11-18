@@ -671,6 +671,47 @@ body.peeking #s-mo-dau .scroll-cue{animation:cueSoft 2.8s ease-in-out infinite!i
 body:not(.peeking) #s-mo-dau .scroll-cue{opacity:0;pointer-events:none;animation:none!important}
 #s-noi-lo{transition:box-shadow .6s}
 body:not(.peeking) #s-noi-lo{box-shadow:none!important}
+
+/* tách footer khỏi phần Bảng giá (Nhung yêu cầu 18/11) */
+#s-footer footer{padding-top:104px!important}
+#s-footer .fwrap::before{content:"";position:absolute;left:50%;top:-56px;transform:translateX(-50%);width:min(1100px,100%);height:1px;background:linear-gradient(90deg,transparent,#e4e4e7 15%,#e4e4e7 85%,transparent)}
+#s-bang-gia section{padding-bottom:72px!important}
+@media (max-width:860px){#s-footer footer{padding-top:72px!important}#s-footer .fwrap::before{top:-36px}}
+
+/* footer nhỏ gọn lại (Nhung yêu cầu 18/11) */
+#s-footer h2{font-size:clamp(24px,2.6vw,30px)!important}
+#s-footer .f3{grid-template-columns:1fr 220px 1fr;gap:48px;margin-top:36px}
+#s-footer .portrait{width:196px!important;height:196px!important}
+#s-footer .who{margin-top:14px;font-size:13px}
+#s-footer .vrow{padding-bottom:16px}
+#s-footer .vrow h3{font-size:15px}
+#s-footer .vrow h3>span{font-size:12px}
+#s-footer .vrow p{font-size:14px;line-height:1.55}
+#s-footer .vic{width:19px;height:19px}
+#s-footer .vrow:not(:last-child)::before{top:26px}
+#s-footer .fr-h{font-size:16px}
+#s-footer .fr-t{font-size:14px}
+#s-footer p{text-wrap:pretty}
+#s-footer .contact{margin-top:18px;gap:12px}
+#s-footer .contact a.plain{font-size:14px}
+#s-footer .btn{height:38px!important;padding:0 16px!important;font-size:14px!important}
+@media (max-width:860px){#s-footer .portrait{width:170px!important;height:170px!important}}
+
+/* footer: 2 bên ôm sát ảnh - trái căn phải, phải căn trái (Nhung phác 18/11) */
+#s-footer .f3{grid-template-columns:1fr auto 1fr!important;gap:44px!important}
+#s-footer .fleft{justify-self:end;width:100%;max-width:360px}
+#s-footer .fright{justify-self:start;width:100%;max-width:360px}
+#s-footer .fleft .vrow{grid-template-columns:28px 1fr;direction:rtl}
+#s-footer .fleft .vrow>div{direction:ltr;text-align:right}
+#s-footer .fleft .vrow:not(:last-child)::before{left:auto;right:9px}
+#s-footer .fleft .vic{justify-self:end}
+@media (max-width:860px){
+  #s-footer .f3{grid-template-columns:1fr!important}
+  #s-footer .fleft,#s-footer .fright{justify-self:stretch;max-width:none}
+  #s-footer .fleft .vrow{grid-template-columns:28px 1fr;direction:ltr}
+  #s-footer .fleft .vrow>div{text-align:left}
+  #s-footer .fleft .vrow:not(:last-child)::before{right:auto;left:9px}
+}
 /* Nối giữa các phần kiểu C (Nhung chọn 18/11): bỏ đường kẻ, nền xen kẽ trắng / xám rất nhạt chuyển mềm */
 body>div>section{border-top:0!important}
 #s-footer footer{border-top:0!important}
@@ -855,7 +896,7 @@ html{scroll-padding-top:72px}
 <div id="s-footer">
 <footer>
   <div class="fwrap">
-    <div class="fhead"><h2>Bắt đầu chỉ với <span class="sel"><i></i><i></i><i></i><i></i><span>một tin nhắn</span></span> Zalo</h2></div>
+    <div class="fhead"><h2>Bắt đầu lên campaign chỉ với một tin nhắn <span class="sel"><i></i><i></i><i></i><i></i><span>Zalo</span></span></h2></div>
     <div class="f3">
       <div class="fcol fleft">
         <div class="vsteps">
