@@ -601,6 +601,15 @@ body{font-family:Geist,system-ui,sans-serif;background:#fff;color:#0a0a0a;-webki
 #s-noi-lo .msg.ty{opacity:1;transform:none}
 #s-noi-lo .msg.ty .b{visibility:hidden}
 #s-noi-lo .msg.ty .dd{display:flex}
+
+/* chờ số liệu: vòng tròn xoay nhẹ, cột xám nhấp nháy */
+#s-bang-chung .wait-ring .spin{transform-origin:40px 40px;animation:ringSpin 1.6s linear infinite}
+@keyframes ringSpin{to{transform:rotate(270deg)}}
+#s-bang-chung .bars.sk span{transform:none;background:#f1f1f2;animation:skPulse 1.6s ease-in-out infinite}
+#s-bang-chung .bars.sk span:nth-child(odd){background:#ececee}
+@keyframes skPulse{50%{opacity:.55}}
+#s-bang-chung .sk-note{margin-top:10px;font-size:13px;color:#a1a1aa;text-align:center}
+#s-bang-chung .dn .wait{margin-top:2px}
 /* Nối giữa các phần kiểu C (Nhung chọn 18/11): bỏ đường kẻ, nền xen kẽ trắng / xám rất nhạt chuyển mềm */
 body>div>section{border-top:0!important}
 #s-footer footer{border-top:0!important}
@@ -876,11 +885,11 @@ const CASES=[
   lt:'Lượt xem theo tuần',peak:'Đỉnh 115,2K / tuần',
   v:[10,10,11,14,80,138,119,87,63,44,28,17,10],x:['8 Th5','5 Th6','19 Th6','10 Th7','5 Th8'],
   note:'Nguồn: thống kê nội dung Facebook của dự án, 08/05 - 05/08/2026'},
- {t:'Vinhomes Cần Giờ',pending:true,chart:'bar',k:[['CPC','giá mỗi lượt bấm',null,0,'đ',null],['CPL','giá mỗi lead',null,0,'đ',null],['CPM','giá 1.000 lượt hiển thị',null,0,'đ',null],['Phản hồi','tỷ lệ khách nghe máy, nhắn lại',null,0,'%',null]],
-  lt:'Số lead theo tuần',bars:null,x:null,
-  gt:'Video quảng cáo đã làm',vid:'assets/video/vincangio.mp4',imgs:['hero-phone-poster.jpg'],note:'Số liệu chi tiết của chiến dịch đang được cập nhật.'},
- {t:'Tiệm hoa',pending:true,chart:'donut',k:[['CPC','giá mỗi lượt bấm',null,0,'đ',null],['CPL','giá mỗi tin nhắn hỏi mua',null,0,'đ',null],['CPM','giá 1.000 lượt hiển thị',null,0,'đ',null],['Phản hồi','tỷ lệ khách nhắn lại',null,0,'%',null]],
-  imgs:[],note:'Số liệu chi tiết của chiến dịch đang được cập nhật.'}];
+ {t:'Vinhomes Cần Giờ',demo:true,chart:'bar',k:[['CPC','giá mỗi lượt bấm',3200,0,'đ',60],['CPL','giá mỗi lead',96000,0,'đ',72],['CPM','giá 1.000 lượt hiển thị',45000,0,'đ',48],['Phản hồi','tỷ lệ khách nghe máy, nhắn lại',62,0,'%',62]],
+  lt:'Số lead theo tuần',bars:[20,34,30,48,55,52,66,62,78,74,88,95],x:['Tuần 1','Tuần 4','Tuần 7','Tuần 10','Tuần 12'],
+  gt:'Video quảng cáo đã làm',vid:'assets/video/vincangio.mp4',imgs:['hero-phone-poster.jpg'],note:'Số liệu minh hoạ, sẽ thay bằng số thật của chiến dịch.'},
+ {t:'Tiệm hoa',demo:true,chart:'donut',k:[['CPC','giá mỗi lượt bấm',2100,0,'đ',55],['CPL','giá mỗi tin nhắn hỏi mua',38000,0,'đ',70],['CPM','giá 1.000 lượt hiển thị',28000,0,'đ',45],['Phản hồi','tỷ lệ khách nhắn lại',71,0,'%',71]],
+  imgs:[],note:'Số liệu minh hoạ, sẽ thay bằng số thật của chiến dịch.'}];
 const fm=(n,d)=>n.toLocaleString('vi-VN',{minimumFractionDigits:d,maximumFractionDigits:d});
 function tick(el,to,d,suf){const t0=performance.now();(function f(t){const p=Math.min((t-t0)/1300,1),k=1-Math.pow(1-p,3);el.textContent=fm(to*k,d)+suf;if(p<1)requestAnimationFrame(f)})(t0)}
 const $=id=>document.getElementById(id);
@@ -892,15 +901,19 @@ function drawLine(v){const W=380,H=170,top=14,bot=158,mx=Math.max(...v),n=v.leng
   ['lcline','lcarea'].forEach(id=>{const e=$(id);e.classList.remove('go');void e.getBBox();requestAnimationFrame(()=>e.classList.add('go'))});}
 const BADGE_REAL='<span id="rbadge" style="margin-left:auto;padding:3px 8px;border-radius:6px;background:#e8f6ec;color:#166534;font-size:12px;font-weight:600">Số liệu thật</span>';
 const BADGE_MAU='<span id="rbadge" style="margin-left:auto;padding:3px 8px;border-radius:6px;background:#fef3c7;color:#92400e;font-size:12px;font-weight:600">SỐ MẪU - thay số thật trước khi đăng</span>';
+const BADGE_DEMO='<span id="rbadge" style="margin-left:auto;padding:3px 8px;border-radius:6px;background:#f4f4f5;color:#52525b;font-size:12px;font-weight:600">Số liệu minh hoạ</span>';
 const BADGE_WAIT='<span id="rbadge" style="margin-left:auto;padding:3px 8px;border-radius:6px;background:#f4f4f5;color:#52525b;font-size:12px;font-weight:600">Đang cập nhật số liệu</span>';
 const tabs=$('tabs');
 const LC=$('rep').querySelector('.lc');let GAL=document.createElement('div');GAL.className='cgal';LC.after(GAL);
 function showPending(c){
   $('rtitle').textContent='Báo cáo chiến dịch - '+c.t;$('rbadge').outerHTML=BADGE_WAIT;
-  $('kpis').innerHTML=c.k.map(x=>'<div><div class="lbl">'+x[0]+'</div><div class="wait">Đang cập nhật</div><div class="sm">'+x[1]+'</div></div>').join('');
-  LC.style.display='none';GAL.style.display=(c.vid||c.imgs.length)?'':'none';
-  const P='assets/img/portfolio/';
-  GAL.innerHTML='<p class="cg-h">'+c.gt+'</p><div class="cg-row">'+(c.vid?'<div class="cg-it v"><video src="'+c.vid+'" poster="'+P+c.imgs[0]+'" muted loop playsinline autoplay></video></div>':c.imgs.map(f=>'<div class="cg-it"><img src="'+P+f+'" alt="'+c.t+'" loading="lazy"></div>').join(''))+'</div>';
+  /* 4 vòng tròn trống, chưa có số */
+  $('kpis').innerHTML=c.k.map(x=>'<div class="dn"><svg class="ring wait-ring" viewBox="0 0 80 80"><circle cx="40" cy="40" r="34" fill="none" stroke="#f0f0f0" stroke-width="6"/><circle class="spin" cx="40" cy="40" r="34" fill="none" stroke="url(#rgGrad)" stroke-width="6" stroke-linecap="round" stroke-dasharray="40 174" transform="rotate(-90 40 40)"/></svg><div class="dn-t"><div class="lbl">'+x[0]+'</div><div class="wait">Đang cập nhật</div><div class="sm">'+x[1]+'</div></div></div>').join('');
+  LC.style.display='none';GAL.style.display='';
+  if(c.chart==='bar'){
+    /* khung biểu đồ cột màu xám, chờ số liệu thật */
+    GAL.innerHTML='<p class="cg-h">'+c.lt+'</p><div class="bars sk">'+[30,42,38,52,58,55,66,63,74,70,82,88].map(h=>'<span style="--h:'+h+'%"></span>').join('')+'</div><p class="sk-note">Biểu đồ hiện khi có số liệu thật</p>';
+  } else { GAL.style.display='none';GAL.innerHTML=''; }
   $('rnote').textContent=c.note;}
 function ringSVG(pct){const r=34,C=2*Math.PI*r;return '<svg class="ring" viewBox="0 0 80 80"><circle cx="40" cy="40" r="'+r+'" fill="none" stroke="#f0f0f0" stroke-width="6"/><circle class="rg" cx="40" cy="40" r="'+r+'" fill="none" stroke="url(#rgGrad)" stroke-width="6" stroke-linecap="round" stroke-dasharray="'+C+'" stroke-dashoffset="'+C+'" data-to="'+(C*(1-pct/100))+'" transform="rotate(-90 40 40)"/></svg>'}
 function ringKpis(c){
@@ -908,13 +921,13 @@ function ringKpis(c){
   $('kpis').querySelectorAll('.num').forEach((el,n)=>tick(el,c.k[n][2],c.k[n][3],c.k[n][4]));
   requestAnimationFrame(()=>$('kpis').querySelectorAll('.rg').forEach(r=>r.style.strokeDashoffset=r.dataset.to));}
 function showBar(c){
-  $('rtitle').textContent='Báo cáo chiến dịch - '+c.t;$('rbadge').outerHTML=c.real?BADGE_REAL:BADGE_MAU;
+  $('rtitle').textContent='Báo cáo chiến dịch - '+c.t;$('rbadge').outerHTML=c.real?BADGE_REAL:(c.demo?BADGE_DEMO:BADGE_MAU);
   ringKpis(c);
   LC.style.display='none';GAL.style.display='';const mx=Math.max(...c.bars);
   GAL.innerHTML='<p class="cg-h">'+c.lt+'</p><div class="bars">'+c.bars.map((v,i)=>'<span style="--h:'+(v/mx*100)+'%;--d:'+(i*60)+'ms"></span>').join('')+'</div><div class="lc-x">'+c.x.map(t=>'<span>'+t+'</span>').join('')+'</div>';
   requestAnimationFrame(()=>GAL.querySelector('.bars').classList.add('go'));$('rnote').textContent=c.note;}
 function showDonut(c){
-  $('rtitle').textContent='Báo cáo chiến dịch - '+c.t;$('rbadge').outerHTML=c.real?BADGE_REAL:BADGE_MAU;
+  $('rtitle').textContent='Báo cáo chiến dịch - '+c.t;$('rbadge').outerHTML=c.real?BADGE_REAL:(c.demo?BADGE_DEMO:BADGE_MAU);
   $('kpis').innerHTML=c.k.map(x=>'<div class="dn">'+ringSVG(x[5])+'<div class="dn-t"><div class="lbl">'+x[0]+'</div><span class="num">0</span><div class="sm">'+x[1]+'</div></div></div>').join('');
   $('kpis').querySelectorAll('.num').forEach((el,n)=>tick(el,c.k[n][2],c.k[n][3],c.k[n][4]));
   requestAnimationFrame(()=>$('kpis').querySelectorAll('.rg').forEach(r=>r.style.strokeDashoffset=r.dataset.to));
@@ -926,7 +939,7 @@ function show(i){const c=CASES[i];
   if(c.chart==='donut'){showDonut(c);return}
   LC.style.display='';GAL.style.display='none';GAL.innerHTML='';
   $('rtitle').textContent='Báo cáo chiến dịch - '+c.t;
-  $('rbadge').outerHTML=c.real?BADGE_REAL:BADGE_MAU;
+  $('rbadge').outerHTML=c.real?BADGE_REAL:(c.demo?BADGE_DEMO:BADGE_MAU);
   $('kpis').innerHTML=c.k.map(x=>'<div><div class="lbl">'+x[0]+'</div><div><span class="num">0</span>'+(x[5]?'<span class="up">'+x[5]+'</span>':'')+'</div><div class="sm">'+x[1]+'</div></div>').join('');
   $('kpis').querySelectorAll('.num').forEach((el,n)=>tick(el,c.k[n][2],c.k[n][3],c.k[n][4]));
   $('lctitle').textContent=c.lt;$('lcpeak').textContent=c.peak;$('lcpeak').style.display=c.peak?'':'none';
