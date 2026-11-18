@@ -540,14 +540,68 @@ body{font-family:Geist,system-ui,sans-serif;background:#fff;color:#0a0a0a;-webki
 #s-footer .contact{margin-top:32px}
 
 /* ===== thu gọn khoảng cách giữa các phần (Nhung yêu cầu 18/11) ===== */
-#s-mo-dau .hero{padding:96px 16px 56px}
+#s-mo-dau .hero{padding:96px 16px 72px;min-height:84vh;min-height:84svh;display:flex;flex-direction:column;justify-content:center;align-items:center}
+/* Mở đầu to hơn (Nhung yêu cầu 18/11) */
+#s-mo-dau h1{max-width:1000px;margin-top:0;font-size:clamp(38px,6.2vw,72px);line-height:1.12;letter-spacing:-.04em}
+#s-mo-dau .lead{max-width:780px;margin-top:24px;font-size:19px}
+#s-noi-lo .head{max-width:860px}
+/* khung chọn cho tiêu đề Nỗi lo */
+#s-noi-lo .sel{position:relative;display:inline-block;padding:0 4px;margin:0 2px}
+#s-noi-lo .sel::before{content:"";position:absolute;inset:-2px 0;border:1px solid #3b82f6;
+    background:repeating-linear-gradient(-45deg,rgba(59,130,246,.16) 0 1px,transparent 1px 6px);
+    transform-origin:left;transform:scaleX(0);transition:transform .7s cubic-bezier(.2,.7,.2,1)}
+#s-noi-lo .sel>i{position:absolute;width:7px;height:7px;background:#fff;border:1px solid #3b82f6;opacity:0;transition:opacity .3s .6s}
+#s-noi-lo .sel>i:nth-of-type(1){left:-3px;top:-5px}
+#s-noi-lo .sel>i:nth-of-type(2){right:-3px;top:-5px}
+#s-noi-lo .sel>i:nth-of-type(3){left:-3px;bottom:-5px}
+#s-noi-lo .sel>i:nth-of-type(4){right:-3px;bottom:-5px}
+#s-noi-lo .sel.on::before{transform:scaleX(1)}
+#s-noi-lo .sel.on>i{opacity:1}
+#s-noi-lo .sel>span{position:relative}
+
+/* ===== s-noi-lo ===== */
+
+/* case chưa có số liệu: hiện mẫu đã làm */
+#s-bang-chung .wait{margin-top:6px;font-size:15px;font-weight:500;color:#a1a1aa}
+#s-bang-chung .cgal{padding:18px 16px 0}
+#s-bang-chung .cg-h{font-size:13px;color:#737373;margin-bottom:10px}
+#s-bang-chung .cg-row{display:flex;gap:12px}
+#s-bang-chung .cg-it{flex:1;max-width:220px;aspect-ratio:4/5;border-radius:10px;overflow:hidden;background:#f4f4f5}
+#s-bang-chung .cg-it.v{max-width:150px;aspect-ratio:9/16}
+#s-bang-chung .cg-it img,#s-bang-chung .cg-it video{width:100%;height:100%;object-fit:cover;display:block}
+
+#s-bang-chung .bars{display:flex;align-items:flex-end;gap:8px;height:150px}
+#s-bang-chung .bars span{flex:1;height:var(--h);border-radius:6px 6px 0 0;background:linear-gradient(180deg,#a5b4fc,#e0e7ff);transform-origin:bottom;transform:scaleY(0);transition:transform .9s cubic-bezier(.2,.8,.2,1) var(--d)}
+#s-bang-chung .bars span:nth-child(odd){background:linear-gradient(180deg,#7dd3fc,#e0f2fe)}
+#s-bang-chung .bars.go span{transform:scaleY(1)}
+#s-bang-chung .kpis .dn{display:flex;align-items:center;gap:12px}
+#s-bang-chung .ring{flex:none;width:64px;height:64px}
+#s-bang-chung .ring .rg{transition:stroke-dashoffset 1.3s cubic-bezier(.2,.8,.2,1)}
+#s-bang-chung .dn .num{font-size:22px}
+
+/* dải logo công cụ dưới nút Mở đầu (Nhung yêu cầu 18/11) */
+#s-mo-dau .tools{position:relative;width:min(760px,100%);margin-top:56px;overflow:hidden;-webkit-mask:linear-gradient(90deg,transparent,#000 14%,#000 86%,transparent);mask:linear-gradient(90deg,transparent,#000 14%,#000 86%,transparent)}
+#s-mo-dau .tools-track{display:flex;align-items:center;width:max-content;animation:toolrun 40s linear infinite}
+#s-mo-dau .tools:hover .tools-track{animation-play-state:paused}
+#s-mo-dau .tool{display:flex;align-items:center;gap:8px;margin-right:44px;white-space:nowrap;font-size:15px;font-weight:500;color:#52525b;filter:grayscale(1);opacity:.7;transition:filter .2s,opacity .2s}
+#s-mo-dau .tool:hover{filter:none;opacity:1}
+#s-mo-dau .tool img{height:22px;width:auto}
+@keyframes toolrun{to{transform:translateX(-50%)}}
+/* Nối giữa các phần kiểu C (Nhung chọn 18/11): bỏ đường kẻ, nền xen kẽ trắng / xám rất nhạt chuyển mềm */
+body>div>section{border-top:0!important}
+#s-footer footer{border-top:0!important}
+#s-noi-lo,#s-video{background:linear-gradient(180deg,#fff 0,#f7f7f8 72px,#f7f7f8 calc(100% - 72px),#fff 100%)}
+#s-noi-lo .chat{background:#fff}
+#s-mo-dau .ctas{margin-top:36px;gap:16px}
+#s-mo-dau .btn{height:46px;padding:0 24px;font-size:15px;border-radius:12px}
 #s-noi-lo section,#s-bang-chung section,#s-video section,#s-bang-gia section{padding:48px 16px}
 #s-footer footer{padding-top:48px}
 #s-noi-lo .head,#s-bang-chung .head{margin-bottom:28px}
 #s-bang-gia .b-grid{margin-top:24px}
 #s-footer .fbottom{margin-top:44px}
 @media (max-width:860px){
-  #s-mo-dau .hero{padding:72px 16px 40px}
+  #s-mo-dau .hero{padding:72px 16px 48px;min-height:76svh}
+  #s-mo-dau .lead{font-size:17px}
   #s-noi-lo section,#s-bang-chung section,#s-video section,#s-bang-gia section{padding:36px 16px}
   #s-footer footer{padding-top:36px}
 }
@@ -567,13 +621,14 @@ body{font-family:Geist,system-ui,sans-serif;background:#fff;color:#0a0a0a;-webki
     <a class="btn btn-light" href="#s-bang-chung">Xem case thật
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg></a>
   </div>
+  <div class="tools" aria-label="Công cụ sử dụng"><div class="tools-track"><span class="tool"><img src="assets/logos/meta.svg" alt="" width="22" height="22">Meta Ads</span><span class="tool"><img src="assets/logos/googleanalytics.svg" alt="" width="22" height="22">Google Analytics</span><span class="tool"><img src="assets/logos/capcut.svg" alt="" width="22" height="22">CapCut</span><span class="tool"><img src="assets/logos/canva.svg" alt="" width="22" height="22">Canva</span><span class="tool"><img src="assets/logos/wordpress.svg" alt="" width="22" height="22">WordPress</span><span class="tool"><img src="assets/logos/html5.svg" alt="" width="22" height="22">HTML5</span><span class="tool" aria-hidden="true"><img src="assets/logos/meta.svg" alt="" width="22" height="22">Meta Ads</span><span class="tool" aria-hidden="true"><img src="assets/logos/googleanalytics.svg" alt="" width="22" height="22">Google Analytics</span><span class="tool" aria-hidden="true"><img src="assets/logos/capcut.svg" alt="" width="22" height="22">CapCut</span><span class="tool" aria-hidden="true"><img src="assets/logos/canva.svg" alt="" width="22" height="22">Canva</span><span class="tool" aria-hidden="true"><img src="assets/logos/wordpress.svg" alt="" width="22" height="22">WordPress</span><span class="tool" aria-hidden="true"><img src="assets/logos/html5.svg" alt="" width="22" height="22">HTML5</span><span class="tool" aria-hidden="true"><img src="assets/logos/meta.svg" alt="" width="22" height="22">Meta Ads</span><span class="tool" aria-hidden="true"><img src="assets/logos/googleanalytics.svg" alt="" width="22" height="22">Google Analytics</span><span class="tool" aria-hidden="true"><img src="assets/logos/capcut.svg" alt="" width="22" height="22">CapCut</span><span class="tool" aria-hidden="true"><img src="assets/logos/canva.svg" alt="" width="22" height="22">Canva</span><span class="tool" aria-hidden="true"><img src="assets/logos/wordpress.svg" alt="" width="22" height="22">WordPress</span><span class="tool" aria-hidden="true"><img src="assets/logos/html5.svg" alt="" width="22" height="22">HTML5</span><span class="tool" aria-hidden="true"><img src="assets/logos/meta.svg" alt="" width="22" height="22">Meta Ads</span><span class="tool" aria-hidden="true"><img src="assets/logos/googleanalytics.svg" alt="" width="22" height="22">Google Analytics</span><span class="tool" aria-hidden="true"><img src="assets/logos/capcut.svg" alt="" width="22" height="22">CapCut</span><span class="tool" aria-hidden="true"><img src="assets/logos/canva.svg" alt="" width="22" height="22">Canva</span><span class="tool" aria-hidden="true"><img src="assets/logos/wordpress.svg" alt="" width="22" height="22">WordPress</span><span class="tool" aria-hidden="true"><img src="assets/logos/html5.svg" alt="" width="22" height="22">HTML5</span></div></div>
 </section>
 </div>
 
 <div id="s-noi-lo">
 <section>
   <div class="wrap">
-    <div class="head"><h2>Tháo gỡ 3 nỗi lo khi chạy ads</h2></div>
+    <div class="head"><h2>Tháo gỡ <span class="sel"><i></i><i></i><i></i><i></i><span>3 nỗi lo</span></span> phổ biến nhất khi chạy ads</h2><p class="sub">Từ lúc chọn kênh chạy ads đến khi sales gọi cho khách.</p></div>
     <div class="chat" id="chat">
       <div class="chat-top"><i></i>Puldigi <span>đang hoạt động</span></div>
       <div class="msg kh"><div class="av">KH</div><div class="b"><b>1. Mình nên đổ tiền vào kênh nào?</b>Facebook, TikTok, Zalo hay Google? Kênh nào cũng muốn thử mà chia tiền ra hết thì sợ chẳng kênh nào chạy tới nơi.</div></div>
@@ -588,12 +643,13 @@ body{font-family:Geist,system-ui,sans-serif;background:#fff;color:#0a0a0a;-webki
 </section>
 </div>
 
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><linearGradient id="rgGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7dd3fc"/><stop offset=".5" stop-color="#818cf8"/><stop offset="1" stop-color="#f0abfc"/></linearGradient></defs></svg>
 <div id="s-bang-chung">
 <section>
   <div class="wrap">
     <div class="head"><h2>Số liệu thật từ chiến dịch đã chạy</h2>
-      <p class="sub">Báo cáo thật từ chiến dịch video quảng cáo Vlasta Premier Phú Thuận.</p></div>
-    <div class="tabs" id="tabs" style="display:none"><button class="on" data-c="0">Vlasta Premier</button></div>
+      <p class="sub">Bấm từng case để xem báo cáo của case đó.</p></div>
+    <div class="tabs" id="tabs"><button class="on" data-c="0">Vlasta Premier</button><button data-c="1">Vinhomes Cần Giờ</button><button data-c="2">Tiệm hoa</button></div>
     <div class="report" id="rep">
       <div class="dash">
         <div class="dash-top"><i></i><i></i><i></i><b id="rtitle"></b><span id="rbadge"></span></div>
@@ -627,8 +683,8 @@ body{font-family:Geist,system-ui,sans-serif;background:#fff;color:#0a0a0a;-webki
       <div class="vfoot"><a class="btn" href="https://zalo.me/0972177282" target="_blank" rel="noopener">Nhắn Zalo đặt video</a><span class="price">Từ <b>300.000đ</b> mỗi video</span></div>
     </div>
     <div class="hk">
-      <figure><div class="vframe" data-src="assets/video/vincangio.mp4"><video src="assets/video/vincangio.mp4" poster="assets/img/portfolio/hero-phone-poster.jpg" muted loop playsinline autoplay></video><div class="tl"><span class="zone rb"></span><span class="play"></span></div><span class="hookchip"><i></i>Hook đang chạy</span><span class="clock">0:00</span><span class="sound"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 010 7M19 5a10 10 0 010 14"/></svg>Bật tiếng</span></div><figcaption class="cap"><b>Vinhomes Cần Giờ</b><span>Video quảng cáo</span></figcaption></figure>
-      <figure><div class="vframe" data-src="assets/video/vlasta-tiktok.mp4"><video src="assets/video/vlasta-tiktok.mp4" poster="assets/img/portfolio/vlasta-tiktok-thumb.webp" muted loop playsinline autoplay></video><div class="tl"><span class="zone rb"></span><span class="play"></span></div><span class="hookchip"><i></i>Hook đang chạy</span><span class="clock">0:00</span><span class="sound"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 010 7M19 5a10 10 0 010 14"/></svg>Bật tiếng</span></div><figcaption class="cap"><b>Vlasta Premier</b><span>Video TikTok</span></figcaption></figure>
+      <figure><div class="vframe" data-src="assets/video/vincangio.mp4"><video src="assets/video/vincangio.mp4" poster="assets/img/portfolio/hero-phone-poster.jpg" muted loop playsinline preload="metadata" data-scrollplay></video><div class="tl"><span class="zone rb"></span><span class="play"></span></div><span class="hookchip"><i></i>Hook đang chạy</span><span class="clock">0:00</span><span class="sound"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 010 7M19 5a10 10 0 010 14"/></svg>Bật tiếng</span></div><figcaption class="cap"><b>Vinhomes Cần Giờ</b><span>Video quảng cáo</span></figcaption></figure>
+      <figure><div class="vframe" data-src="assets/video/vlasta-tiktok.mp4"><video src="assets/video/vlasta-tiktok.mp4" poster="assets/img/portfolio/vlasta-tiktok-thumb.webp" muted loop playsinline preload="metadata" data-scrollplay></video><div class="tl"><span class="zone rb"></span><span class="play"></span></div><span class="hookchip"><i></i>Hook đang chạy</span><span class="clock">0:00</span><span class="sound"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 010 7M19 5a10 10 0 010 14"/></svg>Bật tiếng</span></div><figcaption class="cap"><b>Vlasta Premier</b><span>Video TikTok</span></figcaption></figure>
     </div>
   </div></section>
 <div class="lb" id="lb"><button class="x" id="lbx" aria-label="Đóng">×</button><div class="box" id="lbbox"></div></div>
@@ -752,7 +808,12 @@ const CASES=[
   k:[['Lượt xem','video quảng cáo',398.1,1,'K','▲ 504,9%'],['Xem trên 3 giây','người dừng lại xem',94.1,1,'K','▲ 2.700%'],['Tương tác','thích, bình luận, chia sẻ',5.3,1,'K','▲ 311,2%'],['Người tiếp cận','tài khoản đã thấy',234.7,1,'K','▲ 1.500%']],
   lt:'Lượt xem theo tuần',peak:'Đỉnh 115,2K / tuần',
   v:[10,10,11,14,80,138,119,87,63,44,28,17,10],x:['8 Th5','5 Th6','19 Th6','10 Th7','5 Th8'],
-  note:'Nguồn: thống kê nội dung Facebook của dự án, 08/05 - 05/08/2026'}];
+  note:'Nguồn: thống kê nội dung Facebook của dự án, 08/05 - 05/08/2026'},
+ {t:'Vinhomes Cần Giờ',pending:true,chart:'bar',k:[['CPC','giá mỗi lượt bấm',null,0,'đ',null],['CPL','giá mỗi lead',null,0,'đ',null],['CPM','giá 1.000 lượt hiển thị',null,0,'đ',null],['Phản hồi','tỷ lệ khách nghe máy, nhắn lại',null,0,'%',null]],
+  lt:'Số lead theo tuần',bars:null,x:null,
+  gt:'Video quảng cáo đã làm',vid:'assets/video/vincangio.mp4',imgs:['hero-phone-poster.jpg'],note:'Số liệu chi tiết của chiến dịch đang được cập nhật.'},
+ {t:'Tiệm hoa',pending:true,chart:'donut',k:[['CPC','giá mỗi lượt bấm',null,0,'đ',null],['CPL','giá mỗi tin nhắn hỏi mua',null,0,'đ',null],['CPM','giá 1.000 lượt hiển thị',null,0,'đ',null],['Phản hồi','tỷ lệ khách nhắn lại',null,0,'%',null]],
+  imgs:[],note:'Số liệu chi tiết của chiến dịch đang được cập nhật.'}];
 const fm=(n,d)=>n.toLocaleString('vi-VN',{minimumFractionDigits:d,maximumFractionDigits:d});
 function tick(el,to,d,suf){const t0=performance.now();(function f(t){const p=Math.min((t-t0)/1300,1),k=1-Math.pow(1-p,3);el.textContent=fm(to*k,d)+suf;if(p<1)requestAnimationFrame(f)})(t0)}
 const $=id=>document.getElementById(id);
@@ -764,8 +825,39 @@ function drawLine(v){const W=380,H=170,top=14,bot=158,mx=Math.max(...v),n=v.leng
   ['lcline','lcarea'].forEach(id=>{const e=$(id);e.classList.remove('go');void e.getBBox();requestAnimationFrame(()=>e.classList.add('go'))});}
 const BADGE_REAL='<span id="rbadge" style="margin-left:auto;padding:3px 8px;border-radius:6px;background:#e8f6ec;color:#166534;font-size:12px;font-weight:600">Số liệu thật</span>';
 const BADGE_MAU='<span id="rbadge" style="margin-left:auto;padding:3px 8px;border-radius:6px;background:#fef3c7;color:#92400e;font-size:12px;font-weight:600">SỐ MẪU - thay số thật trước khi đăng</span>';
+const BADGE_WAIT='<span id="rbadge" style="margin-left:auto;padding:3px 8px;border-radius:6px;background:#f4f4f5;color:#52525b;font-size:12px;font-weight:600">Đang cập nhật số liệu</span>';
 const tabs=$('tabs');
+const LC=$('rep').querySelector('.lc');let GAL=document.createElement('div');GAL.className='cgal';LC.after(GAL);
+function showPending(c){
+  $('rtitle').textContent='Báo cáo chiến dịch - '+c.t;$('rbadge').outerHTML=BADGE_WAIT;
+  $('kpis').innerHTML=c.k.map(x=>'<div><div class="lbl">'+x[0]+'</div><div class="wait">Đang cập nhật</div><div class="sm">'+x[1]+'</div></div>').join('');
+  LC.style.display='none';GAL.style.display=(c.vid||c.imgs.length)?'':'none';
+  const P='assets/img/portfolio/';
+  GAL.innerHTML='<p class="cg-h">'+c.gt+'</p><div class="cg-row">'+(c.vid?'<div class="cg-it v"><video src="'+c.vid+'" poster="'+P+c.imgs[0]+'" muted loop playsinline autoplay></video></div>':c.imgs.map(f=>'<div class="cg-it"><img src="'+P+f+'" alt="'+c.t+'" loading="lazy"></div>').join(''))+'</div>';
+  $('rnote').textContent=c.note;}
+function ringSVG(pct){const r=34,C=2*Math.PI*r;return '<svg class="ring" viewBox="0 0 80 80"><circle cx="40" cy="40" r="'+r+'" fill="none" stroke="#f0f0f0" stroke-width="6"/><circle class="rg" cx="40" cy="40" r="'+r+'" fill="none" stroke="url(#rgGrad)" stroke-width="6" stroke-linecap="round" stroke-dasharray="'+C+'" stroke-dashoffset="'+C+'" data-to="'+(C*(1-pct/100))+'" transform="rotate(-90 40 40)"/></svg>'}
+function ringKpis(c){
+  $('kpis').innerHTML=c.k.map(x=>'<div class="dn">'+ringSVG(x[5])+'<div class="dn-t"><div class="lbl">'+x[0]+'</div><span class="num">0</span><div class="sm">'+x[1]+'</div></div></div>').join('');
+  $('kpis').querySelectorAll('.num').forEach((el,n)=>tick(el,c.k[n][2],c.k[n][3],c.k[n][4]));
+  requestAnimationFrame(()=>$('kpis').querySelectorAll('.rg').forEach(r=>r.style.strokeDashoffset=r.dataset.to));}
+function showBar(c){
+  $('rtitle').textContent='Báo cáo chiến dịch - '+c.t;$('rbadge').outerHTML=c.real?BADGE_REAL:BADGE_MAU;
+  ringKpis(c);
+  LC.style.display='none';GAL.style.display='';const mx=Math.max(...c.bars);
+  GAL.innerHTML='<p class="cg-h">'+c.lt+'</p><div class="bars">'+c.bars.map((v,i)=>'<span style="--h:'+(v/mx*100)+'%;--d:'+(i*60)+'ms"></span>').join('')+'</div><div class="lc-x">'+c.x.map(t=>'<span>'+t+'</span>').join('')+'</div>';
+  requestAnimationFrame(()=>GAL.querySelector('.bars').classList.add('go'));$('rnote').textContent=c.note;}
+function showDonut(c){
+  $('rtitle').textContent='Báo cáo chiến dịch - '+c.t;$('rbadge').outerHTML=c.real?BADGE_REAL:BADGE_MAU;
+  $('kpis').innerHTML=c.k.map(x=>'<div class="dn">'+ringSVG(x[5])+'<div class="dn-t"><div class="lbl">'+x[0]+'</div><span class="num">0</span><div class="sm">'+x[1]+'</div></div></div>').join('');
+  $('kpis').querySelectorAll('.num').forEach((el,n)=>tick(el,c.k[n][2],c.k[n][3],c.k[n][4]));
+  requestAnimationFrame(()=>$('kpis').querySelectorAll('.rg').forEach(r=>r.style.strokeDashoffset=r.dataset.to));
+  LC.style.display='none';GAL.style.display='none';GAL.innerHTML='';
+  $('rnote').textContent=c.note;}
 function show(i){const c=CASES[i];
+  if(c.pending){showPending(c);return}
+  if(c.chart==='bar'){showBar(c);return}
+  if(c.chart==='donut'){showDonut(c);return}
+  LC.style.display='';GAL.style.display='none';GAL.innerHTML='';
   $('rtitle').textContent='Báo cáo chiến dịch - '+c.t;
   $('rbadge').outerHTML=c.real?BADGE_REAL:BADGE_MAU;
   $('kpis').innerHTML=c.k.map(x=>'<div><div class="lbl">'+x[0]+'</div><div><span class="num">0</span>'+(x[5]?'<span class="up">'+x[5]+'</span>':'')+'</div><div class="sm">'+x[1]+'</div></div>').join('');
@@ -844,6 +936,13 @@ document.querySelectorAll('.sel').forEach(el=>io.observe(el));
 
 } catch(e) {} }
 
+</script>
+<script>
+/* Video chỉ phát khi cuộn tới, phát lại từ đầu để thấy câu hook 3 giây (Nhung yêu cầu 18/11) */
+(function(){const vs=[...document.querySelectorAll('video[data-scrollplay]')];
+  const io=new IntersectionObserver(es=>es.forEach(e=>{const v=e.target;
+    if(e.isIntersecting){if(!v.dataset.seen){v.currentTime=0;v.dataset.seen='1'}v.play().catch(()=>{})}else{v.pause()}}),{threshold:.5});
+  vs.forEach(v=>io.observe(v));})();
 </script>
 </body>
 </html>
