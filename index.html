@@ -712,6 +712,9 @@ body:not(.peeking) #s-noi-lo{box-shadow:none!important}
   #s-footer .fleft .vrow>div{text-align:left}
   #s-footer .fleft .vrow:not(:last-child)::before{right:auto;left:9px}
 }
+
+/* ánh chuyển sắc của khung giá chỉ nằm dưới đường viền, không lấn vào trong khung (Nhung yêu cầu 18/11) */
+#s-bang-gia .rbcard::after{top:100%!important;bottom:auto!important;left:22%!important;right:22%!important;height:10px!important;margin-top:1px;filter:blur(12px)!important;opacity:.4!important;clip-path:inset(0 -20% -260% -20%)}
 /* Nối giữa các phần kiểu C (Nhung chọn 18/11): bỏ đường kẻ, nền xen kẽ trắng / xám rất nhạt chuyển mềm */
 body>div>section{border-top:0!important}
 #s-footer footer{border-top:0!important}
