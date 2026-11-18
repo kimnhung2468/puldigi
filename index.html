@@ -587,6 +587,20 @@ body{font-family:Geist,system-ui,sans-serif;background:#fff;color:#0a0a0a;-webki
 #s-mo-dau .tool:hover{filter:none;opacity:1}
 #s-mo-dau .tool img{height:22px;width:auto}
 @keyframes toolrun{to{transform:translateX(-50%)}}
+
+/* tin nhắn: 3 chấm nhảy trước khi hiện chữ */
+#s-noi-lo .msg{position:relative}
+#s-noi-lo .msg .dd{display:none;position:absolute;top:0;align-items:center;gap:5px;height:42px;padding:0 16px;border-radius:14px}
+#s-noi-lo .msg.kh .dd{left:40px;background:#fff;border:1px solid #ececec;border-top-left-radius:4px}
+#s-noi-lo .msg.pd .dd{right:40px;background:#0a0a0a;border-top-right-radius:4px}
+#s-noi-lo .msg .dd i{width:7px;height:7px;border-radius:50%;background:#a1a1aa;animation:ddJump 1s infinite ease-in-out}
+#s-noi-lo .msg.pd .dd i{background:#d4d4d8}
+#s-noi-lo .msg .dd i:nth-child(2){animation-delay:.15s}
+#s-noi-lo .msg .dd i:nth-child(3){animation-delay:.3s}
+@keyframes ddJump{0%,60%,100%{transform:translateY(0);opacity:.5}30%{transform:translateY(-5px);opacity:1}}
+#s-noi-lo .msg.ty{opacity:1;transform:none}
+#s-noi-lo .msg.ty .b{visibility:hidden}
+#s-noi-lo .msg.ty .dd{display:flex}
 /* Nối giữa các phần kiểu C (Nhung chọn 18/11): bỏ đường kẻ, nền xen kẽ trắng / xám rất nhạt chuyển mềm */
 body>div>section{border-top:0!important}
 #s-footer footer{border-top:0!important}
@@ -606,9 +620,57 @@ body>div>section{border-top:0!important}
   #s-footer footer{padding-top:36px}
 }
 
+
+/* ===== Thanh header (Nhung yêu cầu 18/11) ===== */
+html{scroll-padding-top:72px}
+.hdr{position:fixed;top:0;left:0;right:0;z-index:50;transition:background .3s,box-shadow .3s,backdrop-filter .3s}
+.hdr.sc{background:rgba(255,255,255,.78);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);box-shadow:0 1px 0 #ececec}
+.hdr-in{max-width:1100px;margin:0 auto;height:64px;padding:0 16px;display:flex;align-items:center;gap:28px}
+.hdr-logo{display:flex;align-items:center;gap:8px;font:600 18px Geist,sans-serif;letter-spacing:-.03em;color:#0a0a0a;text-decoration:none}
+.hdr-logo img{height:22px;width:auto}
+.hdr-nav{display:flex;gap:4px;margin-left:auto}
+.hdr-nav a{position:relative;padding:8px 12px;border-radius:8px;font:500 14px Geist,sans-serif;color:#525252;text-decoration:none;transition:color .2s,background .2s}
+.hdr-nav a:hover{color:#0a0a0a;background:rgba(0,0,0,.04)}
+.hdr-nav a.on{color:#0a0a0a}
+.hdr-nav a.on::after{content:"";position:absolute;left:12px;right:12px;bottom:3px;height:1.5px;border-radius:1px;background:linear-gradient(90deg,hsl(0 100% 63%),hsl(90 100% 63%),hsl(210 100% 63%),hsl(270 100% 63%))}
+.hdr-btn{position:relative;display:inline-flex;align-items:center;height:36px;padding:0 16px;border-radius:9px;font:500 14px Geist,sans-serif;color:#fafafa;text-decoration:none;white-space:nowrap;border:1px solid transparent;isolation:isolate;background-size:200%;
+  background-image:linear-gradient(#121213,#121213),linear-gradient(#121213 50%,rgba(18,18,19,.6) 80%,rgba(18,18,19,0)),linear-gradient(90deg,hsl(0 100% 63%),hsl(90 100% 63%),hsl(210 100% 63%),hsl(195 100% 63%),hsl(270 100% 63%));
+  background-origin:border-box;background-clip:padding-box,border-box,border-box;animation:hdrRb 2s linear infinite}
+@keyframes hdrRb{0%{background-position:0}100%{background-position:200%}}
+.hdr-tg{display:none;width:36px;height:36px;border:0;background:none;cursor:pointer;flex-direction:column;justify-content:center;align-items:center;gap:5px}
+.hdr-tg span{display:block;width:18px;height:1.5px;background:#0a0a0a;transition:transform .25s}
+.hdr.open .hdr-tg span:first-child{transform:translateY(3.25px) rotate(45deg)}
+.hdr.open .hdr-tg span:last-child{transform:translateY(-3.25px) rotate(-45deg)}
+@media (max-width:860px){
+  .hdr-in{height:56px;gap:12px}
+  .hdr-btn{margin-left:auto;height:34px;padding:0 14px}
+  .hdr-tg{display:flex}
+  .hdr-nav{position:absolute;top:56px;left:0;right:0;flex-direction:column;gap:0;padding:8px 16px 16px;background:rgba(255,255,255,.96);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);box-shadow:0 1px 0 #ececec;
+    opacity:0;transform:translateY(-6px);pointer-events:none;transition:opacity .2s,transform .2s}
+  .hdr.open .hdr-nav{opacity:1;transform:none;pointer-events:auto}
+  .hdr.open,.hdr.open.sc{background:#fff;box-shadow:none}
+  .hdr.open .hdr-nav{background:#fff}
+  .hdr-nav a{padding:12px 4px;font-size:16px;border-bottom:1px solid #f1f1f1;border-radius:0}
+  .hdr-nav a.on::after{display:none}
+  html{scroll-padding-top:64px}
+}
 </style>
 </head>
 <body>
+<header class="hdr" id="hdr">
+  <div class="hdr-in">
+    <a class="hdr-logo" href="#s-mo-dau" aria-label="Puldigi trang chủ"><img src="assets/logo-icon.svg" alt="" width="30" height="23">Puldigi</a>
+    <nav class="hdr-nav" id="hdrNav" aria-label="Điều hướng chính">
+      <a href="#s-noi-lo" data-spy="s-noi-lo">Nỗi lo</a>
+      <a href="#s-bang-chung" data-spy="s-bang-chung">Số liệu</a>
+      <a href="#s-video" data-spy="s-video">Video</a>
+      <a href="#s-bang-gia" data-spy="s-bang-gia">Bảng giá</a>
+      <a href="#s-footer" data-spy="s-footer">Liên hệ</a>
+    </nav>
+    <a class="hdr-btn" href="https://zalo.me/0972177282" target="_blank" rel="noopener">Nhắn Zalo</a>
+    <button class="hdr-tg" id="hdrTg" aria-label="Mở menu" aria-expanded="false"><span></span><span></span></button>
+  </div>
+</header>
 
 <div id="s-mo-dau">
 <section class="hero">
@@ -770,7 +832,12 @@ const FIX=['Chọn đúng kênh, dồn tiền vào kênh ra lead','Chỉ nhận 
 
 /* A: tin nhắn hiện dần */
 const msgs=[...document.querySelectorAll('.msg')];
-new IntersectionObserver((es,o)=>{es.forEach(e=>{if(e.isIntersecting){msgs.forEach((m,i)=>setTimeout(()=>m.classList.add('in'),i*450));o.disconnect()}})},{threshold:.25}).observe(document.getElementById('chat'));
+/* Hiện từng tin: 3 chấm nhảy như đang gõ, rồi mới hiện chữ (Nhung yêu cầu 18/11) */
+msgs.forEach(m=>{const d=document.createElement('span');d.className='dd';d.innerHTML='<i></i><i></i><i></i>';m.appendChild(d)});
+const endDots=document.querySelector('#chat .typing');if(endDots)endDots.style.visibility='hidden';
+const wait=ms=>new Promise(r=>setTimeout(r,ms));
+async function playChat(){for(const m of msgs){m.classList.add('ty');await wait(m.classList.contains('pd')?1300:1000);m.classList.remove('ty');m.classList.add('in');await wait(450)}if(endDots)endDots.style.visibility='';}
+new IntersectionObserver((es,o)=>{es.forEach(e=>{if(e.isIntersecting){playChat();o.disconnect()}})},{threshold:.25}).observe(document.getElementById('chat'));
 
 /* B: công tắc */
 const rows=document.getElementById('rows'),sw=document.getElementById('sw'),pill=sw.querySelector('.pill');
@@ -943,6 +1010,15 @@ document.querySelectorAll('.sel').forEach(el=>io.observe(el));
   const io=new IntersectionObserver(es=>es.forEach(e=>{const v=e.target;
     if(e.isIntersecting){if(!v.dataset.seen){v.currentTime=0;v.dataset.seen='1'}v.play().catch(()=>{})}else{v.pause()}}),{threshold:.5});
   vs.forEach(v=>io.observe(v));})();
+</script>
+<script>
+/* Thanh header: nền mờ khi cuộn, đánh dấu phần đang xem, menu điện thoại */
+(function(){const h=document.getElementById('hdr'),tg=document.getElementById('hdrTg'),links=[...document.querySelectorAll('.hdr-nav a')];
+  const onS=()=>h.classList.toggle('sc',scrollY>8);addEventListener('scroll',onS,{passive:true});onS();
+  tg.onclick=()=>{const o=h.classList.toggle('open');tg.setAttribute('aria-expanded',o)};
+  links.forEach(a=>a.addEventListener('click',()=>{h.classList.remove('open');tg.setAttribute('aria-expanded',false)}));
+  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)links.forEach(a=>a.classList.toggle('on',a.dataset.spy===e.target.id))}),{rootMargin:'-45% 0px -50% 0px'});
+  ['s-mo-dau','s-noi-lo','s-bang-chung','s-video','s-bang-gia','s-footer'].forEach(id=>{const el=document.getElementById(id);if(el)io.observe(el)});})();
 </script>
 </body>
 </html>
