@@ -989,8 +989,13 @@ const msgs=[...document.querySelectorAll('.msg')];
 msgs.forEach(m=>{const d=document.createElement('span');d.className='dd';d.innerHTML='<i></i><i></i><i></i>';m.appendChild(d)});
 const endDots=document.querySelector('#chat .typing');if(endDots)endDots.style.visibility='hidden';
 const wait=ms=>new Promise(r=>setTimeout(r,ms));
-async function playChat(){for(const m of msgs){m.classList.add('ty');await wait(m.classList.contains('pd')?1300:1000);m.classList.remove('ty');m.classList.add('in');await wait(450)}if(endDots)endDots.style.visibility='';}
-new IntersectionObserver((es,o)=>{es.forEach(e=>{if(e.isIntersecting){playChat();o.disconnect()}})},{threshold:.25}).observe(document.getElementById('chat'));
+/* cuộn tới đâu, tin nhắn hiện tới đó (Nhung yêu cầu 19/11): mỗi tin gõ 3 chấm thật ngắn rồi hiện chữ */
+const showMsg=m=>{if(m.dataset.shown)return;m.dataset.shown='1';
+  if(m.getBoundingClientRect().bottom<0){m.classList.add('in');return}
+  m.classList.add('ty');setTimeout(()=>{m.classList.remove('ty');m.classList.add('in');
+    if(msgs.every(x=>x.classList.contains('in'))&&endDots)endDots.style.visibility='';},m.classList.contains('pd')?420:320);};
+const msgIO=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting||e.boundingClientRect.bottom<0){showMsg(e.target);msgIO.unobserve(e.target)}}),{rootMargin:'0px 0px -14% 0px'});
+msgs.forEach(m=>msgIO.observe(m));
 
 /* B: công tắc */
 const rows=document.getElementById('rows'),sw=document.getElementById('sw'),pill=sw.querySelector('.pill');
