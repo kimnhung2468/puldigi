@@ -715,6 +715,33 @@ body:not(.peeking) #s-noi-lo{box-shadow:none!important}
 
 /* ánh chuyển sắc của khung giá chỉ nằm dưới đường viền, không lấn vào trong khung (Nhung yêu cầu 18/11) */
 #s-bang-gia .rbcard::after{top:100%!important;bottom:auto!important;left:22%!important;right:22%!important;height:10px!important;margin-top:1px;filter:blur(12px)!important;opacity:.4!important;clip-path:inset(0 -20% -260% -20%)}
+
+/* Khung chat kiểu C - tối giản đen trắng (Nhung chọn 19/11) */
+#s-noi-lo .chat{padding:0!important;overflow:hidden}
+#s-noi-lo .chat-top{display:flex;align-items:center;gap:10px;margin:0;padding:14px 22px;border-bottom:1px solid #f0f0f0;font-size:15px}
+#s-noi-lo .chat-top img{width:34px;height:34px;padding:7px;border-radius:50%;background:#fff;box-shadow:0 0 0 1px #ececec}
+#s-noi-lo .chat-top b{display:block;font-weight:600}
+#s-noi-lo .chat-top span{font-size:12px;font-weight:400;color:#16a34a}
+#s-noi-lo .chat-top span::before{content:"";display:inline-block;width:6px;height:6px;margin-right:5px;border-radius:50%;background:#16a34a;vertical-align:1px}
+#s-noi-lo #chat .msg{align-items:flex-end;gap:8px;margin:0 22px 6px}
+#s-noi-lo #chat .chat-top+.msg{margin-top:22px}
+#s-noi-lo #chat .msg.grp{margin-top:18px}
+#s-noi-lo #chat .msg .av{width:30px;height:30px;visibility:hidden;font-size:0}
+#s-noi-lo #chat .msg.last .av{visibility:visible}
+#s-noi-lo #chat .msg.kh .av{background:#e4e4e7;color:#71717a}
+#s-noi-lo #chat .msg.kh .av svg{width:16px;height:16px}
+#s-noi-lo #chat .msg.pd .av{background:#fff;box-shadow:0 0 0 1px #ececec}
+#s-noi-lo #chat .msg.pd .av img{width:20px;height:auto}
+#s-noi-lo #chat .msg .b{max-width:74%;padding:9px 13px;font-size:15px;line-height:1.5;border-radius:18px}
+#s-noi-lo #chat .msg.kh .b{background:#fff;border:1px solid #e9e9eb;border-bottom-left-radius:6px}
+#s-noi-lo #chat .msg.kh .b b{display:inline;margin:0}
+#s-noi-lo #chat .msg.pd .b{background:#18181b;color:#fafafa;border-bottom-right-radius:6px}
+#s-noi-lo #chat .msg .n{font-weight:600;margin-right:4px}
+#s-noi-lo #chat .typing{padding:6px 0 18px 60px}
+#s-noi-lo #chat .msg .dd{left:38px;height:38px;border-radius:18px}
+#s-noi-lo #chat .msg.kh .dd{border:1px solid #e9e9eb;border-bottom-left-radius:6px}
+#s-noi-lo #chat .msg.pd .dd{left:auto;right:38px;background:#18181b;border-bottom-right-radius:6px}
+@media (max-width:860px){#s-noi-lo #chat .msg{margin-left:14px;margin-right:14px}#s-noi-lo #chat .msg .b{max-width:82%;font-size:14.5px}}
 /* Nối giữa các phần kiểu C (Nhung chọn 18/11): bỏ đường kẻ, nền xen kẽ trắng / xám rất nhạt chuyển mềm */
 body>div>section{border-top:0!important}
 #s-footer footer{border-top:0!important}
@@ -807,13 +834,18 @@ html{scroll-padding-top:72px}
   <div class="wrap">
     <div class="head"><h2>Tháo gỡ <span class="sel"><i></i><i></i><i></i><i></i><span>3 nỗi lo</span></span> phổ biến nhất khi chạy ads</h2><p class="sub">Từ lúc chọn kênh chạy ads đến khi sales gọi cho khách.</p></div>
     <div class="chat" id="chat">
-      <div class="chat-top"><i></i>Puldigi <span>đang hoạt động</span></div>
-      <div class="msg kh"><div class="av">KH</div><div class="b"><b>1. Mình nên đổ tiền vào kênh nào?</b>Facebook, TikTok, Zalo hay Google? Kênh nào cũng muốn thử mà chia tiền ra hết thì sợ chẳng kênh nào chạy tới nơi.</div></div>
-      <div class="msg pd"><div class="av">P</div><div class="b">Puldigi chọn kênh theo nơi khách của bạn thường tìm hiểu sản phẩm. Mình chạy thử với ngân sách nhỏ rồi tăng chi ở kênh mang về nhiều khách có nhu cầu hơn.</div></div>
-      <div class="msg kh"><div class="av">KH</div><div class="b"><b>2. Nhận nhiều lead mà gọi toàn sai số hoặc khách hỏi cho biết.</b>Có người để lại số nhưng lúc mình gọi thì họ chẳng nhớ đã xem sản phẩm nào.</div></div>
-      <div class="msg pd"><div class="av">P</div><div class="b">Puldigi thêm vài câu hỏi ngắn về nhu cầu và khoảng giá khách đang cân nhắc. Khi đội sales gọi xong, mình dùng phản hồi đó để chỉnh quảng cáo và kéo về nhiều khách muốn tư vấn hơn.</div></div>
-      <div class="msg kh"><div class="av">KH</div><div class="b"><b>3. Khách để số buổi sáng, tới chiều sales mới gọi.</b>Lúc gọi được thì khách đã hỏi giá và chốt được bên khác rồi.</div></div>
-      <div class="msg pd"><div class="av">P</div><div class="b">Khách vừa để lại số, hệ thống gửi thông báo ngay lập tức (<b>realtime</b>), sau đó cập nhật thông tin vào Google Sheets. Đội sales có thể gọi lại ngay khi khách còn nhớ sản phẩm.</div></div>
+      <div class="chat-top"><img src="assets/logo-icon-v2.svg" alt="" width="22" height="17"><div><b>Puldigi</b><span>Đang hoạt động</span></div></div>
+      <div class="msg kh"><div class="av"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4.4 3.6-7 8-7s8 2.6 8 7z"/></svg></div><div class="b"><span class="n">1.</span>Chị muốn chạy ads mà không biết nên đổ tiền vào Facebook, TikTok hay Google.</div></div>
+      <div class="msg kh last"><div class="av"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4.4 3.6-7 8-7s8 2.6 8 7z"/></svg></div><div class="b">Chia đều ngân sách thì sợ kênh nào cũng không tới nơi, không hiệu quả.</div></div>
+      <div class="msg pd"><div class="av"><img src="assets/logo-icon-v2.svg" alt="" width="20" height="15"></div><div class="b">Dạ, mình sẽ lên plan: xem khách của chị hay tìm hiểu sản phẩm ở đâu, làm rõ mục tiêu, ngành hàng và nhu cầu chạy của chị.</div></div>
+      <div class="msg pd last"><div class="av"><img src="assets/logo-icon-v2.svg" alt="" width="20" height="15"></div><div class="b">Mình chạy test một phần ngân sách trên các kênh được đánh giá hiệu quả, sau đó tối ưu: kênh nào ra <b>khách có nhu cầu thật</b> thì dồn tiền vào kênh đó.</div></div>
+      <div class="msg kh grp"><div class="av"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4.4 3.6-7 8-7s8 2.6 8 7z"/></svg></div><div class="b"><span class="n">2.</span>Lead về nhiều mà gọi toàn sai số, hoặc khách hỏi cho biết thôi.</div></div>
+      <div class="msg kh last"><div class="av"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4.4 3.6-7 8-7s8 2.6 8 7z"/></svg></div><div class="b">Có người còn không nhớ mình đã điền form nào.</div></div>
+      <div class="msg pd"><div class="av"><img src="assets/logo-icon-v2.svg" alt="" width="20" height="15"></div><div class="b">Form bên mình hỏi thêm vài câu ngắn về nhu cầu và khoảng giá, lọc bớt khách hỏi chơi, khách không có nhu cầu.</div></div>
+      <div class="msg pd last"><div class="av"><img src="assets/logo-icon-v2.svg" alt="" width="20" height="15"></div><div class="b">Sales gọi xong điền kết quả vào file Google Sheets cho dễ quản lý, mình dựa vào đó tối ưu lại quảng cáo để kéo về <b>đúng người cần tư vấn</b>.</div></div>
+      <div class="msg kh grp last"><div class="av"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4.4 3.6-7 8-7s8 2.6 8 7z"/></svg></div><div class="b"><span class="n">3.</span>Số đến tay sales chậm quá, khách điền form buổi sáng, chiều sales mới gọi thì khách đã chốt bên khác rồi.</div></div>
+      <div class="msg pd"><div class="av"><img src="assets/logo-icon-v2.svg" alt="" width="20" height="15"></div><div class="b">Mình có hệ thống CRM và app báo tin nhắn. Khách vừa để lại số là có thông báo ngay (<b>realtime</b>, trễ nhất 1-3 phút), thông tin khách tự điền vào Google Sheets luôn.</div></div>
+      <div class="msg pd last"><div class="av"><img src="assets/logo-icon-v2.svg" alt="" width="20" height="15"></div><div class="b">Sales gọi lại liền thì <b>tỷ lệ chốt khách cao hơn</b>.</div></div>
       <div class="typing"><i></i><i></i><i></i></div>
     </div>
   </div>
